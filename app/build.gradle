@@ -1,0 +1,102 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+apply plugin:'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+
+kapt {
+    generateStubs = true
+    useBuildCache = false
+}
+
+android {
+    namespace 'com.ghn.cocknovel'
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.ghn.cocknovel"
+        minSdk 21
+        targetSdk 33
+        versionCode 1
+        versionName "无鸡小说"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs {
+        platform {
+            //将系统签名文件platform.keystore 放在projectName/app/ 目录下
+            storeFile file('Cocknovel.jks')
+            storePassword 'Cocknovel' // 对应-srcstorepass
+            keyAlias 'Cocknovel' //对应-name
+            keyPassword 'Cocknovel' // 对应-pass
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.platform
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.platform
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+//    buildFeatures {
+//        viewBinding true
+//    }
+
+    dataBinding {
+        enabled = true
+    }
+    viewBinding{
+        enabled = true
+    }
+
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.1'
+    testImplementation 'junit:junit:4.13.2'
+    implementation project(path: ':jg_network')
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    kapt "androidx.room:room-compiler:2.4.2" // Kotlin 使用 kapt
+    //屏幕适配
+    implementation 'me.jessyan:autosize:1.2.1'
+    // 权限请求框架
+    implementation 'com.github.getActivity:XXPermissions:16.6'
+    //toastutlis框架
+    implementation 'com.github.getActivity:XToast:8.9'
+    // 标题栏框架
+    implementation 'com.github.getActivity:TitleBar:10.0'
+}
+//android.applicationVariants.all {
+//    variant ->
+//        variant.outputs.all { output ->
+////            def date = new Date().format("yyMMdd", TimeZone.getTimeZone("GMT+08"))
+//            if (variant.buildType.name == 'debug'){
+//                output.outputFileName = "${android.defaultConfig.versionName}_debug.apk"
+//            }else if (variant.buildType.name == 'release'){
+//                output.outputFileName = "${android.defaultConfig.versionName}_release.apk"
+//            }
+//        }
+//}

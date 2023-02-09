@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">无鸡小说</string>
+    <string name="bookstore">书城</string>
+    <string name="classification">分类</string>
+    <string name="bookshelf">书架</string>
+    <string name="mine">我的</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
