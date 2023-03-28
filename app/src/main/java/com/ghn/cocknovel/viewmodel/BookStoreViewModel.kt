@@ -5,14 +5,18 @@ import android.app.Application
 import android.content.Intent
 import android.util.Log
 import androidx.databinding.ObservableField
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.ghn.cocknovel.App
+import com.ghn.cocknovel.net.DataService
 import com.ghn.cocknovel.ui.activity.SetActivity
 import com.ghn.cocknovel.ui.activity.SwitchActivity
 import com.kt.network.base.BaseViewModel
 import com.kt.network.base.SingleLiveEvent
+import com.kt.network.net.ApiService
+import com.kt.network.net.IBaseResponse
 
 /**
  * @author 浩楠
@@ -30,6 +34,15 @@ open class BookStoreViewModel(application: Application) : BaseViewModel(applicat
     companion object {
         val TAG: String? = BookStoreViewModel::class.simpleName
     }
+    val loginStatus = MutableLiveData<List<String>>().apply {}
+    open fun getwan(){
+        launchOnlyresult({
+            DataService.callback(5)
+        },{
+            loginStatus.value= listOf(it.toString())
+        }, isShowDialog = false)
+    }
+
     /**
      * 从我的页面跳转到设置页面
      */

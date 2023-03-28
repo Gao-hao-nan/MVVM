@@ -84,8 +84,7 @@ dependencies {
     implementation 'me.jessyan:autosize:1.2.1'
     // 权限请求框架
     implementation 'com.github.getActivity:XXPermissions:16.6'
-    //toastutlis框架
-    implementation 'com.github.getActivity:XToast:8.9'
+
     // 标题栏框架
     implementation 'com.github.getActivity:TitleBar:10.0'
 }

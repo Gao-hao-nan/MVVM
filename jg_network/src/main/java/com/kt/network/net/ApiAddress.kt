@@ -4,6 +4,10 @@ class ApiAddress {
 
     companion object {
         /**
+         * 导航
+         */
+        const val PROJECT="/project/tree/json"
+        /**
          * 登录
          */
         const val LOGIN = "api/login"

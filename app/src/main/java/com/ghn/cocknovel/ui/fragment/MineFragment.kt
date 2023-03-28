@@ -30,12 +30,7 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
-import com.hjq.xtoast.XToast
-
 import com.kt.network.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_mine.*
-import kotlinx.android.synthetic.main.fragment_mine.view.*
-
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -71,12 +66,8 @@ class MineFragment : BaseFragment<FragmentMineBinding, BookStoreViewModel>() {
     }
 
     override fun initViewObservable() {
-//        XToast<XToast<*>>(activity).apply {
-//            setContentView(R.layout.layout_toast)
-//            setDuration(3000)
-//            showAsDropDown(iv_toolbar_mine)
-//        }.show()
-        roun_icon.setOnClickListener {
+        binding?.rounIcon?.let { showMsg(it,"1111") }
+        binding?.rounIcon?.setOnClickListener {
             XXPermissions.with(this)
                 // 申请单个权限
                 .permission(Permission.CAMERA).permission(Permission.READ_MEDIA_IMAGES)
@@ -261,7 +252,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, BookStoreViewModel>() {
     private fun displayImage(imagePath: String) {
         if (!TextUtils.isEmpty(imagePath)) {
             //显示图片
-            Glide.with(this).load(imagePath).apply(requestOptions).into(roun_icon)
+            binding?.rounIcon?.let { Glide.with(this).load(imagePath).apply(requestOptions).into(it) }
             //压缩图片
 //            orc_bitmap = compression(BitmapFactory.decodeFile(imagePath))
             //转Base64

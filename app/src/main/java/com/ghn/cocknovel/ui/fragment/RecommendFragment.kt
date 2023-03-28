@@ -1,9 +1,11 @@
 package com.ghn.cocknovel.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.webkit.WebSettings
+import androidx.lifecycle.Observer
 import com.ghn.cocknovel.BR
 import com.ghn.cocknovel.R
 import com.ghn.cocknovel.databinding.FragmentRecommendBinding
@@ -30,13 +32,11 @@ class RecommendFragment : BaseFragment<FragmentRecommendBinding,BookStoreViewMod
     }
 
     override fun initViewObservable() {
-//        webview.loadUrl("https://www.biquzge.com/")
-//        val websetting: WebSettings = webview.settings
-//        websetting.setCacheMode(WebSettings.LOAD_NO_CACHE)//不使用缓存，只从网络获取数据.
-//        //支持屏幕缩放
-//        websetting.setSupportZoom(true)
-//        websetting.setBuiltInZoomControls(true)
-
+        viewModel?.getwan()
+        viewModel?.loginStatus?.observe(this, Observer {
+            binding?.tv?.text=it.toString()
+            Log.i("TAG", "initViewObservable: $it")
+        })
     }
 
 }

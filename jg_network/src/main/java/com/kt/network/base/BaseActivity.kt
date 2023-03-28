@@ -2,12 +2,16 @@ package com.kt.network.base
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
+import android.view.View
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-
+import com.hjq.xtoast.XToast
+import com.kt.ktmvvm.lib.R
 import com.kt.network.base.BaseViewModel.Companion.ParameterField.BUNDLE
 import com.kt.network.base.BaseViewModel.Companion.ParameterField.CLASS
 import com.kt.network.base.BaseViewModel.Companion.ParameterField.REQUEST
@@ -150,6 +154,18 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
      * 返回布局id
      */
     abstract fun initContentView(savedInstanceState: Bundle?): Int
+
+    /**
+     * Toast
+     */
+    fun showMsg(view: View, msg:String){
+        XToast<XToast<*>>(this).apply {
+            setContentView(R.layout.layout_toast)
+            setDuration(3000)
+            showAsDropDown(view)
+            findViewById<TextView>(R.id.txtToastMessage).text=msg
+        }.show()
+    }
 
 }
 

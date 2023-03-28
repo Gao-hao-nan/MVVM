@@ -1,15 +1,19 @@
 package com.kt.network.base
 
+import android.app.Application
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.hjq.xtoast.XToast
+import com.kt.ktmvvm.lib.R
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import com.trello.rxlifecycle2.components.support.RxFragment
 import java.lang.reflect.ParameterizedType
@@ -141,7 +145,17 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
      * 返回variableid
      */
     abstract fun initVariableId(): Int
-
+    /**
+     * Toast
+     */
+    fun showMsg(view: View, msg:String){
+        XToast<XToast<*>>(activity).apply {
+            setContentView(R.layout.layout_toast)
+            setDuration(3000)
+            showAsDropDown(view)
+            findViewById<TextView>(R.id.txtToastMessage).text=msg
+        }.show()
+    }
 
     /**
      * 返回布局id

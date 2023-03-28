@@ -9,18 +9,30 @@ import com.kt.network.base.BaseViewModel.Companion.ParameterField.BUNDLE
 import com.kt.network.base.BaseViewModel.Companion.ParameterField.CLASS
 import com.kt.network.base.BaseViewModel.Companion.ParameterField.REQEUST_DEFAULT
 import com.kt.network.base.BaseViewModel.Companion.ParameterField.REQUEST
-import com.kt.network.net.ExceptionUtil
-
+import com.kt.network.net.ExceptionHandle
+import com.kt.network.net.IBaseResponse
+import com.kt.network.net.ResponseThrowable
 import com.trello.rxlifecycle2.LifecycleProvider
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.lang.ref.WeakReference
-
 
 open class BaseViewModel(application: Application) : AndroidViewModel(application), IBaseViewModel {
     private var mLifecycle: WeakReference<LifecycleProvider<*>>? = null
     private var uc: UIChangeLiveData? = null
+    private lateinit var context: Application
+
+    /**
+     * 所有网络请求都在 viewModelScope 域中启动，当页面销毁时会自动
+     * 调用ViewModel的  #onCleared 方法取消所有协程
+     */
+    fun launchUI(block: suspend CoroutineScope.() -> Unit) {
+        //网络可用
+
+        GlobalScope.launch(Dispatchers.IO) {
+            viewModelScope.launch { block() }
+        }
+
+    }
 
     override fun onAny(owner: LifecycleOwner?, event: Lifecycle.Event?) {
 
@@ -49,28 +61,92 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     }
 
-
-    fun ViewModel.launch(
-        block: suspend CoroutineScope.() -> Unit,
-        onError: (e: Throwable) -> Unit = { _: Throwable -> },
-        onComplete: () -> Unit = {}
+    /**
+     * 过滤请求结果，其他全抛异常
+     * @param block 请求体
+     * @param success 成功回调
+     * @param error 失败回调
+     * @param complete  完成回调（无论成功失败都会调用）
+     * @param isShowDialog 是否显示加载框
+     */
+    fun <T> launchOnlyresult(
+        block: suspend CoroutineScope.() -> IBaseResponse<T>,
+        success: (T?) -> Unit,
+        error: (ResponseThrowable) -> Unit = {
+//            LogUtils.e("错误异常"+it.localizedMessage)
+            it.printStackTrace()
+        },
+        complete: () -> Unit = {},
+        isShowDialog: Boolean = true
     ) {
-        viewModelScope.launch(
-            CoroutineExceptionHandler { _, throwable ->
-                run {
-                    // 这里统一处理错误
-                    ExceptionUtil.catchException(throwable)
-                    onError(throwable)
+        if (isShowDialog) uc?.showDialog?.call()
+        launchUI {
+            handleException(
+                {
+                    withContext(Dispatchers.IO) {
+                        block().let {
+                            if (it.isSuccess()) {
+                                it.content()
+                            } else {
+                                uc?.toastEvent?.postValue("${it.msg()}")
+                                throw ResponseThrowable(it.code(), it.msg())
+                            }
+
+                        }
+                    }.also {
+                        success(it)
+                    }
+                },
+                {
+                    error(it)
+                },
+                {
+                    uc?.dismissDialog?.call()
+                    complete()
                 }
-            }
-        ) {
+            )
+        }
+    }
+
+    /**
+     * 异常统一处理
+     */
+    private suspend fun handleException(
+        block: suspend CoroutineScope.() -> Unit,
+        error: suspend CoroutineScope.(ResponseThrowable) -> Unit,
+        complete: suspend CoroutineScope.() -> Unit
+    ) {
+        coroutineScope {
             try {
-                block.invoke(this)
+                block()
+            } catch (e: Throwable) {
+                error(ExceptionHandle.handleException(e))
             } finally {
-                onComplete()
+                complete()
             }
         }
     }
+//    fun ViewModel.launch(
+//        block: suspend CoroutineScope.() -> Unit,
+//        onError: (e: Throwable) -> Unit = { _: Throwable -> },
+//        onComplete: () -> Unit = {}
+//    ) {
+//        viewModelScope.launch(
+//            CoroutineExceptionHandler { _, throwable ->
+//                run {
+//                    // 这里统一处理错误
+//                    ExceptionUtil.catchException(throwable)
+//                    onError(throwable)
+//                }
+//            }
+//        ) {
+//            try {
+//                block.invoke(this)
+//            } finally {
+//                onComplete()
+//            }
+//        }
+//    }
 
 
     /**
@@ -175,7 +251,9 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
             private var finishResult: SingleLiveEvent<Int>? = null
             private var startActivityForFragment: SingleLiveEvent<Map<String, Any>>? = null
             private var setResultFragment: SingleLiveEvent<Map<String, Any>>? = null
-
+            val showDialog by lazy { SingleLiveEvent<String>() }
+            val toastEvent by lazy { SingleLiveEvent<String>() }
+            val dismissDialog by lazy { SingleLiveEvent<Void>() }
 
             fun getResultFragment(): SingleLiveEvent<Map<String, Any>> {
                 return createLiveData(setResultFragment).also {
@@ -190,7 +268,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
             }
 
             fun getFinishResult(): SingleLiveEvent<Int> {
-                return createLiveData(finishResult ).also {
+                return createLiveData(finishResult).also {
                     finishResult = it
                 }
             }
@@ -224,11 +302,11 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
 
             private fun <T> createLiveData(liveData: SingleLiveEvent<T>?): SingleLiveEvent<T> {
 
-                var mLive: SingleLiveEvent<T>?=liveData
+                var mLive: SingleLiveEvent<T>? = liveData
                 liveData?.let {
                     return mLive!!
-                }?:let {
-                    mLive= SingleLiveEvent()
+                } ?: let {
+                    mLive = SingleLiveEvent()
                 }
 
 

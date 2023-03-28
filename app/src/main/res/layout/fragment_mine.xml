@@ -50,7 +50,7 @@
             android:layout_height="120dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="35dp"
-            android:src="@mipmap/ic_jige" />
+            android:src="@mipmap/ic_my_handes" />
         <TextView
             android:id="@+id/name"
             android:layout_width="match_parent"
@@ -60,7 +60,7 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:maxLength="6"
-            android:text="小黑子"
+            android:text="鲸鱼1号"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             android:textStyle="bold" />

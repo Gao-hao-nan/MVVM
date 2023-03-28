@@ -1,6 +1,9 @@
 package com.ghn.cocknovel.net
 
-import androidx.core.view.MenuHost
+import com.ghn.cocknovel.App
+import com.kt.network.bean.BaseResult
+import com.kt.network.net.ApiService
+import com.kt.network.net.RetrofitClient
 
 /**
  * @author 浩楠
@@ -16,6 +19,13 @@ import androidx.core.view.MenuHost
  */
 class DataService {
     companion object{
+        /**
+         * 测试网络请求框架
+         */
+        suspend fun callback(host: Int): BaseResult<Any> {
+            return RetrofitClient.getInstance(App.get()).getDefault(ApiService::class.java, host)
+                .callback()
+        }
 
     }
 }

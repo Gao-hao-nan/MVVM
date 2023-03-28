@@ -1,5 +1,6 @@
 package com.kt.network.net
 
+import com.kt.network.bean.BaseResult
 import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -8,7 +9,11 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-
+    /**
+     * 获取导航数据
+     */
+    @GET(ApiAddress.PROJECT)
+    suspend fun callback(): BaseResult<Any>
     /**
      * 图书馆数据
      */
