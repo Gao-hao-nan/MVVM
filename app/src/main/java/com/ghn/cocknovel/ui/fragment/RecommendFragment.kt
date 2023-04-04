@@ -30,7 +30,6 @@ class RecommendFragment : BaseFragment<FragmentRecommendBinding,BookStoreViewMod
     override fun initParam() {
 
     }
-
     override fun initViewObservable() {
         viewModel?.getwan()
         viewModel?.loginStatus?.observe(this, Observer {

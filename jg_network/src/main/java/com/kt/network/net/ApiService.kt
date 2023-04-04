@@ -1,5 +1,4 @@
 package com.kt.network.net
-
 import com.kt.network.bean.BaseResult
 import okhttp3.RequestBody
 import retrofit2.http.Body

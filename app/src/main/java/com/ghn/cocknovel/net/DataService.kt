@@ -3,6 +3,7 @@ package com.ghn.cocknovel.net
 import com.ghn.cocknovel.App
 import com.kt.network.bean.BaseResult
 import com.kt.network.net.ApiService
+import com.kt.network.net.IBaseResponse
 import com.kt.network.net.RetrofitClient
 
 /**

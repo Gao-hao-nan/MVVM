@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.ghn.cocknovel.App
 import com.ghn.cocknovel.net.DataService
+import com.ghn.cocknovel.ui.activity.MainActivity
 import com.ghn.cocknovel.ui.activity.SetActivity
 import com.ghn.cocknovel.ui.activity.SwitchActivity
 import com.kt.network.base.BaseViewModel
@@ -42,14 +43,19 @@ open class BookStoreViewModel(application: Application) : BaseViewModel(applicat
             loginStatus.value= listOf(it.toString())
         }, isShowDialog = false)
     }
-
+    /**
+     * 跳转到首页
+     */
+    open fun getMain(){
+        startActivity(MainActivity::class.java)
+    }
     /**
      * 从我的页面跳转到设置页面
      */
     open fun getsetImage(){
-        Log.i(TAG, "getsetImage: "+"snadk")
         startActivity(SetActivity::class.java)
     }
+
     /**
      * 全局更换字体
      */

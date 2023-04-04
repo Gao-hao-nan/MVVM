@@ -8,7 +8,7 @@ class BaseUrlConstants {
         private const val baseUrl2: String = "http://test2/"
         private const val video: String = "http://apis.juhe.cn/"
         private const val degree: String = "http://v.juhe.cn/"
-
+        private const val wanandroid: String = "https://www.wanandroid.com"
 
         fun getHost(host: Int): String {
             when (host) {
@@ -16,6 +16,7 @@ class BaseUrlConstants {
                 2 -> return baseUrl2
                 3 -> return video
                 4 -> return degree
+                5 -> return wanandroid
             }
             return baseUrl1;
         }

@@ -86,10 +86,10 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
                     withContext(Dispatchers.IO) {
                         block().let {
                             if (it.isSuccess()) {
-                                it.content()
+                                it.data()
                             } else {
-                                uc?.toastEvent?.postValue("${it.msg()}")
-                                throw ResponseThrowable(it.code(), it.msg())
+                                uc?.toastEvent?.postValue("${it.errorMsg()}")
+                                throw ResponseThrowable(it.errorCode(), it.errorMsg())
                             }
 
                         }
