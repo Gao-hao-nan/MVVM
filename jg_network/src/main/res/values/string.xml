@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="net_erro">"网络连接失败。请稍后再试"</string>
+</resources>

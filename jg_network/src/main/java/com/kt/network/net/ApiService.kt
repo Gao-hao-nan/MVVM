@@ -1,5 +1,7 @@
 package com.kt.network.net
 import com.kt.network.bean.BaseResult
+import com.kt.network.bean.FontData
+import com.kt.network.bean.FontDataNew
 import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -12,7 +14,7 @@ interface ApiService {
      * 获取导航数据
      */
     @GET(ApiAddress.PROJECT)
-    suspend fun callback(): BaseResult<Any>
+    suspend fun callback(): BaseResult<FontDataNew>
     /**
      * 图书馆数据
      */
@@ -33,19 +35,19 @@ interface ApiService {
     ): Any?
 
 
-    /**
-     * get
-     */
-    @GET(ApiAddress.LOGIN)
-    suspend fun login(
-        @Query("account") account: String,
-        @Query("password") password: String
-    ): BaseResponse<Any>
-
-
-    /**
-     * post body
-     */
-    @POST(ApiAddress.LOGIN)
-    suspend fun loginBody(@Body requestBody: RequestBody): BaseResponse<Any>
+//    /**
+//     * get
+//     */
+//    @GET(ApiAddress.LOGIN)
+//    suspend fun login(
+//        @Query("account") account: String,
+//        @Query("password") password: String
+//    ): BaseResponse<Any>
+//
+//
+//    /**
+//     * post body
+//     */
+//    @POST(ApiAddress.LOGIN)
+//    suspend fun loginBody(@Body requestBody: RequestBody): BaseResponse<Any>
 } 

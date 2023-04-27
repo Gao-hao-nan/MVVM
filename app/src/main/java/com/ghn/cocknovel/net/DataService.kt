@@ -2,6 +2,8 @@ package com.ghn.cocknovel.net
 
 import com.ghn.cocknovel.App
 import com.kt.network.bean.BaseResult
+import com.kt.network.bean.FontData
+import com.kt.network.bean.FontDataNew
 import com.kt.network.net.ApiService
 import com.kt.network.net.IBaseResponse
 import com.kt.network.net.RetrofitClient
@@ -23,7 +25,7 @@ class DataService {
         /**
          * 测试网络请求框架
          */
-        suspend fun callback(host: Int): BaseResult<Any> {
+        suspend fun callback(host: Int): BaseResult<FontDataNew> {
             return RetrofitClient.getInstance(App.get()).getDefault(ApiService::class.java, host)
                 .callback()
         }

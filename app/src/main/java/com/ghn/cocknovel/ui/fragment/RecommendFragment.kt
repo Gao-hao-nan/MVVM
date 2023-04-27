@@ -1,22 +1,26 @@
 package com.ghn.cocknovel.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.webkit.WebSettings
-import androidx.lifecycle.Observer
+import android.view.animation.AnimationUtils
+import android.view.animation.LayoutAnimationController
+import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.basemodel.base.BaseFragment
 import com.ghn.cocknovel.BR
 import com.ghn.cocknovel.R
 import com.ghn.cocknovel.databinding.FragmentRecommendBinding
-import com.ghn.cocknovel.viewmodel.BookStoreViewModel
-import com.kt.network.base.BaseFragment
+import com.ghn.cocknovel.ui.adapter.BaseRecyclerAdapter
+import com.ghn.cocknovel.viewmodel.RecommendViewModel
+import com.kt.network.bean.Datas
 import kotlinx.android.synthetic.main.fragment_recommend.*
 
-class RecommendFragment : BaseFragment<FragmentRecommendBinding,BookStoreViewModel>() {
 
+class RecommendFragment : BaseFragment<FragmentRecommendBinding, RecommendViewModel>() {
+    var adapter: BaseRecyclerAdapter<Datas>? = null
     override fun initVariableId(): Int {
-        return BR.model
+        return BR.mode
     }
 
     override fun initContentView(
@@ -30,12 +34,26 @@ class RecommendFragment : BaseFragment<FragmentRecommendBinding,BookStoreViewMod
     override fun initParam() {
 
     }
-    override fun initViewObservable() {
-        viewModel?.getwan()
-        viewModel?.loginStatus?.observe(this, Observer {
-            binding?.tv?.text=it.toString()
-            Log.i("TAG", "initViewObservable: $it")
-        })
-    }
 
+    override fun initViewObservable() {
+        val RecommList = mutableListOf<Datas>()
+        viewModel?.getwan()
+        RecommRecyclerview.layoutManager = LinearLayoutManager(activity)
+        adapter = object : BaseRecyclerAdapter<Datas>(RecommList) {
+            override fun bindData(holder: BaseViewHolder?, position: Int) {
+                val text: TextView = holder?.getView(R.id.recomm_title) as TextView
+                text.text = datas[position].title
+            }
+
+            override val layoutId: Int = R.layout.animation
+        }
+        val controller =
+            LayoutAnimationController(AnimationUtils.loadAnimation(activity, R.anim.animate))
+        RecommRecyclerview.layoutAnimation = controller
+        RecommRecyclerview.adapter = adapter
+        viewModel?.loginStatus?.observe(this) {
+            adapter?.addData(it.datas)
+        }
+    }
 }
+

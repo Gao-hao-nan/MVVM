@@ -18,7 +18,7 @@
     </style>
     <!--设置Tablayout字体大小-->
     <style name="TabLayoutTextSize" parent="TextAppearance.Design.Tab">
-        <item name="android:textSize">25sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/hei</item>
     </style>

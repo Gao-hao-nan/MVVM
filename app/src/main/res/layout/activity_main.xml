@@ -5,36 +5,60 @@
     <data>
 
         <import type="android.view.View" />
-        <!--        <variable-->
-        <!--            name="mode"-->
-        <!--            type="com.ghn.cocknovel.MainViewModel" />-->
+
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/container"
-        tools:ignore="all"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <fragment
-            android:id="@+id/nav_host_fragment"
-            android:name="androidx.navigation.fragment.NavHostFragment"
+        android:background="@color/white"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        tools:ignore="all">
+        <FrameLayout
+            android:id="@+id/fl_content"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            app:defaultNavHost="true"
-            app:labelVisibilityMode="labeled"
-            app:navGraph="@navigation/main_navigation" />
+            />
+        <FrameLayout
+            android:id="@+id/main_fl_warn"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_above="@+id/homeNav"
+            android:layout_gravity="bottom"
+            android:background="#70000000"
+            android:visibility="visible">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ellipsize="marquee"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="所有小说来源均来自各个网站，本APP仅提供转载服务"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/main_iv_warn_close"
+                android:layout_width="35dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|right"
+                android:paddingLeft="13dp"
+                android:paddingRight="8dp"
+                android:src="@mipmap/icon_close" />
+        </FrameLayout>
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="?android:attr/windowBackground"
-            app:labelVisibilityMode="labeled"
             app:itemIconTint="@color/navigationview_text"
             app:itemTextColor="@color/navigationview_text"
+            app:labelVisibilityMode="labeled"
             app:menu="@menu/navigation" />
     </LinearLayout>
 </layout>

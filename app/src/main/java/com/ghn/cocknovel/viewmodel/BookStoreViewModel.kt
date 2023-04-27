@@ -2,22 +2,16 @@ package com.ghn.cocknovel.viewmodel
 
 import FontAdapter
 import android.app.Application
-import android.content.Intent
-import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.ghn.cocknovel.App
-import com.ghn.cocknovel.net.DataService
+import com.example.basemodel.base.BaseViewModel
+import com.example.basemodel.base.SingleLiveEvent
 import com.ghn.cocknovel.ui.activity.MainActivity
 import com.ghn.cocknovel.ui.activity.SetActivity
 import com.ghn.cocknovel.ui.activity.SwitchActivity
-import com.kt.network.base.BaseViewModel
-import com.kt.network.base.SingleLiveEvent
-import com.kt.network.net.ApiService
-import com.kt.network.net.IBaseResponse
+import com.kt.network.bean.FontDataNew
 
 /**
  * @author 浩楠
@@ -35,14 +29,15 @@ open class BookStoreViewModel(application: Application) : BaseViewModel(applicat
     companion object {
         val TAG: String? = BookStoreViewModel::class.simpleName
     }
-    val loginStatus = MutableLiveData<List<String>>().apply {}
-    open fun getwan(){
-        launchOnlyresult({
-            DataService.callback(5)
-        },{
-            loginStatus.value= listOf(it.toString())
-        }, isShowDialog = false)
-    }
+    val loginStatus = MutableLiveData<FontDataNew>().apply {}
+//    open fun getwan(){
+//        launchOnlyresult({
+//            DataService.callback(5)
+//        },{
+//            Log.i("TAG", "initViewObservable: $it")
+//            loginStatus.value= it
+//        })
+//    }
     /**
      * 跳转到首页
      */

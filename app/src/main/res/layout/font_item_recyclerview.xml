@@ -30,7 +30,7 @@
             app:layout_constraintTop_toTopOf="@id/font_name"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginEnd="15dp"
-            android:layout_marginVertical="@dimen/dp_10"
+            android:layout_marginVertical="10dp"
             android:textSize="15sp"
             android:background="@drawable/background_text_font"
             />

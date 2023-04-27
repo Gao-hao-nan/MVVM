@@ -6,7 +6,7 @@ class ApiAddress {
         /**
          * 导航
          */
-        const val PROJECT="/project/tree/json"
+        const val PROJECT="article/list/1/json"
         /**
          * 登录
          */

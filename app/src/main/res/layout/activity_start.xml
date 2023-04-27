@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="mode"
+            type="com.ghn.cocknovel.viewmodel.BookStoreViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/background_image"
+        tools:context=".ui.activity.StartActivity">
+
+        <TextView
+            android:id="@+id/tvFindNew"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="213dp"
+            android:gravity="center"
+            android:text="Find new\nfriends nearby"
+            android:textColor="#ffffff"
+            android:textSize="44sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btImNew"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="83dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/phone_code_gradual_change_back"
+            android:text="注册"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@+id/tvFindNew" />
+
+        <Button
+            android:id="@+id/btSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/phone_code_white_back"
+            android:onClick="@{()->mode.getMain()}"
+            android:text="登录"
+            android:textColor="#FF2D55"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/btImNew" />
+
+        <ImageView
+            android:id="@+id/iv_code"
+            android:layout_width="95dp"
+            android:layout_height="63dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1.5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btSignIn" />
+
+        <TextView
+            android:id="@+id/tvBy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="49dp"
+            android:gravity="center"
+            android:text="By clicking start, you agree to"
+            android:textColor="#ffffff"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/iv_code" />
+
+        <TextView
+            android:id="@+id/tvPrivacy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="Privacy agreement     Terms of service"
+            android:textColor="#0B65FF"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/tvBy" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

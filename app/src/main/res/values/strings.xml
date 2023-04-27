@@ -1,9 +1,12 @@
 <resources>
-    <string name="app_name">无鸡小说</string>
+    <string name="app_name">鲸鱼阅读</string>
     <string name="bookstore">书城</string>
     <string name="classification">分类</string>
     <string name="bookshelf">书架</string>
     <string name="mine">我的</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- TODO: mine   -->
+    <string name="mineName">登录即可提现</string>
 </resources>

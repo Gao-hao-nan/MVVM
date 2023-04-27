@@ -19,24 +19,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="30dp"
             android:layout_marginRight="30dp"
             android:onClick="@{()->mode.getsetImage()}"
             android:scaleType="fitXY"
             android:src="@mipmap/mine_set" />
-<!--        <androidx.appcompat.widget.Toolbar-->
-<!--            android:id="@+id/toolbar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:background="@color/hei2">-->
-<!--        </androidx.appcompat.widget.Toolbar>-->
-
         <androidx.cardview.widget.CardView
+            android:id="@+id/carview"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="140dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="70dp"
             android:layout_marginRight="10dp"
@@ -60,9 +53,38 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:maxLength="6"
-            android:text="鲸鱼1号"
+            android:text="@string/mineName"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_below="@+id/carview"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            app:cardCornerRadius="10dp"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@mipmap/signln"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="签到/任务"
+                    android:textSize="20sp"
+                    android:textColor="@color/black0"
+                    />
+            </LinearLayout>
+        </LinearLayout>
     </RelativeLayout>
 </layout>

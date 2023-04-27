@@ -25,19 +25,16 @@
             android:background="@color/white"
             app:tabBackground="@color/white"
             app:tabIndicatorColor="@color/white"
-            app:tabIndicatorHeight="0dp"
+            app:tabMode="scrollable"
             app:tabRippleColor="@color/white"
-            app:tabTextAppearance="@style/TabLayoutTextSize"
             app:tabSelectedTextColor="@color/tabcolor"
-            tools:ignore="MissingConstraints">
-        </com.google.android.material.tabs.TabLayout>
+            app:tabTextAppearance="@style/TabLayoutTextSize"
+            tools:ignore="MissingConstraints" />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewpage"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1" />
-
-
     </LinearLayout>
 </layout>

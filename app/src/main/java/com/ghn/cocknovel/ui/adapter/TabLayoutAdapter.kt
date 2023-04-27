@@ -22,7 +22,8 @@ class TabLayoutAdapter(fm: FragmentManager,  val fragmentlist: List<Fragment>,  
     }
 
     override fun getCount(): Int = listTitle.size
-    override fun getPageTitle(position: Int): CharSequence? {
+
+    override fun getPageTitle(position: Int): CharSequence {
         return listTitle.get(position)
     }
 }

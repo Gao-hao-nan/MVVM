@@ -2,17 +2,17 @@ package com.ghn.cocknovel.ui.activity
 
 import android.os.Bundle
 import android.util.Log
+import com.example.basemodel.base.BaseActivity
 import com.ghn.cocknovel.BR
 import com.ghn.cocknovel.R
 import com.ghn.cocknovel.databinding.ActivitySetBinding
 import com.ghn.cocknovel.viewmodel.BookStoreViewModel
 import com.hjq.bar.OnTitleBarListener
 import com.hjq.bar.TitleBar
-import com.kt.network.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_set.*
 
 
-class SetActivity : BaseActivity<ActivitySetBinding,BookStoreViewModel>() {
+class SetActivity : BaseActivity<ActivitySetBinding, BookStoreViewModel>() {
 
     override fun initVariableId(): Int {
         return BR.mode

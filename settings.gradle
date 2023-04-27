@@ -27,3 +27,4 @@ dependencyResolutionManagement {
 rootProject.name = "Cocknovel"
 include ':app'
 include ':jg_network'
+include ':BaseModel'

@@ -14,14 +14,14 @@ kapt {
 
 android {
     namespace 'com.ghn.cocknovel'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.ghn.cocknovel"
         minSdk 21
         targetSdk 33
         versionCode 1
-        versionName "无鸡小说"
+        versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
@@ -75,6 +75,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.4.1'
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.1'
+    implementation project(path: ':BaseModel')
     testImplementation 'junit:junit:4.13.2'
     implementation project(path: ':jg_network')
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
@@ -84,7 +85,6 @@ dependencies {
     implementation 'me.jessyan:autosize:1.2.1'
     // 权限请求框架
     implementation 'com.github.getActivity:XXPermissions:16.6'
-
     // 标题栏框架
     implementation 'com.github.getActivity:TitleBar:10.0'
 }
@@ -93,9 +93,9 @@ dependencies {
 //        variant.outputs.all { output ->
 ////            def date = new Date().format("yyMMdd", TimeZone.getTimeZone("GMT+08"))
 //            if (variant.buildType.name == 'debug'){
-//                output.outputFileName = "${android.defaultConfig.versionName}_debug.apk"
+//                output.outputFileName = "鲸鱼阅读_debug.apk"
 //            }else if (variant.buildType.name == 'release'){
-//                output.outputFileName = "${android.defaultConfig.versionName}_release.apk"
+//                output.outputFileName = "鲸鱼阅读_release.apk"
 //            }
 //        }
 //}
