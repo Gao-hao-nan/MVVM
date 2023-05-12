@@ -28,7 +28,6 @@ open class RecommendViewModel(application: Application) : BaseViewModel(applicat
         launchOnlyresult({
             DataService.callback(5)
         },{
-            Log.i(TAG, "getwan: $it")
             loginStatus.value= it
         })
     }

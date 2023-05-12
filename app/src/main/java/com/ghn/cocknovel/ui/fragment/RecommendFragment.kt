@@ -44,7 +44,6 @@ class RecommendFragment : BaseFragment<FragmentRecommendBinding, RecommendViewMo
                 val text: TextView = holder?.getView(R.id.recomm_title) as TextView
                 text.text = datas[position].title
             }
-
             override val layoutId: Int = R.layout.animation
         }
         val controller =

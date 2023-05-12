@@ -24,7 +24,7 @@ dependencyResolutionManagement {
         }
     }
 }
-rootProject.name = "Cocknovel"
+rootProject.name = "WhaleReading"
 include ':app'
-include ':jg_network'
+include ':NetworkModel'
 include ':BaseModel'

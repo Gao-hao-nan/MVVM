@@ -81,7 +81,6 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
         isShowDialog: Boolean = true
     ) {
         if (isShowDialog) uc?.getShowDialog()?.call()
-        Log.i("TAG", "launchOnlyresult: 开启了")
         launchUI {
             handleException(
                 {
@@ -103,7 +102,6 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
                     error(it)
                 },
                 {
-                    Log.i("TAG", "launchOnlyresult: 关闭了")
                     uc?.getDismissDialog()?.call()
                     complete()
                 }

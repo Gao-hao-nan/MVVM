@@ -4,9 +4,9 @@ import androidx.databinding.ViewDataBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.ghn.cocknovel.R
-import com.ghn.cocknovel.bean.FontBean
 import com.ghn.cocknovel.databinding.FontItemRecyclerviewBinding
 import com.ghn.cocknovel.viewmodel.BookStoreViewModel
+import com.kt.network.bean.FontBean
 
 /**
  * @author 浩楠

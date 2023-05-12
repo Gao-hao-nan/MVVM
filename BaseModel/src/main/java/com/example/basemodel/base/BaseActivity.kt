@@ -20,11 +20,7 @@ import com.kt.ktmvvm.lib.R
 import com.kt.network.dialog.LoadingDialog
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import java.lang.reflect.ParameterizedType
-
-
-abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppCompatActivity(),
-    IBaseView {
-
+abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppCompatActivity(), IBaseView {
     open var binding: V? = null
     open var viewModel: VM? = null
     open var viewModelId = 0
