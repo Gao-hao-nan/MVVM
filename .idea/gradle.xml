@@ -12,6 +12,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/BaseModel" />
+            <option value="$PROJECT_DIR$/CommonModel" />
             <option value="$PROJECT_DIR$/NetworkModel" />
             <option value="$PROJECT_DIR$/app" />
           </set>

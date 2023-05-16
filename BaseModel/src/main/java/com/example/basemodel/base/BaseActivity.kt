@@ -200,7 +200,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
     /**
      * Toast
      */
-    fun showMsg(view: View, msg:String){
+    fun showMsg(msg:String){
         XToast<XToast<*>>(this).apply {
             setContentView(R.layout.layout_toast)
             setDuration(3000)

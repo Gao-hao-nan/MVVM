@@ -16,6 +16,10 @@ import com.ghn.cocknovel.ui.fragment.BookstoreFragment
 import com.ghn.cocknovel.ui.fragment.ClassificationFragment
 import com.ghn.cocknovel.ui.fragment.MineFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.hjq.permissions.OnPermissionCallback
+import com.hjq.permissions.Permission
+import com.hjq.permissions.XXPermissions
+import com.kt.NetworkModel.App
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -44,6 +48,27 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
         binding?.mainFlWarn?.setOnClickListener {
             binding?.flContent?.visibility=View.GONE
         }
+        XXPermissions.with(this).permission(Permission.SYSTEM_ALERT_WINDOW)
+            .request(object : OnPermissionCallback {
+                override fun onGranted(permissions: MutableList<String>, allGranted: Boolean) {
+                    if (!allGranted) {
+                        showMsg("获取部分权限成功，但部分权限未正常授予")
+                        return
+                    }
+                }
+
+                override fun onDenied(permissions: MutableList<String>, doNotAskAgain: Boolean) {
+                    if (doNotAskAgain) {
+                        showMsg("被永久拒绝授权，请手动授权")
+                        // 如果是被永久拒绝就跳转到应用权限系统设置页面
+                        XXPermissions.startPermissionActivity(this@MainActivity, permissions)
+                    } else {
+                        showMsg("获取录音和日历权限失败")
+                    }
+                }
+
+
+            })
     }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -92,7 +117,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_DOWN) {
             if (System.currentTimeMillis() - exitTime > 2000) {
-                binding?.container?.let { showMsg(it, "再按一次退出鲸鱼阅读") }
+                binding?.container?.let { showMsg( "再按一次退出鲸鱼阅读") }
                 exitTime = System.currentTimeMillis()
             } else {
                 finish()

@@ -28,3 +28,4 @@ rootProject.name = "WhaleReading"
 include ':app'
 include ':NetworkModel'
 include ':BaseModel'
+include ':CommonModel'

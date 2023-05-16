@@ -3,6 +3,10 @@ package com.ghn.cocknovel.ui.fragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
 import com.example.basemodel.base.BaseFragment
 import com.ghn.cocknovel.BR
 import com.ghn.cocknovel.R
@@ -27,7 +31,12 @@ class MineFragment : BaseFragment<FragmentMineBinding, BookStoreViewModel>() {
     }
 
     override fun initViewObservable() {
-
+        binding?.let {
+            Glide.with(this).load(R.mipmap.ic_my_handes)
+                .apply(RequestOptions.bitmapTransform(CircleCrop()))
+                .transition(DrawableTransitionOptions.withCrossFade(500))
+                .into(it.rounIcon)
+        }
     }
 
 }

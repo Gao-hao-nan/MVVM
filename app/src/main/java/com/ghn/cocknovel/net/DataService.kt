@@ -1,12 +1,11 @@
 package com.ghn.cocknovel.net
 
-import com.ghn.cocknovel.App
+import com.kt.NetworkModel.App
 import com.kt.network.bean.BaseResult
-import com.kt.network.bean.FontData
 import com.kt.network.bean.FontDataNew
 import com.kt.network.net.ApiService
-import com.kt.network.net.IBaseResponse
 import com.kt.network.net.RetrofitClient
+
 
 /**
  * @author 浩楠

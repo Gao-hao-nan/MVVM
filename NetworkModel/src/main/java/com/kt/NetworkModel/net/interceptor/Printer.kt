@@ -16,7 +16,7 @@ import java.io.IOException
  *    / _ \ | '_ \ / _` | '__/ _ \| |/ _` | \___ \| __| | | |/ _` | |/ _ \
  *   / ___ \| | | | (_| | | | (_) | | (_| |  ___) | |_| |_| | (_| | | (_) |
  *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
- * @Description: TODO
+ * @Description: TODO 对日志拦截器的格式进行处理
  */
 object Printer {
     private val LINE_SEPARATOR = System.getProperty("line.separator") ?: "\n"
