@@ -2,6 +2,7 @@ package com.ghn.cocknovel.ui.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
@@ -46,7 +47,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_content, fragmentList!!.get(0)).commit();
         binding?.navView?.setOnNavigationItemSelectedListener(this)
         binding?.mainFlWarn?.setOnClickListener {
-            binding?.flContent?.visibility=View.GONE
+            binding?.mainFlWarn?.visibility=View.GONE
         }
         XXPermissions.with(this).permission(Permission.SYSTEM_ALERT_WINDOW)
             .request(object : OnPermissionCallback {
@@ -63,11 +64,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
                         // 如果是被永久拒绝就跳转到应用权限系统设置页面
                         XXPermissions.startPermissionActivity(this@MainActivity, permissions)
                     } else {
-                        showMsg("获取录音和日历权限失败")
+                        showMsg("获取权限失败")
                     }
                 }
-
-
             })
     }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
