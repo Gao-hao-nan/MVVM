@@ -195,11 +195,11 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
     /**
      * Toast
      */
-    fun showMsg(view: View, msg: String) {
+    fun showMsg(msg: String) {
         XToast<XToast<*>>(activity).apply {
             setContentView(R.layout.layout_toast)
             setDuration(3000)
-            showAsDropDown(view)
+//            showAsDropDown(view)
             findViewById<TextView>(R.id.txtToastMessage).text = msg
         }.show()
     }

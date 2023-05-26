@@ -11,7 +11,7 @@ import com.example.basemodel.base.BaseFragment
 import com.ghn.cocknovel.BR
 import com.ghn.cocknovel.R
 import com.ghn.cocknovel.databinding.FragmentRecommendBinding
-import com.ghn.cocknovel.ui.adapter.BaseRecyclerAdapter
+import com.example.basemodel.base.BaseRecyclerAdapter
 import com.ghn.cocknovel.viewmodel.RecommendViewModel
 import com.kt.network.bean.Datas
 import kotlinx.android.synthetic.main.fragment_recommend.*

@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ECECEC"
+        android:fitsSystemWindows="true"
         tools:context=".ui.activity.SetActivity">
 
         <com.hjq.bar.TitleBar

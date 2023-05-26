@@ -11,8 +11,6 @@ import okhttp3.Response
  * 网络状态判断
  */
 class NoNetworkInterceptor(private var context: Context?) : Interceptor {
-
-
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val newBuilder = request.newBuilder()
@@ -23,14 +21,9 @@ class NoNetworkInterceptor(private var context: Context?) : Interceptor {
         } else {
             //有网时,只从服务器取
             newBuilder.cacheControl(CacheControl.FORCE_NETWORK)
-
         }
-
-
-
         return chain.proceed(newBuilder.build())
     }
-
 
     companion object {
         @SuppressLint("MissingPermission")
@@ -64,6 +57,4 @@ class NoNetworkInterceptor(private var context: Context?) : Interceptor {
             return -1
         }
     }
-
-
 }

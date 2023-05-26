@@ -11,12 +11,10 @@ import com.example.basemodel.base.BaseFragment
 import com.ghn.cocknovel.BR
 import com.ghn.cocknovel.R
 import com.ghn.cocknovel.databinding.FragmentBookshelfBinding
-import com.ghn.cocknovel.ui.adapter.BaseRecyclerAdapter
+import com.example.basemodel.base.BaseRecyclerAdapter
 import com.ghn.cocknovel.viewmodel.RecommendViewModel
 import com.kt.network.bean.Datas
-import kotlinx.android.synthetic.main.fragment_bookshelf.*
 import kotlinx.android.synthetic.main.fragment_bookshelf.RecommRecyclerview
-import kotlinx.android.synthetic.main.fragment_recommend.*
 
 
 class BookshelfFragment : BaseFragment<FragmentBookshelfBinding, RecommendViewModel>() {

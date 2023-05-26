@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
     BottomNavigationView.OnNavigationItemSelectedListener {
     private var preFragment = 0 // 记录上一个被点击的 fragment页面 ，默认值是0
-    private var fragmentList:ArrayList<Fragment>?=null
+    private var fragmentList: ArrayList<Fragment>? = null
     override fun initVariableId(): Int {
         return BR.mode
     }
@@ -44,12 +44,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
         fragmentList?.add(BookshelfFragment())
         fragmentList?.add(MineFragment())
         //默认显示第一个fragment
-        getSupportFragmentManager().beginTransaction().replace(R.id.fl_content, fragmentList!!.get(0)).commit();
+        getSupportFragmentManager().beginTransaction()
+            .replace(R.id.fl_content, fragmentList!!.get(0)).commit();
         binding?.navView?.setOnNavigationItemSelectedListener(this)
         binding?.mainFlWarn?.setOnClickListener {
-            binding?.mainFlWarn?.visibility=View.GONE
+            binding?.mainFlWarn?.visibility = View.GONE
         }
         XXPermissions.with(this).permission(Permission.SYSTEM_ALERT_WINDOW)
+            .permission(Permission.CAMERA).permission(Permission.READ_MEDIA_IMAGES)
             .request(object : OnPermissionCallback {
                 override fun onGranted(permissions: MutableList<String>, allGranted: Boolean) {
                     if (!allGranted) {
@@ -69,6 +71,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
                 }
             })
     }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.bookstore -> {
@@ -78,6 +81,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
                 }
                 return true
             }
+
             R.id.classification -> {
                 if (preFragment != 1) {
                     switchFragemnt(preFragment, 1)
@@ -85,6 +89,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
                 }
                 return true
             }
+
             R.id.bookshelf -> {
                 if (preFragment != 2) {
                     switchFragemnt(preFragment, 2)
@@ -92,6 +97,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
                 }
                 return true
             }
+
             R.id.mine -> {
                 if (preFragment != 3) {
                     switchFragemnt(preFragment, 3)
@@ -102,6 +108,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
         }
         return false
     }
+
     private fun switchFragemnt(preFragment: Int, i: Int) {
         val ft = supportFragmentManager.beginTransaction()
         ft.hide(fragmentList!![preFragment])
@@ -111,12 +118,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
         }
         ft.show(fragmentList!![i]).commitAllowingStateLoss()
     }
+
     //重写onKeyDown()方法,继承自退出的方法
     private var exitTime: Long = 0
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_DOWN) {
             if (System.currentTimeMillis() - exitTime > 2000) {
-                binding?.container?.let { showMsg( "再按一次退出鲸鱼阅读") }
+                binding?.container?.let { showMsg("再按一次退出鲸鱼阅读") }
                 exitTime = System.currentTimeMillis()
             } else {
                 finish()

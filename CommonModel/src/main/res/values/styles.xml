@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MyDialog">
+        <item name="android:windowFrame">@null</item> <!--Dialog的windowFrame框为无-->
+        <item name="android:windowIsFloating">true</item> <!--是否漂现在activity上-->
+        <item name="android:windowIsTranslucent">false</item> <!--是否半透明-->
+        <item name="android:windowNoTitle">true</item> <!--除去title-->
+        <item name="android:backgroundDimEnabled">true</item> <!--是否允许对话框的背景变暗-->
+        <item name="android:windowBackground">@null</item> <!--除去背景色-->
+    </style>
+</resources>
