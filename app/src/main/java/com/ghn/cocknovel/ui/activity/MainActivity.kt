@@ -2,7 +2,6 @@ package com.ghn.cocknovel.ui.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
@@ -20,7 +19,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
-import com.kt.NetworkModel.App
 import kotlinx.android.synthetic.main.activity_main.*
 
 

@@ -20,6 +20,18 @@ import com.kt.ktmvvm.lib.R
 import com.kt.network.dialog.LoadingDialog
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import java.lang.reflect.ParameterizedType
+/**
+ * @author 浩楠
+ *
+ * @date 2023/6/4-15:58
+ *
+ *      _              _           _     _   ____  _             _ _
+ *     / \   _ __   __| |_ __ ___ (_) __| | / ___|| |_ _   _  __| (_) ___
+ *    / _ \ | '_ \ / _` | '__/ _ \| |/ _` | \___ \| __| | | |/ _` | |/ _ \
+ *   / ___ \| | | | (_| | | | (_) | | (_| |  ___) | |_| |_| | (_| | | (_) |
+ *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
+ * @Description: TODO 封装一个BaseActivity
+ */
 abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppCompatActivity(), IBaseView {
     open var binding: V? = null
     open var viewModel: VM? = null

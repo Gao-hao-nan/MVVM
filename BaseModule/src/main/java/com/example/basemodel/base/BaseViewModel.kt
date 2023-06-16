@@ -16,7 +16,18 @@ import com.kt.network.net.ResponseThrowable
 import com.trello.rxlifecycle2.LifecycleProvider
 import kotlinx.coroutines.*
 import java.lang.ref.WeakReference
-
+/**
+ * @author 浩楠
+ *
+ * @date 2023/6/4-14:28
+ *
+ *      _              _           _     _   ____  _             _ _
+ *     / \   _ __   __| |_ __ ___ (_) __| | / ___|| |_ _   _  __| (_) ___
+ *    / _ \ | '_ \ / _` | '__/ _ \| |/ _` | \___ \| __| | | |/ _` | |/ _ \
+ *   / ___ \| | | | (_| | | | (_) | | (_| |  ___) | |_| |_| | (_| | | (_) |
+ *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
+ * @Description: TODO 封装我们的BaseModel然后，通过观察者模式对数据进行观察并且通知我们的UI进行更新数据
+ */
 open class BaseViewModel(application: Application) : AndroidViewModel(application), IBaseViewModel {
     private var mLifecycle: WeakReference<LifecycleProvider<*>>? = null
     private var uc: UIChangeLiveData? = null
@@ -127,29 +138,6 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
             }
         }
     }
-//    fun ViewModel.launch(
-//        block: suspend CoroutineScope.() -> Unit,
-//        onError: (e: Throwable) -> Unit = { _: Throwable -> },
-//        onComplete: () -> Unit = {}
-//    ) {
-//        viewModelScope.launch(
-//            CoroutineExceptionHandler { _, throwable ->
-//                run {
-//                    // 这里统一处理错误
-//                    ExceptionUtil.catchException(throwable)
-//                    onError(throwable)
-//                }
-//            }
-//        ) {
-//            try {
-//                block.invoke(this)
-//            } finally {
-//                onComplete()
-//            }
-//        }
-//    }
-
-
     /**
      * 注入RxLifecycle生命周期
      *

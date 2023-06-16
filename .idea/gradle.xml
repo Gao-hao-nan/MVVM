@@ -11,9 +11,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/BaseModel" />
-            <option value="$PROJECT_DIR$/CommonModel" />
-            <option value="$PROJECT_DIR$/NetworkModel" />
+            <option value="$PROJECT_DIR$/BaseModule" />
+            <option value="$PROJECT_DIR$/CommonModule" />
+            <option value="$PROJECT_DIR$/NetworkModule" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
