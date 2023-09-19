@@ -2,9 +2,9 @@ package com.kt.network.net
 
 import android.annotation.SuppressLint
 import android.content.Context
-import androidx.databinding.ktx.BuildConfig
 import com.kt.NetworkModel.net.interceptor.Level
 import com.kt.NetworkModel.net.interceptor.LoggingInterceptor
+import com.kt.ktmvvm.lib.BuildConfig
 import com.kt.network.net.dns.OkHttpDNS
 import com.kt.network.net.interceptor.HTTPDNSInterceptor
 import com.kt.network.net.interceptor.NoNetworkInterceptor
@@ -46,8 +46,8 @@ class RetrofitClient
      */
     private fun createOkHttpClient(optimization: Boolean): OkHttpClient {
         //设置请求头拦截器
-//        val httpLoggingInterceptor = com.kt.NetworkModel.net.interceptor.HttpLoggingInterceptor(com.kt.NetworkModel.net.interceptor.HttpLoggingInterceptor.Logger.DEFAULT)
-//        httpLoggingInterceptor.level = com.kt.NetworkModel.net.interceptor.HttpLoggingInterceptor.Level.BODY
+//        val httpLoggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT)
+//        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
         //根据需求添加不同的拦截器
         if (optimization) {
