@@ -1,15 +1,12 @@
 package com.kt.network.net
 
-import android.app.Application
-import android.content.Context
+import android.annotation.SuppressLint
 import android.net.ParseException
-import android.widget.TextView
-import com.blankj.utilcode.util.ToastUtils
+import android.view.Gravity
 import com.google.gson.JsonParseException
 import com.google.gson.stream.MalformedJsonException
-import com.hjq.xtoast.XToast
 import com.kt.NetworkModel.App
-import com.kt.ktmvvm.lib.R
+import com.kt.NetworkModel.utils.ToastUtils
 import org.json.JSONException
 import retrofit2.HttpException
 import java.net.ConnectException
@@ -26,7 +23,9 @@ import java.net.ConnectException
  *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
  * @Description: TODO 根据不同的错误给出相应的提示
  */
+@SuppressLint("StaticFieldLeak")
 object ExceptionHandle {
+    private var toast: ToastUtils? = null
     fun handleException(e: Throwable): ResponseThrowable {
         var ex: ResponseThrowable
         if (e is ResponseThrowable) {
@@ -35,12 +34,11 @@ object ExceptionHandle {
             ex = ResponseThrowable(ERROR.HTTP_ERROR, e)
             when (e.code()) {
                 404 -> {
-//                    ToastUtils.showShort(R.string.net_erro)
-                    XToast<XToast<*>>(App.get()).apply {
-                        setContentView(R.layout.layout_toast)
-                        setDuration(3000)
-                        findViewById<TextView>(R.id.txtToastMessage).text="网络地址错误。请稍后再试"
-                    }.show()
+                    toast=ToastUtils(App.get())
+                    toast?.InitToast()
+                    toast?.setText("网络地址错误。请稍后再试")
+                    toast?.setGravity(Gravity.CENTER)
+                    toast?.show()
                     ex = ResponseThrowable(ERROR.NOT_FOUND, e)
                 }
                 400 -> {
@@ -53,32 +51,28 @@ object ExceptionHandle {
         ) {
             ex = ResponseThrowable(ERROR.PARSE_ERROR, e)
         } else if (e is ConnectException) {
-//            ToastUtils.showShort(R.string.net_erro)
-            XToast<XToast<*>>(App.get()).apply {
-                setContentView(R.layout.layout_toast)
-                setDuration(3000)
-                findViewById<TextView>(R.id.txtToastMessage).text="网络连接失败。请稍后再试"
-            }.show()
-
+            toast=ToastUtils(App.get())
+            toast?.InitToast()
+            toast?.setText("网络连接失败。请稍后再试")
+            toast?.setGravity(Gravity.CENTER)
+            toast?.show()
             ex = ResponseThrowable(ERROR.NETWORD_ERROR, e)
         } else if (e is javax.net.ssl.SSLException) {
             ex = ResponseThrowable(ERROR.SSL_ERROR, e)
         } else if (e is java.net.SocketTimeoutException) {
-//            ToastUtils.showShort(R.string.net_erro)
-            XToast<XToast<*>>(App.get()).apply {
-                setContentView(R.layout.layout_toast)
-                setDuration(3000)
-                findViewById<TextView>(R.id.txtToastMessage).text="网络连接失败。请稍后再试"
-            }.show()
+            toast=ToastUtils(App.get())
+            toast?.InitToast()
+            toast?.setText("网络连接失败。请稍后再试")
+            toast?.setGravity(Gravity.CENTER)
+            toast?.show()
             ex = ResponseThrowable(ERROR.TIMEOUT_ERROR, e)
 
         } else if (e is java.net.UnknownHostException) {
-//            ToastUtils.showShort(R.string.net_erro)
-            XToast<XToast<*>>(App.get()).apply {
-                setContentView(R.layout.layout_toast)
-                setDuration(3000)
-                findViewById<TextView>(R.id.txtToastMessage).text="网络连接失败。请稍后再试"
-            }.show()
+            toast=ToastUtils(App.get())
+            toast?.InitToast()
+            toast?.setText("网络连接失败。请稍后再试")
+            toast?.setGravity(Gravity.CENTER)
+            toast?.show()
             ex = ResponseThrowable(ERROR.TIMEOUT_ERROR, e)
         } else {
             ex = if (!e.message.isNullOrEmpty()) ResponseThrowable(1000, e.message!!, e)

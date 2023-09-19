@@ -1,38 +1,51 @@
 package com.kt.network.net
+
+import com.kt.NetworkModel.bean.ProjectBean
+import com.kt.NetworkModel.bean.TabFrameBean
+import com.kt.NetworkModel.bean.WBanner
 import com.kt.network.bean.BaseResult
-import com.kt.network.bean.FontData
 import com.kt.network.bean.FontDataNew
-import okhttp3.RequestBody
-import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
+import retrofit2.http.Streaming
+import retrofit2.http.Url
 
 interface ApiService {
 
     /**
-     * 获取导航数据
+     * 首页文章
+     */
+    @GET(ApiAddress.CALLBACK)
+    suspend fun callback(): BaseResult<FontDataNew>
+
+    /**
+     * 轮播图
+     */
+    @GET(ApiAddress.BANNER)
+    suspend fun banner(): BaseResult<MutableList<WBanner.Data>>
+
+    /**
+     * 项目分类
      */
     @GET(ApiAddress.PROJECT)
-    suspend fun callback(): BaseResult<FontDataNew>
-    /**
-     * 图书馆数据
-     */
-    @GET(ApiAddress.ONE_PIECE)
-    suspend fun onePiece(
-        @Query("dtype") dtype: String,
-        @Query("key") key: String
-    ): Any?
-
+    suspend fun project(): BaseResult<MutableList<ProjectBean.Data>>
 
     /**
-     * 历史上的今天
+     * 项目列表数据
      */
-    @GET(ApiAddress.HISTORY_DATE)
-    suspend fun history(
-        @Query("date") dtype: String,
-        @Query("key") key: String
-    ): Any?
+    @GET("project/list/{page}/json?")
+    suspend fun project_content(
+        @Path("page") page: Int,
+        @Query("cid") cid: Int
+    ): BaseResult<TabFrameBean.Data>
+
+    /**
+     * 下载接口
+     */
+    @Streaming
+    @GET
+    suspend fun downloadFile(@Url url: String): Any?
 
 
 //    /**

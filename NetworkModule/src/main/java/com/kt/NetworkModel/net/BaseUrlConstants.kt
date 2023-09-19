@@ -9,7 +9,7 @@ class BaseUrlConstants {
         private const val video: String = "http://apis.juhe.cn/"
         private const val degree: String = "http://v.juhe.cn/"
         private const val wanandroid: String = "https://www.wanandroid.com"
-        private const val baseurl3: String = "http://192.168.66.121:7002"
+        private const val baseurl3: String = "http://rk.tongjidiaocha.com/"
         fun getHost(host: Int): String {
             when (host) {
                 1 -> return baseUrl1

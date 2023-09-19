@@ -2,22 +2,22 @@ package com.example.basemodel.base
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.hjq.xtoast.XToast
-import com.kt.ktmvvm.lib.R
+import com.kt.NetworkModel.utils.ToastUtils
 import com.kt.network.dialog.LoadingDialog
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import com.trello.rxlifecycle2.components.support.RxFragment
 import java.lang.reflect.ParameterizedType
+
 /**
  * @author 浩楠
  *
@@ -36,6 +36,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
     open var viewModel: VM? = null
     open var viewModelId = 0
     var dialog: LoadingDialog? = null
+    private var toast: ToastUtils? = null
 
     //是否第一次加载
     private var isFirst: Boolean = true
@@ -203,16 +204,28 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
      */
     abstract fun initVariableId(): Int
 
+
+
     /**
-     * Toast
+     * 自定义Toast文字
      */
     fun showMsg(msg: String) {
-        XToast<XToast<*>>(activity).apply {
-            setContentView(R.layout.layout_toast)
-            setDuration(3000)
-//            showAsDropDown(view)
-            findViewById<TextView>(R.id.txtToastMessage).text = msg
-        }.show()
+        toast=ToastUtils(context)
+        toast?.InitToast()
+        toast?.setText(msg)
+        toast?.setGravity(Gravity.CENTER)
+        toast?.show()
+    }
+    /**
+     * 自定义Toast图片+文字
+     */
+    fun showMsgimage(msg: String,url:Int) {
+        toast=ToastUtils(context)
+        toast?.InitToast()
+        toast?.setText(msg)
+        toast?.setImage(url)
+        toast?.setGravity(Gravity.CENTER)
+        toast?.show()
     }
 
     /**

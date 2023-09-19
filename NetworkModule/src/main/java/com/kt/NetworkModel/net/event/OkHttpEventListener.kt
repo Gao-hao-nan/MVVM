@@ -2,8 +2,14 @@ package com.kt.ktmvvm.net.event
 
 import android.util.Log
 import com.kt.network.net.event.OkHttpEvent
-import okhttp3.*
+import okhttp3.Call
+import okhttp3.Connection
+import okhttp3.EventListener
 import okhttp3.EventListener.Factory
+import okhttp3.Handshake
+import okhttp3.Protocol
+import okhttp3.Request
+import okhttp3.Response
 import java.io.IOException
 import java.net.InetAddress
 import java.net.InetSocketAddress
@@ -41,7 +47,11 @@ class OkHttpEventListener : EventListener() {
     /**
      * dns 解析结束
      */
-    override fun dnsEnd(call: Call, domainName: String, inetAddressList: MutableList<InetAddress>) {
+    override fun dnsEnd(
+        call: Call,
+        domainName: String,
+        inetAddressList: List<@JvmSuppressWildcards InetAddress>
+    ) {
         super.dnsEnd(call, domainName, inetAddressList)
         OkHttpEvent?.dnsEndTime = System.currentTimeMillis()
     }

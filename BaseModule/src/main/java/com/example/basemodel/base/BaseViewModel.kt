@@ -4,18 +4,18 @@ import android.app.Activity
 import android.app.Application
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.BUNDLE
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.CLASS
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.REQEUST_DEFAULT
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.REQUEST
+import com.kt.network.bean.BaseResult
 import com.kt.network.net.ExceptionHandle
-import com.kt.network.net.IBaseResponse
 import com.kt.network.net.ResponseThrowable
 import com.trello.rxlifecycle2.LifecycleProvider
 import kotlinx.coroutines.*
 import java.lang.ref.WeakReference
+
 /**
  * @author 浩楠
  *
@@ -37,6 +37,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
      * 所有网络请求都在 viewModelScope 域中启动，当页面销毁时会自动
      * 调用ViewModel的  #onCleared 方法取消所有协程
      */
+    @OptIn(DelicateCoroutinesApi::class)
     fun launchUI(block: suspend CoroutineScope.() -> Unit) {
         //网络可用
 
@@ -82,10 +83,9 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
      * @param isShowDialog 是否显示加载框
      */
     fun <T> launchOnlyresult(
-        block: suspend CoroutineScope.() -> IBaseResponse<T>,
+        block: suspend CoroutineScope.() -> BaseResult<T>,
         success: (T?) -> Unit,
         error: (ResponseThrowable) -> Unit = {
-//            LogUtils.e("错误异常"+it.localizedMessage)
             it.printStackTrace()
         },
         complete: () -> Unit = {},
@@ -93,30 +93,26 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
     ) {
         if (isShowDialog) uc?.getShowDialog()?.call()
         launchUI {
-            handleException(
-                {
-                    withContext(Dispatchers.IO) {
-                        block().let {
-                            if (it.isSuccess()) {
-                                it.data()
-                            } else {
-                                uc?.toastEvent()?.postValue(it.errorMsg())
-                                throw ResponseThrowable(it.errorCode(), it.errorMsg())
-                            }
-
+            handleException({
+                withContext(Dispatchers.IO) {
+                    block().let {
+                        if (it.isSuccess()) {
+                            it.data()
+                        } else {
+                            uc?.toastEvent()?.postValue(it.errorMsg())
+                            throw ResponseThrowable(it.errorCode(), it.errorMsg())
                         }
-                    }.also {
-                        success(it)
+
                     }
-                },
-                {
-                    error(it)
-                },
-                {
-                    uc?.getDismissDialog()?.call()
-                    complete()
+                }.also {
+                    success(it)
                 }
-            )
+            }, {
+                error(it)
+            }, {
+                uc?.getDismissDialog()?.call()
+                complete()
+            })
         }
     }
 
@@ -138,6 +134,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
             }
         }
     }
+
     /**
      * 注入RxLifecycle生命周期
      *

@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import java.util.HashMap
 
 /**
  * @author 浩楠
@@ -18,7 +17,7 @@ import java.util.HashMap
  *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
  * @Description: TODO
  */
-abstract class BaseRecyclerAdapter<T>(protected var datas: MutableList<T>,type: Int) :
+abstract class BaseRecyclerAdapter<T>(protected var datas: MutableList<T>) :
     RecyclerView.Adapter<BaseRecyclerAdapter<T>.BaseViewHolder>() {
     override fun onCreateViewHolder(
         viewGroup: ViewGroup,

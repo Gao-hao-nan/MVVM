@@ -48,8 +48,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
         binding?.mainFlWarn?.setOnClickListener {
             binding?.mainFlWarn?.visibility = View.GONE
         }
-        XXPermissions.with(this).permission(Permission.SYSTEM_ALERT_WINDOW)
-            .permission(Permission.CAMERA).permission(Permission.READ_MEDIA_IMAGES)
+        XXPermissions.with(this).permission(Permission.CAMERA).permission(Permission.READ_MEDIA_IMAGES)
             .request(object : OnPermissionCallback {
                 override fun onGranted(permissions: MutableList<String>, allGranted: Boolean) {
                     if (!allGranted) {

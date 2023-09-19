@@ -1,4 +1,4 @@
-import android.widget.TextView
+
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -6,7 +6,6 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.ghn.cocknovel.R
 import com.ghn.cocknovel.databinding.FontItemRecyclerviewBinding
 import com.ghn.cocknovel.viewmodel.BookStoreViewModel
-import com.kt.network.bean.FontBean
 
 /**
  * @author 浩楠
@@ -22,7 +21,6 @@ import com.kt.network.bean.FontBean
  */
 class FontAdapter(model: BookStoreViewModel) : BaseQuickAdapter<String, BaseViewHolder>(R.layout.font_item_recyclerview) {
     private var model: BookStoreViewModel? = model
-    private lateinit var listdatafont:List<FontBean>
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         super.onBindViewHolder(holder, position)
 //        holder.getView<TextView>(R.id.font_name).text

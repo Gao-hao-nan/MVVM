@@ -1,27 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="mode"
             type="com.ghn.cocknovel.viewmodel.RecommendViewModel" />
     </data>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#CFCFCF"
         tools:context=".ui.fragment.RecommendFragment">
 
-        <TextView
-            android:id="@+id/tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <com.stx.xhb.androidx.XBanner
+            android:id="@+id/homexbanner"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:AutoPlayTime="3000"
+            app:isAutoPlay="false"
+            app:isClipChildrenMode="true"
+            app:isClipChildrenModeLessThree="true"
+            app:isHandLoop="true"
+            app:isShowIndicatorOnlyOne="true"
+            app:isShowNumberIndicator="false"
+            app:isShowTips="false"
+            app:pageChangeDuration="800"
+            app:pointsPosition="RIGHT"
+            app:tipTextSize="12sp" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/RecommRecyclerview"
+            android:id="@+id/recyclerView_home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/animation"
-            android:accessibilityHeading="@bool/tbrest_test"
+            tools:listitem="@layout/item_home"
             />
     </LinearLayout>
 </layout>

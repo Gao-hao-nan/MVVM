@@ -52,13 +52,13 @@ object Printer {
         val tag = builder.requestTag
         if (builder.logger == null)
             log(builder.type, tag, REQUEST_UP_LINE)
-        logLines(builder.type, tag, arrayOf(URL_TAG + request.url()), builder.logger, false)
+        logLines(builder.type, tag, arrayOf(URL_TAG + request.url), builder.logger, false)
         logLines(builder.type, tag, getRequest(request, builder.level), builder.logger, true)
-        if (request.body() is FormBody) {
+        if (request.body is FormBody) {
             val formBody = StringBuilder()
-            val body = request.body() as FormBody?
-            if (body != null && body.size() != 0) {
-                for (i in 0 until body.size()) {
+            val body = request.body as FormBody?
+            if (body != null && body.size != 0) {
+                for (i in 0 until body.size) {
                     formBody.append(body.encodedName(i) + "=" + body.encodedValue(i) + "&")
                 }
                 formBody.delete(formBody.length - 1, formBody.length)
@@ -83,7 +83,7 @@ object Printer {
         code: Int, headers: String, bodyString: String, segments: List<String>
     ) {
         val responseBody =
-            LINE_SEPARATOR!! + BODY_TAG + LINE_SEPARATOR + JsonUtils.formatJson(bodyString)
+            LINE_SEPARATOR + BODY_TAG + LINE_SEPARATOR + JsonUtils.formatJson(bodyString)
         val tag = builder.responseTag
         if (builder.logger == null)
             log(builder.type, tag, RESPONSE_UP_LINE)
@@ -111,13 +111,13 @@ object Printer {
         val tag = builder.responseTag
         if (builder.logger == null)
             log(builder.type, tag, REQUEST_UP_LINE)
-        logLines(builder.type, tag, arrayOf(URL_TAG + request.url()), builder.logger, false)
+        logLines(builder.type, tag, arrayOf(URL_TAG + request.url), builder.logger, false)
         logLines(builder.type, tag, getRequest(request, builder.level), builder.logger, true)
-        if (request.body() is FormBody) {
+        if (request.body is FormBody) {
             val formBody = StringBuilder()
-            val body = request.body() as FormBody?
-            if (body != null && body.size() != 0) {
-                for (i in 0 until body.size()) {
+            val body = request.body as FormBody?
+            if (body != null && body.size != 0) {
+                for (i in 0 until body.size) {
                     formBody.append(body.encodedName(i) + "=" + body.encodedValue(i) + "&")
                 }
                 formBody.delete(formBody.length - 1, formBody.length)
@@ -152,14 +152,14 @@ object Printer {
 
     private fun getRequest(request: Request, level: Level): Array<String> {
         val message: String
-        val header = request.headers().toString()
+        val header = request.headers.toString()
         val loggableHeader = level == Level.HEADERS || level == Level.BASIC
-        message = METHOD_TAG + request.method() + DOUBLE_SEPARATOR +
+        message = METHOD_TAG + request.method + DOUBLE_SEPARATOR +
                 when {
                     loggableHeader -> "${HEADERS_TAG}${LINE_SEPARATOR}${dotHeaders(header)}"
                     else -> ""
                 }
-        return message.split(LINE_SEPARATOR!!.toRegex()).dropLastWhile { it.isEmpty() }
+        return message.split(LINE_SEPARATOR.toRegex()).dropLastWhile { it.isEmpty() }
             .toTypedArray()
     }
 
@@ -190,7 +190,7 @@ object Printer {
     private fun dotHeaders(header: String): String {
         if (isEmpty(header)) return ""
         val headers =
-            header.split(LINE_SEPARATOR!!.toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+            header.split(LINE_SEPARATOR.toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
         val builder = StringBuilder()
         var tag = "─ "
         if (headers.size > 1) {
@@ -237,9 +237,9 @@ object Printer {
         try {
             val copy = request.newBuilder().build()
             val buffer = Buffer()
-            if (copy.body() == null)
+            if (copy.body == null)
                 return ""
-            copy.body()!!.writeTo(buffer)
+            copy.body!!.writeTo(buffer)
             return JsonUtils.formatJson(buffer.readUtf8())
         } catch (e: IOException) {
             return "{\"err\": \"${e.message}\"}"

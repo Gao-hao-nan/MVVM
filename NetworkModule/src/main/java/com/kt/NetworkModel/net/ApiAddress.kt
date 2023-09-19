@@ -4,23 +4,20 @@ class ApiAddress {
 
     companion object {
         /**
-         * 导航
+         * 首页文章列表
          */
-        const val PROJECT="article/list/1/json"
+        const val CALLBACK="article/list/1/json"
         /**
-         * 登录
+         * 轮播
          */
-        const val LOGIN = "api/login"
-
+        const val BANNER="banner/json"
         /**
-         * 海贼
+         * 项目分类
          */
-        const val ONE_PIECE = "goodbook/catalog"
-
+        const val PROJECT="project/tree/json"
         /**
-         * 历史上的今天
+         * 项目分类
          */
-        const val HISTORY_DATE="todayOnhistory/queryEvent.php"
-
+        const val PROJECT_CONTENT="/article/list/0/json?cid=60"
     }
 }

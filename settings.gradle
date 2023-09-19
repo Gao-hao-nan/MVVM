@@ -23,6 +23,11 @@ dependencyResolutionManagement {
             url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
         }
     }
+//    versionCatalogs {
+//        libs {
+//            from(files("./project.verisons.toml"))
+//        }
+//    }
 }
 rootProject.name = "WhaleReading"
 include ':app'

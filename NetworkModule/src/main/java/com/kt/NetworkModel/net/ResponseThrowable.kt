@@ -1,5 +1,7 @@
 package com.kt.network.net
 
+import com.kt.network.bean.BaseResult
+
 /**
  * @author 浩楠
  *
@@ -26,7 +28,7 @@ class ResponseThrowable : Exception {
         this.errMsg = msg
     }
 
-    constructor(base: IBaseResponse<*>, e: Throwable? = null) : super(e) {
+    constructor(base: BaseResult<*>, e: Throwable? = null) : super(e) {
         this.code = base.errorCode()
         this.errMsg = base.errorMsg()
     }

@@ -1,24 +1,33 @@
 package com.ghn.cocknovel.ui.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
-import android.widget.TextView
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.basemodel.base.BaseFragment
+import com.example.basemodel.base.BaseRecyclerAdapter
 import com.ghn.cocknovel.BR
 import com.ghn.cocknovel.R
 import com.ghn.cocknovel.databinding.FragmentRecommendBinding
-import com.example.basemodel.base.BaseRecyclerAdapter
 import com.ghn.cocknovel.viewmodel.RecommendViewModel
-import com.kt.network.bean.Datas
-import kotlinx.android.synthetic.main.fragment_recommend.*
+import com.kt.NetworkModel.bean.WBanner
+import com.kt.network.bean.datas
+import com.stx.xhb.androidx.XBanner
+import com.stx.xhb.androidx.transformers.Transformer
+import kotlinx.android.synthetic.main.item_home.view.item_home_author
+import kotlinx.android.synthetic.main.item_home.view.item_home_source
+import kotlinx.android.synthetic.main.item_home.view.item_home_time
+import kotlinx.android.synthetic.main.item_home.view.item_home_title
 
 
 class RecommendFragment : BaseFragment<FragmentRecommendBinding, RecommendViewModel>() {
-    var adapter: BaseRecyclerAdapter<Datas>? = null
+    var adapter: BaseRecyclerAdapter<datas>? = null
     override fun initVariableId(): Int {
         return BR.mode
     }
@@ -35,24 +44,62 @@ class RecommendFragment : BaseFragment<FragmentRecommendBinding, RecommendViewMo
 
     }
 
+    @SuppressLint("CheckResult")
     override fun initViewObservable() {
-        val RecommList = mutableListOf<Datas>()
-        viewModel?.getwan()
-        RecommRecyclerview.layoutManager = LinearLayoutManager(activity)
-        adapter = object : BaseRecyclerAdapter<Datas>(RecommList) {
+        viewModel?.getBanner()
+
+        viewModel?.mBanner?.observe(this) {
+            binding?.homexbanner?.setBannerData(it)
+            //刷新数据之后，需要重新设置是否支持自动轮播
+            binding?.homexbanner?.setAutoPlayAble(it.size > 1)
+            //设置模式是否为一屏多页（可选）
+            binding?.homexbanner?.setIsClipChildrenMode(true)
+            binding?.homexbanner?.setBannerData(it)
+            //设置轮播的动画，默认情况下一屏多页左右的图片不会缩放，更改动画可以改变轮播的效果，
+            //Transformer还有很多效果，感兴趣的朋友可以自行尝试
+            binding?.homexbanner?.setPageTransformer(Transformer.Scale)
+            binding?.homexbanner?.loadImage(object : XBanner.XBannerAdapter {
+                override fun loadBanner(banner: XBanner?, model: Any?, view: View?, position: Int) {
+                    Glide.with(this@RecommendFragment).load((model as WBanner.Data).imagePath)
+                        .into(view as ImageView)
+                }
+            })
+        }
+
+
+
+
+        val recyclerview_homelist = mutableListOf<datas>()
+        viewModel?.getHomeStatus()
+        binding?.recyclerViewHome?.layoutManager = LinearLayoutManager(activity)
+        adapter = object : BaseRecyclerAdapter<datas>(recyclerview_homelist) {
             override fun bindData(holder: BaseViewHolder?, position: Int) {
-                val text: TextView = holder?.getView(R.id.recomm_title) as TextView
-                text.text = datas[position].title
+                holder?.itemView?.item_home_author?.text = "作者: " + datas[position].shareUser
+                holder?.itemView?.item_home_time?.text = datas[position].niceDate
+                holder?.itemView?.item_home_title?.text = datas[position].title
+                holder?.itemView?.item_home_source?.text =
+                    datas[position].superChapterName + "/" + datas[position].chapterName
+                holder?.getView(R.id.item_home_csl)?.setOnClickListener {
+                    viewModel?.setWebview(datas[position].link)
+                }
             }
-            override val layoutId: Int = R.layout.animation
+
+            override val layoutId: Int = R.layout.item_home
         }
-        val controller =
-            LayoutAnimationController(AnimationUtils.loadAnimation(activity, R.anim.animate))
-        RecommRecyclerview.layoutAnimation = controller
-        RecommRecyclerview.adapter = adapter
-        viewModel?.loginStatus?.observe(this) {
+        val controller = LayoutAnimationController(AnimationUtils.loadAnimation(activity, R.anim.animate))
+
+        binding?.recyclerViewHome?.layoutAnimation = controller
+        binding?.recyclerViewHome?.adapter = adapter
+        viewModel?.homeStatus?.observe(this) {
             adapter?.addData(it.datas)
+
         }
+
     }
+
+
 }
+
+
+
 

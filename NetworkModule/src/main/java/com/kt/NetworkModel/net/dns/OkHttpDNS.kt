@@ -44,7 +44,7 @@ class OkHttpDNS(context: Context?) : Dns {
             Log.e("OkHttpDns", "inetAddresses:$inetAddresses")
             return inetAddresses
         } ?: let {
-            return Dns.SYSTEM.lookup(hostname)
+            return Dns.SYSTEM.lookup(hostname).toMutableList()
         }
     }
 

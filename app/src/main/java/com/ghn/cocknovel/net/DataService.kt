@@ -1,6 +1,9 @@
 package com.ghn.cocknovel.net
 
 import com.kt.NetworkModel.App
+import com.kt.NetworkModel.bean.ProjectBean
+import com.kt.NetworkModel.bean.TabFrameBean
+import com.kt.NetworkModel.bean.WBanner
 import com.kt.network.bean.BaseResult
 import com.kt.network.bean.FontDataNew
 import com.kt.network.net.ApiService
@@ -28,6 +31,33 @@ class DataService {
             return RetrofitClient.getInstance(App.get()).getDefault(ApiService::class.java, host)
                 .callback()
         }
-
+        /**
+         * banner
+         */
+        suspend fun wbanner(host: Int): BaseResult<MutableList<WBanner.Data>> {
+            return RetrofitClient.getInstance(App.get()).getDefault(ApiService::class.java, host)
+                .banner()
+        }
+        /**
+         * 项目分类
+         */
+        suspend fun project(host: Int):BaseResult<MutableList<ProjectBean.Data>>{
+            return RetrofitClient.getInstance(App.get()).getDefault(ApiService::class.java, host)
+                .project()
+        }
+        /**
+         * 项目分类的详情
+         */
+        suspend fun project_content(host: Int,page:Int,cid:Int):BaseResult<TabFrameBean.Data>{
+            return RetrofitClient.getInstance(App.get()).getDefault(ApiService::class.java, host)
+                .project_content(page, cid)
+        }
+        /**
+         * 下载
+         */
+        suspend fun download(host: Int, url: String):Any?{
+            return RetrofitClient.getInstance(App.get()).getDefault(ApiService::class.java,host)
+                .downloadFile(url)
+        }
     }
 }

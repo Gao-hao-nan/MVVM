@@ -11,9 +11,9 @@ import okhttp3.Response
 class HTTPDNSInterceptor(private var context: Context?) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val originRequest = chain.request()
-        val httpUrl = originRequest.url()
+        val httpUrl = originRequest.url
         val url = httpUrl.toString()
-        val host = httpUrl.host()
+        val host = httpUrl.host
         val service = HttpDns.getService(context)
         val hostIP = service.getIpByHostAsync(host)
         val builder = originRequest.newBuilder()

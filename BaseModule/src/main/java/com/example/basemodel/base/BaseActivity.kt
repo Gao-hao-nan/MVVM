@@ -4,9 +4,9 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentActivity
@@ -15,8 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.BUNDLE
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.CLASS
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.REQUEST
-import com.hjq.xtoast.XToast
-import com.kt.ktmvvm.lib.R
+import com.kt.NetworkModel.utils.ToastUtils
 import com.kt.network.dialog.LoadingDialog
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import java.lang.reflect.ParameterizedType
@@ -37,6 +36,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
     open var viewModel: VM? = null
     open var viewModelId = 0
     private var dialog: LoadingDialog? = null
+    private var toast: ToastUtils? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -91,11 +91,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
         }
         viewModel?.getUC()?.toastEvent()?.observe(this){
 //            ToastUtils.showShort(it)
-            XToast<XToast<*>>(this).apply {
-                setContentView(R.layout.layout_toast)
-                setDuration(3000)
-                findViewById<TextView>(R.id.txtToastMessage).text=it
-            }.show()
+                showMsg(it.toString())
         }
         //关闭界面
         viewModel?.getUC()?.getFinishEvent()?.observe(this) { finish() }
@@ -210,15 +206,25 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
     abstract fun initContentView(savedInstanceState: Bundle?): Int
 
     /**
-     * Toast
+     * 自定义Toast文字
      */
-    fun showMsg(msg:String){
-        XToast<XToast<*>>(this).apply {
-            setContentView(R.layout.layout_toast)
-            setDuration(3000)
-//            showAsDropDown(view)
-            findViewById<TextView>(R.id.txtToastMessage).text=msg
-        }.show()
+    fun showMsg(msg: String) {
+        toast=ToastUtils(this)
+        toast?.InitToast()
+        toast?.setText(msg)
+        toast?.setGravity(Gravity.CENTER)
+        toast?.show()
+    }
+    /**
+     * 自定义Toast图片+文字
+     */
+    fun showMsgimage(msg: String,url:Int) {
+        toast=ToastUtils(this)
+        toast?.InitToast()
+        toast?.setText(msg)
+        toast?.setImage(url)
+        toast?.setGravity(Gravity.CENTER)
+        toast?.show()
     }
 
 }

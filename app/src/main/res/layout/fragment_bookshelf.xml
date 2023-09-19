@@ -15,7 +15,7 @@
             android:id="@+id/RecommRecyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/animation"
+            tools:listitem="@layout/item_home"
             android:accessibilityHeading="@bool/tbrest_test"
             />
     </FrameLayout>

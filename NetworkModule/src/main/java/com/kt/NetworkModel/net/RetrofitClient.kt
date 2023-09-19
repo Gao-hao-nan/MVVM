@@ -2,10 +2,9 @@ package com.kt.network.net
 
 import android.annotation.SuppressLint
 import android.content.Context
+import androidx.databinding.ktx.BuildConfig
 import com.kt.NetworkModel.net.interceptor.Level
 import com.kt.NetworkModel.net.interceptor.LoggingInterceptor
-import com.kt.ktmvvm.lib.BuildConfig
-import com.kt.ktmvvm.net.event.OkHttpEventListener
 import com.kt.network.net.dns.OkHttpDNS
 import com.kt.network.net.interceptor.HTTPDNSInterceptor
 import com.kt.network.net.interceptor.NoNetworkInterceptor
@@ -60,13 +59,11 @@ class RetrofitClient
                 .connectionPool(ConnectionPool(8, 10, TimeUnit.SECONDS)) //添加这两行代码
                 .sslSocketFactory(TrustAllCerts.createSSLSocketFactory()!!, TrustAllCerts())
                 .hostnameVerifier(TrustAllCerts.TrustAllHostnameVerifier())
-//            .protocols(Collections.unmodifiableList(listOf(Protocol.HTTP_1_1)))
                 //alibaba dns优化
                 .dns(OkHttpDNS.get(context))
                 .addInterceptor(HTTPDNSInterceptor(context)) //不建议用这种方式，因为大型APP 域名会比较多，假设HTTPS 的话，证书会认证失败
                 .cache(context?.cacheDir?.let { Cache(it, 50 * 1024 * 1024L) })//缓存目录
                 .addInterceptor(NoNetworkInterceptor(context))//无网拦截器
-//                .addInterceptor(httpLoggingInterceptor)
                 .addNetworkInterceptor(LoggingInterceptor().apply {
                     isDebug = BuildConfig.DEBUG
                     level = Level.BASIC
@@ -85,7 +82,7 @@ class RetrofitClient
                 .connectionPool(ConnectionPool(8, 10, TimeUnit.SECONDS)) //添加这两行代码
                 .sslSocketFactory(TrustAllCerts.createSSLSocketFactory()!!, TrustAllCerts())
                 .hostnameVerifier(TrustAllCerts.TrustAllHostnameVerifier())
-//                .addInterceptor(httpLoggingInterceptor)
+                .dns(OkHttpDNS.get(context))
                 .addNetworkInterceptor(LoggingInterceptor().apply {
                     isDebug = BuildConfig.DEBUG
                     level = Level.BASIC
@@ -110,7 +107,6 @@ class RetrofitClient
             create(interfaceServer, hostType)
         } else retrofitManager.create(interfaceServer!!)
     }
-
 
     /**
      *
