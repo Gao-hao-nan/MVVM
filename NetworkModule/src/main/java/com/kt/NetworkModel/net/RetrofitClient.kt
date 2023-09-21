@@ -23,6 +23,7 @@ class RetrofitClient
  */(var context: Context?) {
 
 
+
     companion object {
 
         @SuppressLint("StaticFieldLeak")

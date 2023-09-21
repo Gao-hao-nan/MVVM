@@ -1,17 +1,27 @@
 package com.kt.network.net
 
+import com.kt.NetworkModel.bean.LoginBean
 import com.kt.NetworkModel.bean.ProjectBean
 import com.kt.NetworkModel.bean.TabFrameBean
 import com.kt.NetworkModel.bean.WBanner
 import com.kt.network.bean.BaseResult
 import com.kt.network.bean.FontDataNew
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.Streaming
 import retrofit2.http.Url
 
 interface ApiService {
+    /**
+     * 登录接口
+     */
+    @POST(ApiAddress.LOGIN)
+    suspend fun Login(
+        @Query("username") username: String,
+        @Query("password") password: String
+    ):  BaseResult<LoginBean.Data>
 
     /**
      * 首页文章

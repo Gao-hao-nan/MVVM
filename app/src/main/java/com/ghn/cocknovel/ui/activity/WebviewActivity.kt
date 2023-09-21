@@ -1,10 +1,12 @@
 package com.ghn.cocknovel.ui.activity
 
 import android.os.Bundle
+import android.util.Log
 import com.example.basemodel.base.BaseActivity
 import com.ghn.cocknovel.BR
 import com.ghn.cocknovel.R
 import com.ghn.cocknovel.databinding.ActivityWebviewBinding
+import com.ghn.cocknovel.ui.view.MyWebView
 import com.ghn.cocknovel.viewmodel.RecommendViewModel
 
 class WebviewActivity : BaseActivity<ActivityWebviewBinding, RecommendViewModel>() {
@@ -18,6 +20,21 @@ class WebviewActivity : BaseActivity<ActivityWebviewBinding, RecommendViewModel>
 
     override fun initParam() {
         val bundle = this.intent.extras
+        //webview加载成功和失败的回调
+        binding?.homeWebview?.setOnLoadStatueListener(object :MyWebView.OnWebLoadStatusListener{
+            override fun error() {
+                Log.i("TAG", "error: 失败")
+            }
+
+            override fun success() {
+                Log.i("TAG", "success: 成功")
+            }
+
+            override fun onTitle(title: String) {
+                Log.i("TAG", "onTitle: 标题")
+            }
+
+        })
         bundle?.getString("url")?.let { binding?.homeWebview?.loadUrl(it) }
         binding?.homeWebview?.canGoBack()
     }

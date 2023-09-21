@@ -10,7 +10,7 @@
     <style name="start_photo" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:fitsSystemWindows">true</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@mipmap/background_image</item>
+<!--        <item name="android:windowBackground">@mipmap/background_image</item>-->
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">false</item><!--显示虚拟按键，并腾出空间-->
     </style>

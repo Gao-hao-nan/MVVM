@@ -4,6 +4,10 @@ class ApiAddress {
 
     companion object {
         /**
+         * 登录接口
+         */
+        const val LOGIN="user/login"
+        /**
          * 首页文章列表
          */
         const val CALLBACK="article/list/1/json"

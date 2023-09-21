@@ -27,6 +27,7 @@ import com.ghn.cocknovel.R
  *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
  * @Description: TODO 自定义带有进度条的webview
  */
+@SuppressLint("SetJavaScriptEnabled")
 class MyWebView constructor(context: Context, attributeset: AttributeSet) : ConstraintLayout(context, attributeset) {
 
     private var progress: ProgressBar

@@ -1,12 +1,9 @@
 package com.kt.NetworkModel
 
 import android.app.Application
-import android.app.Person
 import android.content.Context
-import com.blankj.utilcode.util.ToastUtils
-import com.hjq.permissions.OnPermissionCallback
-import com.hjq.permissions.Permission
-import com.hjq.permissions.XXPermissions
+import com.kt.NetworkModel.utils.MVUtils
+import com.tencent.mmkv.MMKV
 import me.jessyan.autosize.AutoSize
 import me.jessyan.autosize.AutoSizeConfig
 import me.jessyan.autosize.unit.Subunits
@@ -34,8 +31,9 @@ class App : Application() {
         AutoSizeConfig.getInstance().setCustomFragment(true).setExcludeFontScale(true)
             .setPrivateFontScale(0.8f).setLog(false).setBaseOnWidth(true).setUseDeviceSize(true)
             .getUnitsManager().setSupportDP(true).setDesignSize(2160F, 3840F).setSupportSP(true)
-            .setSupportSubunits(Subunits.MM);
-
+            .setSupportSubunits(Subunits.MM)
+        MMKV.initialize(this)
+        MVUtils.instance
     }
 
     /**

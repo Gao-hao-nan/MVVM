@@ -2,16 +2,19 @@ package com.ghn.cocknovel.viewmodel
 
 import FontAdapter
 import android.app.Application
+import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.basemodel.base.BaseViewModel
 import com.example.basemodel.base.SingleLiveEvent
+import com.ghn.cocknovel.net.DataService
 import com.ghn.cocknovel.ui.activity.MainActivity
 import com.ghn.cocknovel.ui.activity.SetActivity
 import com.ghn.cocknovel.ui.activity.SwitchActivity
-import com.kt.network.bean.FontDataNew
+import com.kt.NetworkModel.bean.LoginBean
+import com.kt.NetworkModel.utils.MVUtils
 
 /**
  * @author 浩楠
@@ -28,36 +31,42 @@ import com.kt.network.bean.FontDataNew
 open class BookStoreViewModel(application: Application) : BaseViewModel(application) {
     companion object {
         val TAG: String? = BookStoreViewModel::class.simpleName
+        val mLogin = MutableLiveData<LoginBean>()
     }
-    val loginStatus = MutableLiveData<FontDataNew>().apply {}
-//    open fun getwan(){
-//        launchOnlyresult({
-//            DataService.callback(5)
-//        },{
-//            Log.i("TAG", "initViewObservable: $it")
-//            loginStatus.value= it
-//        })
-//    }
+
+
     /**
      * 跳转到首页
      */
-    open fun getMain(){
-        startActivity(MainActivity::class.java)
+    open fun getMain(username: String, password: String) {
+        launchOnlyresult({
+            DataService.login(5, username, password)
+        }, {
+            Log.i(TAG, "getMain: $it")
+            if (it?.id != null) {
+                MVUtils.put("token",it.id)
+                startActivity(MainActivity::class.java)
+            } else {
+            }
+        })
+
     }
+
     /**
      * 从我的页面跳转到设置页面
      */
-    open fun getsetImage(){
+    open fun getsetImage() {
         startActivity(SetActivity::class.java)
     }
 
     /**
      * 全局更换字体
      */
-    open fun getSwitchFont(){
+    open fun getSwitchFont() {
         //App.get().changeTTF()
         startActivity(SwitchActivity::class.java)
     }
+
     /**
      * 字体recyclerview的适配器
      */
@@ -81,6 +90,7 @@ open class BookStoreViewModel(application: Application) : BaseViewModel(applicat
             //CAN_SCROLLVERTICALLY
         }
     }
+
     inner class OnListener : RecyclerView.OnScrollListener() {
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)

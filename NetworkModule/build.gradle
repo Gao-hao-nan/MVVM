@@ -87,4 +87,6 @@ dependencies {
     api 'com.github.getActivity:XXPermissions:16.6'
     //弹窗
     api 'com.github.li-xiaojun:XPopup:2.9.19'
+    //MMKV
+    api 'com.tencent:mmkv:1.3.0'
 }

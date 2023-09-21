@@ -27,6 +27,7 @@ open class RecommendViewModel(application: Application) : BaseViewModel(applicat
     companion object {
         val TAG: String? = BookStoreViewModel::class.simpleName
 
+
     }
 
     val homeStatus = MutableLiveData<FontDataNew>()

@@ -2,6 +2,7 @@ package com.ghn.cocknovel.ui.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
@@ -19,6 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
+import com.kt.NetworkModel.utils.MVUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -36,6 +38,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
 
     @SuppressLint("CommitTransaction")
     override fun initParam() {
+        Log.i("TAG", "initParam: ${MVUtils.getInt("token")}")
         fragmentList = ArrayList()
         fragmentList?.add(BookstoreFragment())
         fragmentList?.add(ClassificationFragment())
@@ -48,7 +51,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
         binding?.mainFlWarn?.setOnClickListener {
             binding?.mainFlWarn?.visibility = View.GONE
         }
-        XXPermissions.with(this).permission(Permission.CAMERA).permission(Permission.READ_MEDIA_IMAGES)
+        XXPermissions.with(this).permission(Permission.CAMERA)
+            .permission(Permission.READ_MEDIA_IMAGES)
             .request(object : OnPermissionCallback {
                 override fun onGranted(permissions: MutableList<String>, allGranted: Boolean) {
                     if (!allGranted) {
