@@ -9,6 +9,7 @@ import okhttp3.ResponseBody
 import okhttp3.internal.platform.Platform
 import okhttp3.internal.platform.Platform.Companion.INFO
 import java.io.IOException
+import java.nio.charset.Charset
 import java.util.concurrent.TimeUnit
 
 /**
@@ -123,6 +124,8 @@ class LoggingInterceptor : Interceptor {
                 segmentList
             )
             body = ResponseBody.create(contentType, bodyString)
+            val charset = body.contentType()?.charset(Charset.forName("UTF-8"))
+                ?: Charset.forName("UTF-8")
         } else {
             Printer.printFileResponse(this, chainMs, isSuccessful, code, header, segmentList)
             return response

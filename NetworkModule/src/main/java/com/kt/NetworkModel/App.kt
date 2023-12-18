@@ -20,7 +20,7 @@ import me.jessyan.autosize.unit.Subunits
  *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
  * 描述:
  */
-class App : Application() {
+open class App : Application() {
 
 
     override fun onCreate() {

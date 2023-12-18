@@ -24,6 +24,7 @@ class HTTPDNSInterceptor(private var context: Context?) : Interceptor {
             builder.header("host", hostIP)
 
         }
+        builder.header("Accept-Encoding","gzip, deflate")
         builder.header("id", id.toString())
         val newRequest = builder.build()
         return chain.proceed(newRequest)

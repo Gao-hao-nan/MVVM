@@ -8,7 +8,6 @@ import com.ghn.cocknovel.BR
 import com.ghn.cocknovel.R
 import com.ghn.cocknovel.databinding.FragmentBookshelfBinding
 import com.ghn.cocknovel.viewmodel.RecommendViewModel
-import com.kt.network.bean.datas
 
 
 class BookshelfFragment() : BaseFragment<FragmentBookshelfBinding, RecommendViewModel>() {
@@ -29,7 +28,8 @@ class BookshelfFragment() : BaseFragment<FragmentBookshelfBinding, RecommendView
     }
 
     override fun initViewObservable() {
-        val RecommList = mutableListOf<datas>()
+
+//        val RecommList = mutableListOf<datas>()
 //        viewModel?.getwan()
 //        RecommRecyclerview.layoutManager = LinearLayoutManager(activity)
 //        adapter = object : BaseRecyclerAdapter<datas>(RecommList) {

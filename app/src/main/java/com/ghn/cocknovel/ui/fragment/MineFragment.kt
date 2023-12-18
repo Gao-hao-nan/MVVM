@@ -10,21 +10,19 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.example.basemodel.base.BaseFragment
-import com.exploitation.commonmodel.view.BitmapUtils
-import com.exploitation.commonmodel.view.CameraUtils
 import com.ghn.cocknovel.BR
 import com.ghn.cocknovel.R
 import com.ghn.cocknovel.databinding.FragmentMineBinding
 import com.ghn.cocknovel.viewmodel.BookStoreViewModel
-import com.hjq.permissions.OnPermissionCallback
-import com.hjq.permissions.Permission
-import com.hjq.permissions.XXPermissions
+import com.kt.NetworkModel.utils.BitmapUtils
+import com.kt.NetworkModel.utils.CameraUtils
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -63,13 +61,13 @@ class MineFragment : BaseFragment<FragmentMineBinding, BookStoreViewModel>() {
     }
 
     override fun initViewObservable() {
-        binding?.let {
+        mBinding?.let {
             Glide.with(this).load(R.mipmap.ic_my_handes)
                 .apply(RequestOptions.bitmapTransform(CircleCrop()))
                 .transition(DrawableTransitionOptions.withCrossFade(500))
                 .into(it.rounIcon)
         }
-        binding?.rounIcon?.setOnClickListener {
+        mBinding?.rounIcon?.setOnClickListener {
             // 打开自定义dialog
 //            openDialog()
 //            context?.let { it1 -> ButtomDialogView(it1,true,true).show() }
@@ -206,10 +204,11 @@ class MineFragment : BaseFragment<FragmentMineBinding, BookStoreViewModel>() {
     /**
      * 通过图片路径显示图片
      */
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun displayImage(imagePath: String) {
         if (!TextUtils.isEmpty(imagePath)) {
             //显示图片
-            binding?.rounIcon?.let {
+            mBinding?.rounIcon?.let {
                 Glide.with(this).load(imagePath).apply(requestOptions).into(it)
             }
             //压缩图片

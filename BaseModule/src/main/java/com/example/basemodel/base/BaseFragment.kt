@@ -1,21 +1,28 @@
 package com.example.basemodel.base
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
+import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
+import com.example.basemodel.R
 import com.kt.NetworkModel.utils.ToastUtils
 import com.kt.network.dialog.LoadingDialog
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
-import com.trello.rxlifecycle2.components.support.RxFragment
+import com.trello.rxlifecycle4.components.support.RxAppCompatActivity
+import com.trello.rxlifecycle4.components.support.RxFragment
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -30,12 +37,12 @@ import java.lang.reflect.ParameterizedType
  *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
  * @Description: TODO 封装一个BaseFragment
  */
-abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragment(), IBaseView {
+abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> :RxFragment(), IBaseView{
 
-    open var binding: V? = null
-    open var viewModel: VM? = null
+    open var mBinding: V? = null
+    open var mViewModel: VM? = null
     open var viewModelId = 0
-    var dialog: LoadingDialog? = null
+    var dialog: MaterialDialog? = null
     private var toast: ToastUtils? = null
 
     //是否第一次加载
@@ -53,20 +60,21 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate<ViewDataBinding>(
+        mBinding = DataBindingUtil.inflate<ViewDataBinding>(
             inflater,
             initContentView(inflater, container, savedInstanceState),
             container,
             false
         ) as V?
-        return binding?.root
+        return mBinding?.root
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onVisible()
-        viewModel?.let { lifecycle.addObserver(it) }
+        mViewModel?.let { lifecycle.addObserver(it) }
         //私有的初始化Databinding和ViewModel方法
         initViewDataBinding()
         //私有的ViewModel与View的契约事件回调逻辑
@@ -97,7 +105,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
 
     private fun registerUIChangeLiveDataCallBack() {
         //跳入新页面
-        viewModel?.getUC()?.getStartActivityEvent()?.observe(this) { params ->
+        mViewModel?.getUC()?.getStartActivityEvent()?.observe(viewLifecycleOwner) { params ->
             params?.let {
                 val clz = params[BaseViewModel.Companion.ParameterField.CLASS] as Class<*>?
                 val intent = Intent(activity, clz)
@@ -114,17 +122,29 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
             }
 
         }
-        viewModel?.getUC()?.getFinishResult()?.observe(this) { integer ->
+        //包名和类名跳转
+        mViewModel?.getUC()?.getStartModelActivityEvent()?.observe(viewLifecycleOwner){ params->
+            params?.let {
+                val clz=params[BaseViewModel.Companion.ParameterField.CLASS]
+                val Packagename=params[BaseViewModel.Companion.ParameterField.CANONICAL_NAME]
+                val intent=Intent()
+                intent.setClassName(Packagename.toString(), clz.toString())
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                this@BaseFragment.startActivity(intent)
+            }
+        }
+
+        mViewModel?.getUC()?.getFinishResult()?.observe(viewLifecycleOwner) { integer ->
             integer?.let {
                 activity?.setResult(integer)
                 activity?.finish()
             }
         }
 
-        viewModel?.getUC()?.getShowDialog()?.observe(this) {
+        mViewModel?.getUC()?.getShowDialog()?.observe(viewLifecycleOwner) {
             ShowDialog()
         }
-        viewModel?.getUC()?.getDismissDialog()?.observe(this) {
+        mViewModel?.getUC()?.getDismissDialog()?.observe(viewLifecycleOwner) {
             dismissLoading()
         }
 
@@ -132,9 +152,9 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
 //        viewModel?.getUC()?.getFinishEvent()?.observe(this) { activity?.finish() }
         //关闭上一层
 
-        viewModel?.getUC()?.getOnBackPressedEvent()?.observe(this) { activity?.onBackPressed() }
+        mViewModel?.getUC()?.getOnBackPressedEvent()?.observe(viewLifecycleOwner) { activity?.onBackPressed() }
 
-        viewModel?.getUC()?.getSetResultEvent()?.observe(this) { params ->
+        mViewModel?.getUC()?.getSetResultEvent()?.observe(viewLifecycleOwner) { params ->
             params?.let {
                 val intent = Intent()
                 if (params.isNotEmpty()) {
@@ -150,6 +170,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun initViewDataBinding() {
         viewModelId = initVariableId()
 
@@ -164,15 +185,16 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
             BaseViewModel::class.java
         }
 
-        viewModel = createViewModel(this, modelClass as Class<VM>)
+        mViewModel = createViewModel(this, modelClass as Class<VM>)
         //关联ViewModel
-        binding?.setVariable(viewModelId, viewModel)
+        mBinding?.setVariable(viewModelId, mViewModel)
         //支持LiveData绑定xml，数据改变，UI自动会更新
-        binding?.lifecycleOwner = this
+        mBinding?.lifecycleOwner = this
+        mBinding?.lifecycleOwner?.lifecycle?.addObserver(mViewModel!!)
         //让ViewModel拥有View的生命周期感应
-        lifecycle.addObserver(viewModel!!)
+//        lifecycle.addObserver(viewModel!!)
         //注入RxLifecycle生命周期
-        viewModel?.injectLifecycleProvider(this)
+        mViewModel?.injectLifecycleProvider(this)
     }
 
     open fun <T : ViewModel> createViewModel(fragment: Fragment?, cls: Class<T>?): T {
@@ -184,9 +206,20 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
      */
     private fun ShowDialog() {
         if (dialog == null) {
-            dialog = LoadingDialog.getInstance(activity)
+            dialog = context?.let {
+                MaterialDialog(it)
+                    .cancelable(false)
+                    .cornerRadius(8f)
+                    .customView(R.layout.custom_progress_dialog_view, noVerticalPadding = true)
+                    .lifecycleOwner(this)
+                    .maxWidth(R.dimen.dialog_width)
+            }
         }
         dialog?.show()
+//        if (dialog == null) {
+//            dialog = LoadingDialog.getInstance(activity)
+//        }
+//        dialog?.show()
     }
 
     /**
@@ -209,6 +242,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
     /**
      * 自定义Toast文字
      */
+    @RequiresApi(Build.VERSION_CODES.M)
     fun showMsg(msg: String) {
         toast=ToastUtils(context)
         toast?.InitToast()
@@ -219,7 +253,8 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
     /**
      * 自定义Toast图片+文字
      */
-    fun showMsgimage(msg: String,url:Int) {
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun showMsgimage(msg: String, url:Int) {
         toast=ToastUtils(context)
         toast?.InitToast()
         toast?.setText(msg)
@@ -236,5 +271,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): Int
+
+
 
 }

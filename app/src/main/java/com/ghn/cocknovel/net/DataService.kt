@@ -1,7 +1,6 @@
 package com.ghn.cocknovel.net
 
 import com.kt.NetworkModel.App
-import com.kt.NetworkModel.bean.LoginBean
 import com.kt.NetworkModel.bean.ProjectBean
 import com.kt.NetworkModel.bean.TabFrameBean
 import com.kt.NetworkModel.bean.WBanner
@@ -30,11 +29,10 @@ class DataService {
          */
         suspend fun login(
             host: Int,
-            username: String,
-            password: String
-        ): BaseResult<LoginBean.Data> {
+            phoneNumber: String
+        ): BaseResult<Any> {
             return RetrofitClient.getInstance(App.get()).getDefault(ApiService::class.java, host)
-                .Login(username,password)
+                .Login(phoneNumber)
         }
 
         /**

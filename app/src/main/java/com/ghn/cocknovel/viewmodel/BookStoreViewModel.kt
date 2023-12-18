@@ -10,11 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.basemodel.base.BaseViewModel
 import com.example.basemodel.base.SingleLiveEvent
 import com.ghn.cocknovel.net.DataService
-import com.ghn.cocknovel.ui.activity.MainActivity
 import com.ghn.cocknovel.ui.activity.SetActivity
 import com.ghn.cocknovel.ui.activity.SwitchActivity
 import com.kt.NetworkModel.bean.LoginBean
-import com.kt.NetworkModel.utils.MVUtils
 
 /**
  * @author 浩楠
@@ -38,16 +36,16 @@ open class BookStoreViewModel(application: Application) : BaseViewModel(applicat
     /**
      * 跳转到首页
      */
-    open fun getMain(username: String, password: String) {
+    open fun getMain(phoneNumber: String) {
         launchOnlyresult({
-            DataService.login(5, username, password)
+            DataService.login(1, phoneNumber)
         }, {
             Log.i(TAG, "getMain: $it")
-            if (it?.id != null) {
-                MVUtils.put("token",it.id)
-                startActivity(MainActivity::class.java)
-            } else {
-            }
+//            if (it?.id != null) {
+//                MVUtils.put("token",it.id)
+//                startActivity(MainActivity::class.java)
+//            } else {
+//            }
         })
 
     }

@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonintern"
             tools:listitem="@layout/item_tab"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -37,23 +37,23 @@ class ClassificationFragment : BaseFragment<FragmentClassificationBinding, Recom
         //初始化fragmentlist
         fragmentList=ArrayList()
         //viewpage2禁止预加载
-        binding?.ficationPage?.offscreenPageLimit = ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
+        mBinding?.ficationPage?.offscreenPageLimit = ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
 
-        viewModel?.getProject()
-        viewModel?.mProject?.observe(this) {
+        mViewModel?.getProject()
+        mViewModel?.mProject?.observe(this) {
             for (i in 0 until it.size) {
-                binding?.ficationTab?.addTab(binding?.ficationTab!!.newTab().setText(it[i].name))
+                mBinding?.ficationTab?.addTab(mBinding?.ficationTab!!.newTab().setText(it[i].name))
                 fragmentList.add(TabFragment())
             }
             activity?.supportFragmentManager?.let {
-                binding?.ficationPage?.setAdapter(object : FragmentStateAdapter(it, lifecycle) {
+                mBinding?.ficationPage?.setAdapter(object : FragmentStateAdapter(it, lifecycle) {
                     override fun createFragment(position: Int)=fragmentList[position]
                     override fun getItemCount(): Int= fragmentList.size
 
                 })
 
             }
-            binding?.ficationTab?.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            mBinding?.ficationTab?.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     for (i in 0 until it.size){
                         TabFragment.tabling(it[tab?.position!!].id)
@@ -73,11 +73,11 @@ class ClassificationFragment : BaseFragment<FragmentClassificationBinding, Recom
                 }
 
             })
-            binding?.ficationPage?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+            mBinding?.ficationPage?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
                     TabFragment.tabling(it[position].id)
-                    binding?.ficationTab?.selectTab( binding?.ficationTab?.getTabAt(position))
+                    mBinding?.ficationTab?.selectTab( mBinding?.ficationTab?.getTabAt(position))
                 }
             })
         }

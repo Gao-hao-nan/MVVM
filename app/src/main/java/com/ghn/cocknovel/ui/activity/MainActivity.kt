@@ -21,7 +21,6 @@ import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
 import com.kt.NetworkModel.utils.MVUtils
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
@@ -38,6 +37,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
 
     @SuppressLint("CommitTransaction")
     override fun initParam() {
+
         Log.i("TAG", "initParam: ${MVUtils.getInt("token")}")
         fragmentList = ArrayList()
         fragmentList?.add(BookstoreFragment())
@@ -47,9 +47,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
         //默认显示第一个fragment
         getSupportFragmentManager().beginTransaction()
             .replace(R.id.fl_content, fragmentList!!.get(0)).commit();
-        binding?.navView?.setOnNavigationItemSelectedListener(this)
-        binding?.mainFlWarn?.setOnClickListener {
-            binding?.mainFlWarn?.visibility = View.GONE
+        mBinding?.navView?.setOnNavigationItemSelectedListener(this)
+        mBinding?.mainFlWarn?.setOnClickListener {
+            mBinding?.mainFlWarn?.visibility = View.GONE
         }
         XXPermissions.with(this).permission(Permission.CAMERA)
             .permission(Permission.READ_MEDIA_IMAGES)
@@ -125,7 +125,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_DOWN) {
             if (System.currentTimeMillis() - exitTime > 2000) {
-                binding?.container?.let { showMsg("再按一次退出鲸鱼阅读") }
+                mBinding?.container?.let { showMsg("再按一次退出鲸鱼阅读") }
                 exitTime = System.currentTimeMillis()
             } else {
                 finish()

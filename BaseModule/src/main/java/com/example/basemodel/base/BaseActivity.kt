@@ -12,13 +12,23 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import cn.coderpig.cp_network_capture.ui.activity.NetworkCaptureActivity
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
+import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
+import com.dk.floatingview.BuildConfig
+import com.dk.floatingview.FloatWindow
+import com.example.basemodel.R
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.BUNDLE
+import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.CANONICAL_NAME
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.CLASS
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.REQUEST
+import com.kt.NetworkModel.App
 import com.kt.NetworkModel.utils.ToastUtils
-import com.kt.network.dialog.LoadingDialog
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
+import com.trello.rxlifecycle4.components.support.RxAppCompatActivity
 import java.lang.reflect.ParameterizedType
+
+
 /**
  * @author 浩楠
  *
@@ -31,11 +41,12 @@ import java.lang.reflect.ParameterizedType
  *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
  * @Description: TODO 封装一个BaseActivity
  */
-abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppCompatActivity(), IBaseView {
-    open var binding: V? = null
-    open var viewModel: VM? = null
+abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppCompatActivity(),
+    IBaseView {
+    open var mBinding: V? = null
+    open var mViewModel: VM? = null
     open var viewModelId = 0
-    private var dialog: LoadingDialog? = null
+    private var dialog: MaterialDialog? = null
     private var toast: ToastUtils? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,12 +67,25 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
         } else {
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS) //隐藏状态栏
         }
+        FloatWindow.with(App.get())//application上下文
+            .setLayoutId(R.layout.float_music)//悬浮布局
+            //.setFilter(Test1_1Activity.class)//过滤activity
+            //.setLayoutParam()//设置悬浮布局layoutParam
+            .build();
+        FloatWindow.get()
+            .setOnClickListener {
+                startActivity(Intent(this, NetworkCaptureActivity::class.java))
+            }
+        if (BuildConfig.DEBUG){
+            FloatWindow.get().show()
+        }
     }
+
 
     private fun registerUIChangeLiveDataCallBack() {
 
         //跳入新页面
-        viewModel?.getUC()?.getStartActivityEvent()?.observe(this) { params ->
+        mViewModel?.getUC()?.getStartActivityEvent()?.observe(this) { params ->
 
             params?.let {
                 val clz = params[CLASS] as Class<*>?
@@ -75,31 +99,43 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
             }
 
         }
-        viewModel?.getUC()?.getFinishResult()?.observe(this) { integer ->
+        //包名和类名跳转
+        mViewModel?.getUC()?.getStartModelActivityEvent()?.observe(this){ params->
+            params?.let {
+                val clz=params[CLASS]
+                val Packagename=params[CANONICAL_NAME]
+                val intent=Intent()
+                intent.setClassName(Packagename.toString(), clz.toString())
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+        }
+
+        mViewModel?.getUC()?.getFinishResult()?.observe(this) { integer ->
             integer?.let {
                 setResult(integer)
                 finish()
             }
         }
 
-        viewModel?.getUC()?.getShowDialog()?.observe(this){
+        mViewModel?.getUC()?.getShowDialog()?.observe(this) {
             showLoading()
         }
 
-        viewModel?.getUC()?.getDismissDialog()?.observe(this){
+        mViewModel?.getUC()?.getDismissDialog()?.observe(this) {
             dismissLoading()
         }
-        viewModel?.getUC()?.toastEvent()?.observe(this){
+        mViewModel?.getUC()?.toastEvent()?.observe(this) {
 //            ToastUtils.showShort(it)
-                showMsg(it.toString())
+            showMsg(it.toString())
         }
         //关闭界面
-        viewModel?.getUC()?.getFinishEvent()?.observe(this) { finish() }
+        mViewModel?.getUC()?.getFinishEvent()?.observe(this) { finish() }
         //关闭上一层
 
-        viewModel?.getUC()?.getOnBackPressedEvent()?.observe(this) { onBackPressed() }
+        mViewModel?.getUC()?.getOnBackPressedEvent()?.observe(this) { onBackPressed() }
 
-        viewModel?.getUC()?.getSetResultEvent()?.observe(this) { params ->
+        mViewModel?.getUC()?.getSetResultEvent()?.observe(this) { params ->
             params?.let {
                 val intent = Intent()
                 if (params.isNotEmpty()) {
@@ -120,7 +156,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
 
     private fun initViewDataBinding(savedInstanceState: Bundle?) {
         //DataBindingUtil类需要在project的build中配置 dataBinding {enabled true }, 同步后会自动关联android.databinding包
-        binding =
+        mBinding =
             DataBindingUtil.setContentView(this@BaseActivity, initContentView(savedInstanceState))
 
 
@@ -133,17 +169,15 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
             //如果没有指定泛型参数，则默认使用BaseViewModel
             BaseViewModel::class.java
         }
-
-
-        viewModel = createViewModel(this, modelClass as Class<VM>)
+        mViewModel = createViewModel(this, modelClass as Class<VM>)
         //关联ViewModel
-        binding?.setVariable(viewModelId, viewModel)
+        mBinding?.setVariable(viewModelId, mViewModel)
         //支持LiveData绑定xml，数据改变，UI自动会更新
-        binding?.lifecycleOwner = this
+        mBinding?.lifecycleOwner = this
         //让ViewModel拥有View的生命周期感应
-        lifecycle.addObserver(viewModel!!)
+        lifecycle.addObserver(mViewModel!!)
         //注入RxLifecycle生命周期
-        viewModel?.injectLifecycleProvider(this)
+        mViewModel?.injectLifecycleProvider(this)
 
     }
 
@@ -151,13 +185,25 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
      * 打开等待框
      */
     private fun showLoading() {
-        if (dialog==null){
-            dialog= LoadingDialog.getInstance(this)
+//        if (dialog == null) {
+//            dialog = LoadingDialog.getInstance(this)
+//        }
+//        dialog?.show()
+
+        if (dialog == null) {
+            dialog = MaterialDialog(this)
+                .cancelOnTouchOutside(false)
+                .cornerRadius(8f)
+                .customView(R.layout.custom_progress_dialog_view, noVerticalPadding = true)
+                .lifecycleOwner(this)
+                .maxWidth(R.dimen.dialog_width)
         }
+
         dialog?.show()
     }
+
     /**
-     * 打开等待框
+     * 关闭等待框
      */
     private fun dismissLoading() {
         dialog?.run {
@@ -167,7 +213,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
 
     override fun onDestroy() {
         super.onDestroy()
-        binding?.unbind()
+        mBinding?.unbind()
     }
 
 
@@ -184,7 +230,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        viewModel?.onActivityResult(requestCode, resultCode, data)
+        mViewModel?.onActivityResult(requestCode, resultCode, data)
     }
 
 
@@ -209,17 +255,18 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
      * 自定义Toast文字
      */
     fun showMsg(msg: String) {
-        toast=ToastUtils(this)
+        toast = ToastUtils(this)
         toast?.InitToast()
         toast?.setText(msg)
         toast?.setGravity(Gravity.CENTER)
         toast?.show()
     }
+
     /**
      * 自定义Toast图片+文字
      */
-    fun showMsgimage(msg: String,url:Int) {
-        toast=ToastUtils(this)
+    fun showMsgimage(msg: String, url: Int) {
+        toast = ToastUtils(this)
         toast?.InitToast()
         toast?.setText(msg)
         toast?.setImage(url)

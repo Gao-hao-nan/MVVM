@@ -13,7 +13,6 @@ import com.ghn.cocknovel.ui.adapter.TabLayoutAdapter
 import com.ghn.cocknovel.viewmodel.BookStoreViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
-import kotlinx.android.synthetic.main.fragment_bookstore.*
 
 
 class BookstoreFragment : BaseFragment<FragmentBookstoreBinding, BookStoreViewModel>() {
@@ -44,12 +43,13 @@ class BookstoreFragment : BaseFragment<FragmentBookstoreBinding, BookStoreViewMo
         titles.add("推荐")
         titles.add("男生")
         titles.add("女生")
-        viewpage.adapter=
+
+        mBinding?.viewpage?.adapter=
             activity?.let { TabLayoutAdapter(it.supportFragmentManager,fragmentList,titles) }
-        main_tab.setupWithViewPager(viewpage)
-        main_tab.getTabAt(0)?.view?.scaleX=1.5f
-        main_tab.getTabAt(0)?.view?.scaleY=1.5f
-        main_tab.addOnTabSelectedListener(object : OnTabSelectedListener {
+        mBinding?.mainTab?.setupWithViewPager( mBinding?.viewpage)
+        mBinding?.mainTab?.getTabAt(0)?.view?.scaleX=1.5f
+        mBinding?.mainTab?.getTabAt(0)?.view?.scaleY=1.5f
+        mBinding?.mainTab?.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 (tab.view as View).setScaleX(1.5f)
                 (tab.view as View).setScaleY(1.5f)

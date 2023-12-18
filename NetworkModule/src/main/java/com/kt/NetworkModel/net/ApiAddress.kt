@@ -4,9 +4,9 @@ class ApiAddress {
 
     companion object {
         /**
-         * 登录接口
+         * 登录接口 user/login
          */
-        const val LOGIN="user/login"
+        const val LOGIN="api/user/auth/get/verifyCode"
         /**
          * 首页文章列表
          */

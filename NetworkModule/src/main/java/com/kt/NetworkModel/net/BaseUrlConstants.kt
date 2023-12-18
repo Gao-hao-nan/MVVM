@@ -4,7 +4,7 @@ class BaseUrlConstants {
 
 
     companion object {
-        private const val baseUrl1: String = "http://test1/"
+        private const val baseUrl1: String = "http://139.224.186.198/"
         private const val baseUrl2: String = "http://test2/"
         private const val video: String = "http://apis.juhe.cn/"
         private const val degree: String = "http://v.juhe.cn/"

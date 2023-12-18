@@ -13,8 +13,10 @@ package com.kt.NetworkModel.bean
  * @Description: TODO
  */
 data class WBanner(
+    val errorCode: Int,
+    val errorMsg: String,
     val datas: ArrayList<Data>,
-){
+) {
     data class Data(
         val imagePath: String, // https://www.wanandroid.com/blogimgs/42da12d8-de56-4439-b40c-eab66c227a4b.png
     )

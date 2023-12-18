@@ -22,6 +22,7 @@
         android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.Cocknovel"
+        android:enableOnBackInvokedCallback="true"
         tools:targetApi="31">
         <activity
             android:name=".ui.activity.WebviewActivity"
@@ -39,15 +40,20 @@
 
         <activity
             android:name=".ui.activity.MainActivity"
-            android:exported="false">
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".ui.activity.SwitchActivity"
-            android:exported="false" />
+            android:exported="false"
+            />
         <activity
             android:name=".ui.activity.SetActivity"
             android:exported="false">
@@ -59,11 +65,7 @@
             android:name=".ui.activity.StartActivity"
             android:exported="true"
             android:theme="@style/start_photo">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <meta-data

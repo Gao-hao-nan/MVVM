@@ -11,12 +11,12 @@
         android:layout_height="match_parent"
         tools:context=".ui.fragment.BookshelfFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/RecommRecyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/item_home"
-            android:accessibilityHeading="@bool/tbrest_test"
-            />
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/RecommRecyclerview"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            tools:listitem="@layout/item_home"-->
+<!--            android:accessibilityHeading="@bool/tbrest_test"-->
+<!--            />-->
     </FrameLayout>
 </layout>

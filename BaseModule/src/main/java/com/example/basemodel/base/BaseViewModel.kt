@@ -4,17 +4,30 @@ import android.app.Activity
 import android.app.Application
 import android.content.Intent
 import android.os.Bundle
-import androidx.lifecycle.*
+import android.util.Log
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
+import androidx.lifecycle.viewModelScope
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.BUNDLE
+import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.CANONICAL_NAME
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.CLASS
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.REQEUST_DEFAULT
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.REQUEST
 import com.kt.network.bean.BaseResult
 import com.kt.network.net.ExceptionHandle
 import com.kt.network.net.ResponseThrowable
-import com.trello.rxlifecycle2.LifecycleProvider
-import kotlinx.coroutines.*
+import com.trello.rxlifecycle4.LifecycleProvider
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.lang.ref.WeakReference
+import kotlin.collections.set
 
 /**
  * @author 浩楠
@@ -75,6 +88,34 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     /**
+     *  不过滤请求结果
+     * @param block 请求体
+     * @param error 失败回调
+     * @param complete  完成回调（无论成功失败都会调用）
+     * @param isShowDialog 是否显示加载框
+     */
+    fun launchGo(
+        block: suspend CoroutineScope.() -> Unit,
+        error: suspend CoroutineScope.(ResponseThrowable) -> Unit = {
+            uc?.toastEvent()?.postValue("${it.code}:${it.errMsg}")
+        },
+        complete: suspend CoroutineScope.() -> Unit = {},
+        isShowDialog: Boolean = true
+    ) {
+        if (isShowDialog) uc?.getShowDialog()?.call()
+        launchUI {
+            handleException(
+                withContext(Dispatchers.IO) { block },
+                { error(it) },
+                {
+                    uc?.getDismissDialog()?.call()
+                    complete()
+                }
+            )
+        }
+    }
+
+    /**
      * 过滤请求结果，其他全抛异常
      * @param block 请求体
      * @param success 成功回调
@@ -85,10 +126,11 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
     fun <T> launchOnlyresult(
         block: suspend CoroutineScope.() -> BaseResult<T>,
         success: (T?) -> Unit,
+
         error: (ResponseThrowable) -> Unit = {
             it.printStackTrace()
         },
-        complete: () -> Unit = {},
+        complete: () -> Any = {},
         isShowDialog: Boolean = true
     ) {
         if (isShowDialog) uc?.getShowDialog()?.call()
@@ -102,16 +144,20 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
                             uc?.toastEvent()?.postValue(it.errorMsg())
                             throw ResponseThrowable(it.errorCode(), it.errorMsg())
                         }
-
                     }
+
                 }.also {
                     success(it)
+
                 }
+//                startModelActivity("com.ghn.cocknovel","com.ghn.cocknovel.ui.activity.SwitchActivity")
+
             }, {
                 error(it)
             }, {
                 uc?.getDismissDialog()?.call()
                 complete()
+
             })
         }
     }
@@ -187,6 +233,18 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
         uc?.getStartActivityEvent()?.postValue(params as Map<String, Any>)
     }
 
+    /**
+     * 从model中跳转到主app中的activity
+     *
+     * @param clz 所跳转的目的Activity类
+     */
+    fun startModelActivity(Packagename: String?,clz: String?) {
+        val params: MutableMap<String, Any?> = HashMap()
+        params[CLASS] = clz
+        params[CANONICAL_NAME]=Packagename
+        uc?.getStartModelActivityEvent()?.postValue(params as Map<String, Any>)
+    }
+
 
     fun startActivityForFragment(clz: Class<out Activity?>, bundle: Bundle, requestCode: Int) {
         val params: MutableMap<String, Any> = HashMap()
@@ -230,6 +288,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
         class UIChangeLiveData : SingleLiveEvent<Any?>() {
 
             private var startActivityEvent: SingleLiveEvent<Map<String, Any>>? = null
+            private var getStartModelActivityEvent: SingleLiveEvent<Map<String, Any>>? = null
             private var finishEvent: SingleLiveEvent<Void>? = null
             private var onBackPressedEvent: SingleLiveEvent<Void>? = null
             private var setResultEvent: SingleLiveEvent<Map<String, String>>? = null
@@ -280,6 +339,13 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
                     startActivityEvent = it
                 }
 
+            }
+
+            fun getStartModelActivityEvent(): SingleLiveEvent<Map<String, Any>> {
+                Log.i("TAG", "getStartModelActivityEvent: 111")
+                return createLiveData(getStartModelActivityEvent).also {
+                    getStartModelActivityEvent = it
+                }
 
             }
 

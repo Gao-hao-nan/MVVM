@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="mode"
             type="com.ghn.cocknovel.viewmodel.RecommendViewModel" />
@@ -15,7 +14,6 @@
         android:orientation="vertical"
         android:background="#CFCFCF"
         tools:context=".ui.fragment.RecommendFragment">
-
         <com.stx.xhb.androidx.XBanner
             android:id="@+id/homexbanner"
             android:layout_width="match_parent"

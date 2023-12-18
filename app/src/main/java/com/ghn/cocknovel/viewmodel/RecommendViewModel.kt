@@ -2,10 +2,12 @@ package com.ghn.cocknovel.viewmodel
 
 import android.app.Application
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.basemodel.base.BaseViewModel
 import com.ghn.cocknovel.net.DataService
 import com.ghn.cocknovel.ui.activity.WebviewActivity
+import com.google.gson.Gson
 import com.kt.NetworkModel.bean.ProjectBean
 import com.kt.NetworkModel.bean.TabFrameBean
 import com.kt.network.bean.FontDataNew
@@ -35,21 +37,33 @@ open class RecommendViewModel(application: Application) : BaseViewModel(applicat
     val mProject = MutableLiveData<MutableList<ProjectBean.Data>>()
     val mProjectcontent = MutableLiveData<TabFrameBean.Data>()
     open fun getBanner() {
-        launchOnlyresult({
-            DataService.wbanner(5)
-        }, {
-            mBanner.value = it as List<BaseBannerInfo>
+//        launchOnlyresult({
+//            DataService.wbanner(5)
+//        }, {
+//            Log.i(TAG, "getBanner: $it")
+////            mBanner.value = it as List<BaseBannerInfo>
+//        },{
+//            Log.i(TAG, "getBanner: ${it.code}")
+//        },{
+//            Log.i(TAG, "getBanner: $it")
+//        })
+        launchGo({
+            DataService.wbanner(5).also {
+                mBanner.value=it.data as List<BaseBannerInfo>
+                Log.i(TAG, "getBanner: ${Gson().toJson(it)}")
+                Log.i(TAG, "getBanner: ${it.errorCode}")
+            }
         })
-
     }
 
     open fun getHomeStatus() {
         launchOnlyresult({
             DataService.callback(5)
         }, {
-            homeStatus.value = it
+//            homeStatus.value = it
         })
     }
+
 
     open fun setWebview(url: String) {
         val bundle = Bundle()
@@ -62,7 +76,7 @@ open class RecommendViewModel(application: Application) : BaseViewModel(applicat
         launchOnlyresult({
             DataService.project(5)
         }, {
-            mProject.value = it
+//            mProject.value = it
         })
     }
 
@@ -70,7 +84,8 @@ open class RecommendViewModel(application: Application) : BaseViewModel(applicat
         launchOnlyresult({
             DataService.project_content(5, page, cid)
         }, {
-            mProjectcontent.value = it
+            Log.i(TAG, "project_content: ${it}")
+//            mProjectcontent.value = it
         })
     }
 

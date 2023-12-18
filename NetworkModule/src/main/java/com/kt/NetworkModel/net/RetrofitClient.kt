@@ -2,14 +2,16 @@ package com.kt.network.net
 
 import android.annotation.SuppressLint
 import android.content.Context
+import com.blankj.utilcode.BuildConfig
 import com.kt.NetworkModel.net.interceptor.Level
 import com.kt.NetworkModel.net.interceptor.LoggingInterceptor
-import com.kt.ktmvvm.lib.BuildConfig
+import com.kt.ktmvvm.net.event.OkHttpEventListener
 import com.kt.network.net.dns.OkHttpDNS
 import com.kt.network.net.interceptor.HTTPDNSInterceptor
 import com.kt.network.net.interceptor.NoNetworkInterceptor
 import okhttp3.Cache
 import okhttp3.ConnectionPool
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.internal.platform.Platform
 import retrofit2.Retrofit
@@ -21,7 +23,6 @@ class RetrofitClient
 /**
  * retrofit 初始化build
  */(var context: Context?) {
-
 
 
     companion object {
@@ -49,6 +50,16 @@ class RetrofitClient
         //设置请求头拦截器
 //        val httpLoggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT)
 //        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        // 反射获取抓包拦截器类实例初始化
+        var captureInterceptor: Interceptor? = null
+        try {
+            val clazz =
+                Class.forName("cn.coderpig.cp_network_capture.interceptor.CaptureInterceptor")
+            val constructor = clazz.getDeclaredConstructor()
+            captureInterceptor = constructor.newInstance() as Interceptor
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
         //根据需求添加不同的拦截器
         if (optimization) {
@@ -65,6 +76,7 @@ class RetrofitClient
                 .addInterceptor(HTTPDNSInterceptor(context)) //不建议用这种方式，因为大型APP 域名会比较多，假设HTTPS 的话，证书会认证失败
                 .cache(context?.cacheDir?.let { Cache(it, 50 * 1024 * 1024L) })//缓存目录
                 .addInterceptor(NoNetworkInterceptor(context))//无网拦截器
+                .addInterceptor(captureInterceptor!!)
                 .addNetworkInterceptor(LoggingInterceptor().apply {
                     isDebug = BuildConfig.DEBUG
                     level = Level.BASIC
@@ -72,7 +84,7 @@ class RetrofitClient
                     requestTag = "Request"
                     requestTag = "Response"
                 })
-//                .eventListenerFactory(OkHttpEventListener.FACTORY)
+                .eventListenerFactory(OkHttpEventListener.FACTORY)
                 .build()
         } else {
             //无优化版本
@@ -113,7 +125,8 @@ class RetrofitClient
      *
      */
     private fun <T> create(interfaceServer: Class<T>?, hostType: Int): T {
-        val retrofit: Retrofit = Retrofit.Builder()
+
+            val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(BaseUrlConstants.getHost(hostType))
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
