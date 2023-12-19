@@ -14,22 +14,11 @@ kapt {
 }
 
 android {
-    compileSdk = 33
+    compileSdk=libs.versions.compileSdk.get().toInt()
     defaultConfig {
-        minSdk = 21
-        targetSdk = 26
+        minSdk=libs.versions.minSdk.get().toInt()
+        targetSdk=libs.versions.compileSdk.get().toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-//        consumerProguardFiles "consumer-rules.pro"
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -45,10 +34,6 @@ android {
     }
     namespace = "com.kt.ktmvvm.lib"
 
-
-//    dataBinding {
-//        enabled = true
-//    }
 }
 
 dependencies {

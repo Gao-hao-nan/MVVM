@@ -18,14 +18,14 @@ kapt {
 
 android {
     namespace = "com.ghn.cocknovel"
-    compileSdk = 33
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.ghn.cocknovel"
-        minSdk = 21
-        targetSdk = 33
-        versionCode = 1
-        versionName = "1.0.0"
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.compileSdk.get().toInt()
+        versionCode = libs.versions.versionCode.get().toInt()
+        versionName = libs.versions.versionName.toString()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {

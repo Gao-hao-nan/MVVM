@@ -1,8 +1,15 @@
 [versions]
+compileSdk="33"
+minSdk="21"
+versionCode="1"
+versionName="1.0.0"
+
+
 agp = "8.1.2"
 kotlin = "1.9.0"
 ktx="2.6.1"
 core-ktx="1.8.0"
+
 
 appcompat="1.7.0-alpha02"
 kotlinx-core="1.6.4"
