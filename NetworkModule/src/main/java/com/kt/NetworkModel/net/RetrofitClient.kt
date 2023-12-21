@@ -11,7 +11,6 @@ import com.kt.network.net.interceptor.HTTPDNSInterceptor
 import com.kt.network.net.interceptor.NoNetworkInterceptor
 import okhttp3.Cache
 import okhttp3.ConnectionPool
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.internal.platform.Platform
 import retrofit2.Retrofit
@@ -46,66 +45,75 @@ class RetrofitClient
     /**
      * 创建连接客户端
      */
-    private fun createOkHttpClient(optimization: Boolean): OkHttpClient {
-        //设置请求头拦截器
-//        val httpLoggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT)
-//        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        // 反射获取抓包拦截器类实例初始化
-        var captureInterceptor: Interceptor? = null
-        try {
-            val clazz =
-                Class.forName("cn.coderpig.cp_network_capture.interceptor.CaptureInterceptor")
-            val constructor = clazz.getDeclaredConstructor()
-            captureInterceptor = constructor.newInstance() as Interceptor
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-        //根据需求添加不同的拦截器
+    private fun createOkHttpClient(optimization: Boolean, update: Boolean): OkHttpClient {
+        val builder = OkHttpClient.Builder()
+        builder.connectTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
+            .writeTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
+            .readTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
+            .connectionPool(ConnectionPool(8, 10, TimeUnit.SECONDS)) //添加这两行代码
+            .sslSocketFactory(TrustAllCerts.createSSLSocketFactory()!!, TrustAllCerts())
+            .hostnameVerifier(TrustAllCerts.TrustAllHostnameVerifier())
+            //alibaba dns优化
+            .dns(OkHttpDNS.get(context))
+            .eventListenerFactory(OkHttpEventListener.FACTORY)
         if (optimization) {
-            //DNS 优化以及 开启缓存、无网拦截
-            return OkHttpClient.Builder()
-                .connectTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
-                .writeTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
-                .readTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
-                .connectionPool(ConnectionPool(8, 10, TimeUnit.SECONDS)) //添加这两行代码
-                .sslSocketFactory(TrustAllCerts.createSSLSocketFactory()!!, TrustAllCerts())
-                .hostnameVerifier(TrustAllCerts.TrustAllHostnameVerifier())
-                //alibaba dns优化
-                .dns(OkHttpDNS.get(context))
-                .addInterceptor(HTTPDNSInterceptor(context)) //不建议用这种方式，因为大型APP 域名会比较多，假设HTTPS 的话，证书会认证失败
+            builder.addInterceptor(HTTPDNSInterceptor(context)) //不建议用这种方式，因为大型APP 域名会比较多，假设HTTPS 的话，证书会认证失败
                 .cache(context?.cacheDir?.let { Cache(it, 50 * 1024 * 1024L) })//缓存目录
                 .addInterceptor(NoNetworkInterceptor(context))//无网拦截器
-                .addInterceptor(captureInterceptor!!)
-                .addNetworkInterceptor(LoggingInterceptor().apply {
-                    isDebug = BuildConfig.DEBUG
-                    level = Level.BASIC
-                    type = Platform.INFO
-                    requestTag = "Request"
-                    requestTag = "Response"
-                })
-                .eventListenerFactory(OkHttpEventListener.FACTORY)
-                .build()
-        } else {
-            //无优化版本
-            return OkHttpClient.Builder()
-                .connectTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
-                .writeTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
-                .readTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
-                .connectionPool(ConnectionPool(8, 10, TimeUnit.SECONDS)) //添加这两行代码
-                .sslSocketFactory(TrustAllCerts.createSSLSocketFactory()!!, TrustAllCerts())
-                .hostnameVerifier(TrustAllCerts.TrustAllHostnameVerifier())
-                .dns(OkHttpDNS.get(context))
-                .addNetworkInterceptor(LoggingInterceptor().apply {
-                    isDebug = BuildConfig.DEBUG
-                    level = Level.BASIC
-                    type = Platform.INFO
-                    requestTag = "Request"
-                    requestTag = "Response"
-                })
-//                .eventListenerFactory(OkHttpEventListener.FACTORY)
-                .build()
         }
+        if (update==false) {
+            builder.addNetworkInterceptor(LoggingInterceptor().apply {
+                isDebug = BuildConfig.DEBUG
+                level = Level.BASIC
+                type = Platform.INFO
+                requestTag = "Request"
+                requestTag = "Response"
+            })
+        }
+        return builder.build()
+        //根据需求添加不同的拦截器
+//        if (optimization) {
+//            //DNS 优化以及 开启缓存、无网拦截
+//            return OkHttpClient.Builder()
+//                .connectTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
+//                .writeTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
+//                .readTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
+//                .connectionPool(ConnectionPool(8, 10, TimeUnit.SECONDS)) //添加这两行代码
+//                .sslSocketFactory(TrustAllCerts.createSSLSocketFactory()!!, TrustAllCerts())
+//                .hostnameVerifier(TrustAllCerts.TrustAllHostnameVerifier())
+//                //alibaba dns优化
+//                .dns(OkHttpDNS.get(context))
+//                .addInterceptor(HTTPDNSInterceptor(context)) //不建议用这种方式，因为大型APP 域名会比较多，假设HTTPS 的话，证书会认证失败
+//                .cache(context?.cacheDir?.let { Cache(it, 50 * 1024 * 1024L) })//缓存目录
+//                .addInterceptor(NoNetworkInterceptor(context))//无网拦截器
+//                .addNetworkInterceptor(LoggingInterceptor().apply {
+//                    isDebug = BuildConfig.DEBUG
+//                    level = Level.BASIC
+//                    type = Platform.INFO
+//                    requestTag = "Request"
+//                    requestTag = "Response"
+//                })
+//                .eventListenerFactory(OkHttpEventListener.FACTORY)
+//                .build()
+//        } else {
+//            //无优化版本
+//            return OkHttpClient.Builder()
+//                .connectTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
+//                .writeTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
+//                .readTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
+//                .connectionPool(ConnectionPool(8, 10, TimeUnit.SECONDS)) //添加这两行代码
+//                .sslSocketFactory(TrustAllCerts.createSSLSocketFactory()!!, TrustAllCerts())
+//                .hostnameVerifier(TrustAllCerts.TrustAllHostnameVerifier())
+//                .dns(OkHttpDNS.get(context))
+//                .addNetworkInterceptor(LoggingInterceptor().apply {
+//                    isDebug = BuildConfig.DEBUG
+//                    level = Level.BASIC
+//                    type = Platform.INFO
+//                    requestTag = "Request"
+//                    requestTag = "Response"
+//                })
+//                .build()
+//        }
 
     }
 
@@ -124,13 +132,13 @@ class RetrofitClient
     /**
      *
      */
-    private fun <T> create(interfaceServer: Class<T>?, hostType: Int): T {
+    private fun <T> create(interfaceServer: Class<T>?, hostType: Int, update: Boolean = false): T {
 
-            val retrofit: Retrofit = Retrofit.Builder()
+        val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(BaseUrlConstants.getHost(hostType))
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .client(createOkHttpClient(true))
+            .client(createOkHttpClient(true, update))
             .build()
         sRetrofitManager[hostType] = retrofit
         if (interfaceServer == null) {
