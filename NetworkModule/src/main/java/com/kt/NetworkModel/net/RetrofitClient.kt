@@ -2,9 +2,9 @@ package com.kt.network.net
 
 import android.annotation.SuppressLint
 import android.content.Context
-import com.blankj.utilcode.BuildConfig
 import com.kt.NetworkModel.net.interceptor.Level
 import com.kt.NetworkModel.net.interceptor.LoggingInterceptor
+import com.kt.ktmvvm.lib.BuildConfig
 import com.kt.ktmvvm.net.event.OkHttpEventListener
 import com.kt.network.net.dns.OkHttpDNS
 import com.kt.network.net.interceptor.HTTPDNSInterceptor

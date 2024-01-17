@@ -32,7 +32,6 @@ autosize="1.2.1"
 xxpermissions="16.6"
 github-XPopup="2.9.19"
 mmkv="1.3.0"
-cpNetworkCapture="0.0.11"
 dialogs="3.1.1"
 navigation="2.4.1"
 junit="4.13.2"
@@ -71,7 +70,6 @@ jessyan-autosize={ group = "me.jessyan", name = "autosize", version.ref = "autos
 github-xxPermissions={ group = "com.github.getActivity", name = "XXPermissions", version.ref = "xxpermissions" }
 github-xpopup={ group = "com.github.li-xiaojun", name = "XPopup", version.ref = "github-XPopup" }
 gencent-mmkv={ group = "com.tencent", name = "mmkv", version.ref = "mmkv" }
-github-cpNetworkCapture={ group = "com.github.coder-pig", name = "CpNetworkCapture", version.ref = "cpNetworkCapture" }
 dialogs-core={ group = "com.afollestad.material-dialogs", name = "core", version.ref = "dialogs" }
 dialogs-lifecycle={ group = "com.afollestad.material-dialogs", name = "lifecycle", version.ref = "dialogs" }
 androidx-navigation-fragment={ group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation" }
