@@ -109,6 +109,8 @@ dependencies {
     implementation(libs.github.xbanner)
     implementation("com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7")
     implementation(libs.github.xxPermissions)
+//    implementation ("androidx.biometric:biometric:1.2.0")
+
 }
 //android.applicationVariants.all {
 //    variant ->

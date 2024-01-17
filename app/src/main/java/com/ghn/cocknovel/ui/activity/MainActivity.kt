@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
+import androidx.core.hardware.fingerprint.FingerprintManagerCompat
 import androidx.fragment.app.Fragment
 import com.example.basemodel.base.BaseActivity
 import com.example.basemodel.base.BaseViewModel
@@ -21,7 +22,6 @@ import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
 import com.kt.NetworkModel.utils.MVUtils
-
 
 class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
     BottomNavigationView.OnNavigationItemSelectedListener {
@@ -71,6 +71,27 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
                     }
                 }
             })
+        FingerprintManagerUtil.startFingerprinterVerification(this@MainActivity, object :
+            FingerprintManagerUtil.FingerprintListenerAdapter(){
+            override fun onAuthenticationSucceeded(result: FingerprintManagerCompat.AuthenticationResult?) {
+                Log.i("MainActivity", "onAuthenticationSucceeded result =$result")
+            }
+
+            override fun onNonsupport() {
+                super.onNonsupport()
+                Log.i("MainActivity", "onNonsupport");
+            }
+
+            override fun onEnrollFailed() {
+                super.onEnrollFailed()
+                Log.i("MainActivity", "onEnrollFailed");
+            }
+
+            override fun onAuthenticationError(errMsgId: Int, errString: CharSequence?) {
+                super.onAuthenticationError(errMsgId, errString)
+                Log.i("MainActivity", "onAuthenticationError errMsgId = [" + errMsgId + "], errString = [" + errString + "]")
+            }
+        })
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -134,6 +155,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
         }
         return super.onKeyDown(keyCode, event)
     }
+
+
 }
 
 

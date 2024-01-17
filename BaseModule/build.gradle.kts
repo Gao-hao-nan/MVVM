@@ -39,7 +39,6 @@ dependencies {
     implementation(libs.test.junit)
     implementation(libs.androidx.junit)
     implementation(libs.androidx.espresso)
-    implementation(libs.github.dkFloatingView)
     implementation(libs.github.cpNetworkCapture)
     implementation(libs.dialogs.core)
     implementation(libs.dialogs.lifecycle)

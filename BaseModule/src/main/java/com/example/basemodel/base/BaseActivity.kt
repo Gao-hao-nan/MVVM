@@ -12,18 +12,14 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import cn.coderpig.cp_network_capture.ui.activity.NetworkCaptureActivity
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
-import com.dk.floatingview.BuildConfig
-import com.dk.floatingview.FloatWindow
 import com.example.basemodel.R
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.BUNDLE
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.CANONICAL_NAME
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.CLASS
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.REQUEST
-import com.kt.NetworkModel.App
 import com.kt.NetworkModel.utils.ToastUtils
 import com.trello.rxlifecycle4.components.support.RxAppCompatActivity
 import java.lang.reflect.ParameterizedType
@@ -66,18 +62,6 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
             window.statusBarColor = Color.TRANSPARENT
         } else {
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS) //隐藏状态栏
-        }
-        FloatWindow.with(App.get())//application上下文
-            .setLayoutId(R.layout.float_music)//悬浮布局
-            //.setFilter(Test1_1Activity.class)//过滤activity
-            //.setLayoutParam()//设置悬浮布局layoutParam
-            .build();
-        FloatWindow.get()
-            .setOnClickListener {
-                startActivity(Intent(this, NetworkCaptureActivity::class.java))
-            }
-        if (BuildConfig.DEBUG){
-            FloatWindow.get().show()
         }
     }
 

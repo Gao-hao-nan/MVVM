@@ -40,7 +40,6 @@ ext-junit="1.1.3"
 espresso="3.4.0"
 titlebar="10.0"
 xbanner="androidx_v1.2.6"
-dkFloatingView="1.1.0"
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "ktx" }
@@ -82,7 +81,6 @@ androidx-junit={ group = "androidx.test.ext", name = "junit", version.ref = "ext
 androidx-espresso={ group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
 github-titlebar={ group = "com.github.getActivity", name = "TitleBar", version.ref = "titlebar" }
 github-xbanner={ group = "com.github.xiaohaibin", name = "XBanner", version.ref = "xbanner" }
-github-DkFloatingView={ group = "com.github.Doonkey", name = "DkFloatingView", version.ref = "dkFloatingView" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
