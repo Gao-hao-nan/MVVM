@@ -14,7 +14,6 @@ import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient
 import okhttp3.internal.platform.Platform
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
@@ -137,7 +136,7 @@ class RetrofitClient
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(BaseUrlConstants.getHost(hostType))
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+//            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(createOkHttpClient(true, update))
             .build()
         sRetrofitManager[hostType] = retrofit

@@ -31,7 +31,7 @@ class ToastUtils(
     private var toastimage: ImageView? = null
     private var toast: Toast? = null
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint("MissingInflatedId", "WrongConstant")
     fun InitToast() {
         if (toast == null) {
             toast = Toast(context)
@@ -39,7 +39,6 @@ class ToastUtils(
             tipsText = view.findViewById(R.id.toast_message)
             toastimage=view.findViewById(R.id.toast_image)
             toast!!.setView(view)
-
         }
     }
 
@@ -54,7 +53,6 @@ class ToastUtils(
         toastimage?.visibility= View.VISIBLE
         toastimage?.let { Glide.with(context!!).load(url).into(it) }
     }
-
     fun show() {
         toast!!.show()
     }
