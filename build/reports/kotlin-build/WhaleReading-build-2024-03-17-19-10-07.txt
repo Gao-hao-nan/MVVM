@@ -1,0 +1,612 @@
+Gradle start parameters:
+  tasks = [:app:assembleDebug]
+  excluded tasks = []
+  current dir = D:\Android\xiangmu\Android\novel-app
+  project properties args = [android.studio.version: 232.10227.8.2321.11479570, android.injected.enableStableIds: true, android.injected.attribution.file.location: D:\Android\xiangmu\Android\novel-app\.gradle, android.injected.build.api: 34, android.injected.build.abi: x86_64,arm64-v8a, android.injected.invoked.from.ide: true]
+  system properties args = [idea.active: true, idea.version: 2023.2]
+
+Build failed: [Execution failed for task ':app:compileDebugKotlin'.]
+
+Time metrics:
+  Total Gradle task time: 101.35 s
+  Spent time before task action: 2.35 s
+  Task action before worker execution: 2.71 s
+  Run compilation in Gradle worker: 25.54 s
+    Clear output: 0.00 s
+    Connect to Kotlin daemon: 0.82 s
+    Calculate output size: 0.00 s
+    Run compilation: 24.70 s
+      Incremental compilation in daemon: 23.89 s
+        Clear outputs on rebuild: 0.00 s
+        Update caches: 0.45 s
+        Sources compilation round: 22.95 s
+          Compiler initialization time: 1.07 s
+          Compiler code analysis: 18.39 s
+          Compiler code generation: 2.93 s
+        Write history file: 0.00 s
+  Start gradle worker: 0.03 s
+
+Size metrics:
+  Total size of the cache directory: 1.4 MB
+    ABI snapshot size: 227 B
+  Increase memory usage: 308.5 MB
+  Total memory usage at the end of build: 1.0 GB
+  Total compiler iteration: 5
+    Number of lines analyzed: 9381
+    Number of lines for code generation: 3787
+    Analysis lines per second: 2934
+    Code generation lines per second: 2537
+  Start time of task action: 2241-01-17T07:49:20
+
+Build attributes:
+  REBUILD_REASON: Unknown Gradle changes
+
+Total time for Kotlin tasks: 30.67 s (30.3 % of all tasks time)
+Time   |% of Kotlin time|Task                                       
+14.58 s|47.5 %          |:NetworkModule:kaptGenerateStubsDebugKotlin
+7.23 s |23.6 %          |:NetworkModule:compileDebugKotlin          
+3.53 s |11.5 %          |:BaseModule:compileDebugKotlin             
+2.80 s |9.1 %           |:app:compileDebugKotlin                    
+2.54 s |8.3 %           |:app:kaptGenerateStubsDebugKotlin          
+
+Task ':app:mergeExtDexDebug' finished in 36.99 s
+Time metrics:
+  Total Gradle task time: 36.99 s
+
+Task ':NetworkModule:kaptGenerateStubsDebugKotlin' finished in 14.58 s
+Task info:
+  Kotlin language version: 1.9
+Compilation log for task ':NetworkModule:kaptGenerateStubsDebugKotlin':
+  Use module detection: true
+  Non-incremental compilation will be performed: UNKNOWN_CHANGES_IN_GRADLE_INPUTS
+  Cleaning 4 output directories
+Time metrics:
+  Total Gradle task time: 14.58 s
+  Spent time before task action: 1.82 s
+  Task action before worker execution: 2.48 s
+  Run compilation in Gradle worker: 10.25 s
+    Clear output: 0.00 s
+    Connect to Kotlin daemon: 0.79 s
+    Calculate output size: 0.00 s
+    Run compilation: 9.43 s
+      Incremental compilation in daemon: 8.83 s
+        Clear outputs on rebuild: 0.00 s
+        Update caches: 0.21 s
+        Sources compilation round: 8.41 s
+          Compiler initialization time: 0.80 s
+          Compiler code analysis: 7.60 s
+        Write history file: 0.00 s
+  Start gradle worker: 0.02 s
+Size metrics:
+  Total size of the cache directory: 373.3 KB
+    ABI snapshot size: 49 B
+  Increase memory usage: 70.5 MB
+  Total memory usage at the end of build: 93.5 MB
+  Total compiler iteration: 1
+    Number of lines analyzed: 2564
+    Analysis lines per second: 337
+  Start time of task action: 2024-03-17T11:09:30
+Build attributes:
+  REBUILD_REASON: Unknown Gradle changes
+GC metrics:
+  G1 Young Generation:
+    GC count: 14
+    GC time: 0.08 s
+  G1 Old Generation:
+    GC count: 0
+    GC time: 0.00 s
+
+Task ':NetworkModule:compileDebugKotlin' finished in 7.23 s
+Task info:
+  Kotlin language version: 1.9
+Compilation log for task ':NetworkModule:compileDebugKotlin':
+  Use module detection: true
+  Non-incremental compilation will be performed: UNKNOWN_CHANGES_IN_GRADLE_INPUTS
+  Cleaning 3 output directories
+Time metrics:
+  Total Gradle task time: 7.23 s
+  Spent time before task action: 0.08 s
+  Task action before worker execution: 0.09 s
+  Run compilation in Gradle worker: 7.05 s
+    Connect to Kotlin daemon: 0.01 s
+    Calculate output size: 0.00 s
+    Run compilation: 7.04 s
+      Incremental compilation in daemon: 6.96 s
+        Update caches: 0.09 s
+        Sources compilation round: 6.76 s
+          Compiler initialization time: 0.09 s
+          Compiler code analysis: 4.38 s
+          Compiler code generation: 1.91 s
+  Start gradle worker: 0.00 s
+Size metrics:
+  Total size of the cache directory: 409.3 KB
+    ABI snapshot size: 49 B
+  Increase memory usage: 105.7 MB
+  Total memory usage at the end of build: 200.4 MB
+  Total compiler iteration: 1
+    Number of lines analyzed: 2564
+    Number of lines for code generation: 2564
+    Analysis lines per second: 584
+    Code generation lines per second: 1342
+  Start time of task action: 2024-03-17T11:09:48
+Build attributes:
+  REBUILD_REASON: Unknown Gradle changes
+GC metrics:
+  G1 Young Generation:
+    GC count: 9
+    GC time: 0.06 s
+  G1 Old Generation:
+    GC count: 0
+    GC time: 0.00 s
+
+Task ':app:processDebugResources' finished in 4.79 s
+Time metrics:
+  Total Gradle task time: 4.79 s
+
+Task ':NetworkModule:kaptDebugKotlin' finished in 4.22 s
+Time metrics:
+  Total Gradle task time: 4.22 s
+
+Task ':BaseModule:compileDebugKotlin' finished in 3.53 s
+Task info:
+  Kotlin language version: 1.9
+Compilation log for task ':BaseModule:compileDebugKotlin':
+  Use module detection: true
+  Non-incremental compilation will be performed: UNKNOWN_CHANGES_IN_GRADLE_INPUTS
+  Cleaning 3 output directories
+Time metrics:
+  Total Gradle task time: 3.53 s
+  Spent time before task action: 0.18 s
+  Task action before worker execution: 0.02 s
+  Run compilation in Gradle worker: 3.32 s
+    Connect to Kotlin daemon: 0.01 s
+    Calculate output size: 0.00 s
+    Run compilation: 3.31 s
+      Incremental compilation in daemon: 3.26 s
+        Update caches: 0.09 s
+        Sources compilation round: 3.08 s
+          Compiler initialization time: 0.06 s
+          Compiler code analysis: 1.83 s
+          Compiler code generation: 1.02 s
+  Start gradle worker: 0.00 s
+Size metrics:
+  Total size of the cache directory: 360.3 KB
+    ABI snapshot size: 49 B
+  Increase memory usage: -24202752 B
+  Total memory usage at the end of build: 179.3 MB
+  Total compiler iteration: 1
+    Number of lines analyzed: 1223
+    Number of lines for code generation: 1223
+    Analysis lines per second: 667
+    Code generation lines per second: 1195
+  Start time of task action: 2024-03-17T11:09:56
+Build attributes:
+  REBUILD_REASON: Unknown Gradle changes
+GC metrics:
+  G1 Young Generation:
+    GC count: 4
+    GC time: 0.05 s
+  G1 Old Generation:
+    GC count: 0
+    GC time: 0.00 s
+
+Task ':app:checkDebugDuplicateClasses' finished in 3.26 s
+Time metrics:
+  Total Gradle task time: 3.26 s
+
+Task ':app:mergeDebugResources' finished in 3.13 s
+Time metrics:
+  Total Gradle task time: 3.13 s
+
+Task ':app:mergeDebugNativeLibs' finished in 2.98 s
+Time metrics:
+  Total Gradle task time: 2.98 s
+
+Task ':app:compileDebugKotlin' finished in 2.80 s
+Task info:
+  Kotlin language version: 1.9
+Compilation log for task ':app:compileDebugKotlin':
+  Use module detection: true
+  Non-incremental compilation will be performed: UNKNOWN_CHANGES_IN_GRADLE_INPUTS
+  Cleaning 3 output directories
+Time metrics:
+  Total Gradle task time: 2.80 s
+  Spent time before task action: 0.05 s
+  Task action before worker execution: 0.06 s
+  Run compilation in Gradle worker: 2.69 s
+    Connect to Kotlin daemon: 0.01 s
+    Run compilation: 2.68 s
+      Incremental compilation in daemon: 2.64 s
+        Sources compilation round: 2.63 s
+          Compiler initialization time: 0.06 s
+          Compiler code analysis: 2.58 s
+  Start gradle worker: 0.00 s
+Size metrics:
+    ABI snapshot size: 31 B
+  Increase memory usage: 90.7 MB
+  Total memory usage at the end of build: 337.6 MB
+  Total compiler iteration: 1
+    Number of lines analyzed: 1515
+    Analysis lines per second: 588
+  Start time of task action: 2024-03-17T11:10:04
+Build attributes:
+  REBUILD_REASON: Unknown Gradle changes
+GC metrics:
+  G1 Young Generation:
+    GC count: 2
+    GC time: 0.02 s
+  G1 Old Generation:
+    GC count: 0
+    GC time: 0.00 s
+
+Task ':app:kaptGenerateStubsDebugKotlin' finished in 2.54 s
+Task info:
+  Kotlin language version: 1.9
+Compilation log for task ':app:kaptGenerateStubsDebugKotlin':
+  Use module detection: true
+  Non-incremental compilation will be performed: UNKNOWN_CHANGES_IN_GRADLE_INPUTS
+  Cleaning 4 output directories
+Time metrics:
+  Total Gradle task time: 2.54 s
+  Spent time before task action: 0.22 s
+  Task action before worker execution: 0.07 s
+  Run compilation in Gradle worker: 2.25 s
+    Connect to Kotlin daemon: 0.01 s
+    Run compilation: 2.24 s
+      Incremental compilation in daemon: 2.20 s
+        Update caches: 0.06 s
+        Sources compilation round: 2.06 s
+          Compiler initialization time: 0.06 s
+          Compiler code analysis: 2.00 s
+  Start gradle worker: 0.00 s
+Size metrics:
+  Total size of the cache directory: 320.3 KB
+    ABI snapshot size: 49 B
+  Increase memory usage: 64.7 MB
+  Total memory usage at the end of build: 245.1 MB
+  Total compiler iteration: 1
+    Number of lines analyzed: 1515
+    Analysis lines per second: 758
+  Start time of task action: 2024-03-17T11:10:00
+Build attributes:
+  REBUILD_REASON: Unknown Gradle changes
+GC metrics:
+  G1 Young Generation:
+    GC count: 4
+    GC time: 0.04 s
+  G1 Old Generation:
+    GC count: 0
+    GC time: 0.00 s
+
+Task ':app:kaptDebugKotlin' finished in 1.63 s
+Time metrics:
+  Total Gradle task time: 1.63 s
+
+Task ':app:packageDebugResources' finished in 1.25 s
+Time metrics:
+  Total Gradle task time: 1.25 s
+
+Task ':NetworkModule:compileDebugJavaWithJavac' finished in 0.93 s
+Time metrics:
+  Total Gradle task time: 0.93 s
+
+Task ':app:processDebugMainManifest' finished in 0.89 s
+Time metrics:
+  Total Gradle task time: 0.89 s
+
+Task ':NetworkModule:packageDebugResources' finished in 0.84 s
+Time metrics:
+  Total Gradle task time: 0.84 s
+
+Task ':NetworkModule:dataBindingGenBaseClassesDebug' finished in 0.66 s
+Time metrics:
+  Total Gradle task time: 0.66 s
+
+Task ':app:mergeDebugAssets' finished in 0.60 s
+Time metrics:
+  Total Gradle task time: 0.60 s
+
+Task ':app:checkDebugAarMetadata' finished in 0.60 s
+Time metrics:
+  Total Gradle task time: 0.60 s
+
+Task ':app:mapDebugSourceSetPaths' finished in 0.55 s
+Time metrics:
+  Total Gradle task time: 0.55 s
+
+Task ':BaseModule:processDebugManifest' finished in 0.48 s
+Time metrics:
+  Total Gradle task time: 0.48 s
+
+Task ':NetworkModule:processDebugManifest' finished in 0.48 s
+Time metrics:
+  Total Gradle task time: 0.48 s
+
+Task ':NetworkModule:dataBindingMergeDependencyArtifactsDebug' finished in 0.41 s
+Time metrics:
+  Total Gradle task time: 0.41 s
+
+Task ':BaseModule:packageDebugResources' finished in 0.37 s
+Time metrics:
+  Total Gradle task time: 0.37 s
+
+Task ':app:dataBindingGenBaseClassesDebug' finished in 0.36 s
+Time metrics:
+  Total Gradle task time: 0.36 s
+
+Task ':NetworkModule:transformDebugClassesWithAsm' finished in 0.34 s
+Time metrics:
+  Total Gradle task time: 0.34 s
+
+Task ':app:compressDebugAssets' finished in 0.31 s
+Time metrics:
+  Total Gradle task time: 0.31 s
+
+Task ':BaseModule:compileDebugLibraryResources' finished in 0.28 s
+Time metrics:
+  Total Gradle task time: 0.28 s
+
+Task ':app:mergeDebugShaders' finished in 0.27 s
+Time metrics:
+  Total Gradle task time: 0.27 s
+
+Task ':BaseModule:mergeDebugShaders' finished in 0.26 s
+Time metrics:
+  Total Gradle task time: 0.26 s
+
+Task ':NetworkModule:mergeDebugShaders' finished in 0.26 s
+Time metrics:
+  Total Gradle task time: 0.26 s
+
+Task ':app:mergeDebugJniLibFolders' finished in 0.22 s
+Time metrics:
+  Total Gradle task time: 0.22 s
+
+Task ':BaseModule:mergeDebugJniLibFolders' finished in 0.21 s
+Time metrics:
+  Total Gradle task time: 0.21 s
+
+Task ':NetworkModule:mergeDebugJniLibFolders' finished in 0.20 s
+Time metrics:
+  Total Gradle task time: 0.20 s
+
+Task ':BaseModule:parseDebugLocalResources' finished in 0.20 s
+Time metrics:
+  Total Gradle task time: 0.20 s
+
+Task ':NetworkModule:bundleLibRuntimeToDirDebug' finished in 0.18 s
+Time metrics:
+  Total Gradle task time: 0.18 s
+
+Task ':app:dataBindingMergeDependencyArtifactsDebug' finished in 0.15 s
+Time metrics:
+  Total Gradle task time: 0.15 s
+
+Task ':NetworkModule:writeDebugAarMetadata' finished in 0.14 s
+Time metrics:
+  Total Gradle task time: 0.14 s
+
+Task ':BaseModule:writeDebugAarMetadata' finished in 0.14 s
+Time metrics:
+  Total Gradle task time: 0.14 s
+
+Task ':NetworkModule:javaPreCompileDebug' finished in 0.14 s
+Time metrics:
+  Total Gradle task time: 0.14 s
+
+Task ':app:createDebugVariantModel' finished in 0.13 s
+Time metrics:
+  Total Gradle task time: 0.13 s
+
+Task ':app:mergeLibDexDebug' finished in 0.13 s
+Time metrics:
+  Total Gradle task time: 0.13 s
+
+Task ':BaseModule:javaPreCompileDebug' finished in 0.11 s
+Time metrics:
+  Total Gradle task time: 0.11 s
+
+Task ':NetworkModule:processDebugJavaRes' finished in 0.11 s
+Time metrics:
+  Total Gradle task time: 0.11 s
+
+Task ':app:processDebugManifest' finished in 0.11 s
+Time metrics:
+  Total Gradle task time: 0.11 s
+
+Task ':app:javaPreCompileDebug' finished in 0.10 s
+Time metrics:
+  Total Gradle task time: 0.10 s
+
+Task ':NetworkModule:generateDebugBuildConfig' finished in 0.09 s
+Time metrics:
+  Total Gradle task time: 0.09 s
+
+Task ':BaseModule:generateDebugRFile' finished in 0.08 s
+Time metrics:
+  Total Gradle task time: 0.08 s
+
+Task ':NetworkModule:bundleLibCompileToJarDebug' finished in 0.08 s
+Time metrics:
+  Total Gradle task time: 0.08 s
+
+Task ':NetworkModule:bundleLibRuntimeToJarDebug' finished in 0.08 s
+Time metrics:
+  Total Gradle task time: 0.08 s
+
+Task ':app:stripDebugDebugSymbols' finished in 0.07 s
+Time metrics:
+  Total Gradle task time: 0.07 s
+
+Task ':BaseModule:bundleLibRuntimeToDirDebug' finished in 0.07 s
+Time metrics:
+  Total Gradle task time: 0.07 s
+
+Task ':app:createDebugCompatibleScreenManifests' finished in 0.07 s
+Time metrics:
+  Total Gradle task time: 0.07 s
+
+Task ':app:dataBindingTriggerDebug' finished in 0.06 s
+Time metrics:
+  Total Gradle task time: 0.06 s
+
+Task ':NetworkModule:dataBindingTriggerDebug' finished in 0.06 s
+Time metrics:
+  Total Gradle task time: 0.06 s
+
+Task ':app:parseDebugLocalResources' finished in 0.05 s
+Time metrics:
+  Total Gradle task time: 0.05 s
+
+Task ':app:generateDebugResValues' finished in 0.05 s
+Time metrics:
+  Total Gradle task time: 0.05 s
+
+Task ':BaseModule:generateDebugResValues' finished in 0.05 s
+Time metrics:
+  Total Gradle task time: 0.05 s
+
+Task ':NetworkModule:generateDebugResValues' finished in 0.05 s
+Time metrics:
+  Total Gradle task time: 0.05 s
+
+Task ':app:mergeDebugNativeDebugMetadata' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.04 s
+
+Task ':app:writeDebugSigningConfigVersions' finished in 0.03 s
+Time metrics:
+  Total Gradle task time: 0.03 s
+
+Task ':app:processDebugManifestForPackage' finished in 0.03 s
+Time metrics:
+  Total Gradle task time: 0.03 s
+
+Task ':NetworkModule:generateDebugRFile' finished in 0.03 s
+Time metrics:
+  Total Gradle task time: 0.03 s
+
+Task ':NetworkModule:parseDebugLocalResources' finished in 0.03 s
+Time metrics:
+  Total Gradle task time: 0.03 s
+
+Task ':NetworkModule:compileDebugLibraryResources' finished in 0.02 s
+Time metrics:
+  Total Gradle task time: 0.02 s
+
+Task ':NetworkModule:compileDebugShaders' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.02 s
+
+Task ':NetworkModule:copyDebugJniLibsProjectOnly' finished in 0.02 s
+Time metrics:
+  Total Gradle task time: 0.02 s
+
+Task ':BaseModule:copyDebugJniLibsProjectOnly' finished in 0.02 s
+Time metrics:
+  Total Gradle task time: 0.02 s
+
+Task ':BaseModule:bundleLibCompileToJarDebug' finished in 0.02 s
+Time metrics:
+  Total Gradle task time: 0.02 s
+
+Task ':NetworkModule:mergeDebugNativeLibs' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.02 s
+
+Task ':BaseModule:compileDebugShaders' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.02 s
+
+Task ':BaseModule:processDebugJavaRes' finished in 0.02 s
+Time metrics:
+  Total Gradle task time: 0.02 s
+
+Task ':app:extractDeepLinksDebug' finished in 0.02 s
+Time metrics:
+  Total Gradle task time: 0.02 s
+
+Task ':app:compileDebugShaders' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.02 s
+
+Task ':BaseModule:bundleLibRuntimeToJarDebug' finished in 0.02 s
+Time metrics:
+  Total Gradle task time: 0.02 s
+
+Task ':BaseModule:extractDeepLinksDebug' finished in 0.02 s
+Time metrics:
+  Total Gradle task time: 0.02 s
+
+Task ':BaseModule:mergeDebugNativeLibs' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.02 s
+
+Task ':NetworkModule:packageDebugAssets' finished in 0.02 s
+Time metrics:
+  Total Gradle task time: 0.02 s
+
+Task ':BaseModule:packageDebugAssets' finished in 0.01 s
+Time metrics:
+  Total Gradle task time: 0.01 s
+
+Task ':NetworkModule:extractDeepLinksDebug' finished in 0.01 s
+Time metrics:
+  Total Gradle task time: 0.01 s
+
+Task ':app:writeDebugAppMetadata' finished in 0.01 s
+Time metrics:
+  Total Gradle task time: 0.01 s
+
+Task ':app:desugarDebugFileDependencies' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:validateSigningDebug' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':BaseModule:compileDebugJavaWithJavac' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:preBuild' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:preBuild' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':BaseModule:preBuild' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:preDebugBuild' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':BaseModule:preDebugBuild' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:generateDebugResources' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':BaseModule:generateDebugResources' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:generateDebugAssets' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:preDebugBuild' finished in 0.00 s
+
+Task ':app:generateDebugResources' finished in 0.00 s
+
+Task ':NetworkModule:generateDebugAssets' finished in 0.00 s
+
+Task ':BaseModule:generateDebugAssets' finished in 0.00 s
+

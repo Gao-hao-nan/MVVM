@@ -1,6 +1,5 @@
 package com.ghn.cocknovel.viewmodel
 
-import FontAdapter
 import android.app.Application
 import android.util.Log
 import androidx.databinding.ObservableField
@@ -10,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.basemodel.base.BaseViewModel
 import com.example.basemodel.base.SingleLiveEvent
 import com.ghn.cocknovel.net.DataService
+import com.ghn.cocknovel.ui.activity.MainActivity
 import com.ghn.cocknovel.ui.activity.SetActivity
 import com.ghn.cocknovel.ui.activity.SwitchActivity
 import com.kt.NetworkModel.bean.LoginBean
@@ -43,7 +43,7 @@ open class BookStoreViewModel(application: Application) : BaseViewModel(applicat
             Log.i(TAG, "getMain: $it")
 //            if (it?.id != null) {
 //                MVUtils.put("token",it.id)
-//                startActivity(MainActivity::class.java)
+                startActivity(MainActivity::class.java)
 //            } else {
 //            }
         })
@@ -69,7 +69,6 @@ open class BookStoreViewModel(application: Application) : BaseViewModel(applicat
      * 字体recyclerview的适配器
      */
     var canVertically: SingleLiveEvent<Int> = SingleLiveEvent()
-    var adapter: ObservableField<FontAdapter>? = ObservableField(FontAdapter(this))
     var layoutManager: ObservableField<LinearLayoutManager>? = ObservableField(
         LinearLayoutManager(application)
     )

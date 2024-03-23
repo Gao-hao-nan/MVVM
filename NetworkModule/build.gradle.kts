@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("kotlin-android")
+    id ("dagger.hilt.android.plugin")
     kotlin("android")
     kotlin("kapt")
 }
@@ -64,9 +65,10 @@ dependencies {
     implementation(libs.jessyan.autosize)
     implementation(libs.dialog.avi.library)
     implementation(libs.dialog.blankj)
-
-    implementation(libs.github.xpopup)
+    api(libs.github.brv)
     implementation(libs.gencent.mmkv)
+    api(libs.dagger.hilt.android)
+    kapt(libs.dagger.hilt.android.compiler)
 
 //    api("com.github.bumptech.glide:glide:4.13.2")
 //    //room数据库

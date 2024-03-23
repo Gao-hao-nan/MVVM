@@ -1,0 +1,522 @@
+Gradle start parameters:
+  tasks = [:app:assembleDebug]
+  excluded tasks = []
+  current dir = D:\Android\xiangmu\Android\novel-app
+  project properties args = [android.studio.version: 232.10300.40.2321.11567975, android.injected.enableStableIds: true, android.injected.attribution.file.location: D:\Android\xiangmu\Android\novel-app\.gradle, android.injected.build.api: 34, android.injected.build.abi: x86_64,arm64-v8a, android.injected.invoked.from.ide: true]
+  system properties args = [idea.active: true, idea.version: 2023.2]
+
+Time metrics:
+  Total Gradle task time: 1.15 s
+  Spent time before task action: 0.01 s
+  Task action before worker execution: 0.12 s
+    Backup output: 0.04 s
+  Run compilation in Gradle worker: 0.63 s
+    Connect to Kotlin daemon: 0.01 s
+    Calculate output size: 0.00 s
+    Run compilation: 0.62 s
+      Incremental compilation in daemon: 0.58 s
+        Calculate initial dirty sources set: 0.02 s
+          Analyze dependency changes: 0.01 s
+          Detect removed classes: 0.01 s
+        Update caches: 0.02 s
+        Sources compilation round: 0.48 s
+          Compiler initialization time: 0.08 s
+          Compiler code analysis: 0.36 s
+          Compiler code generation: 0.03 s
+  Start gradle worker: 0.00 s
+
+Size metrics:
+  Total size of the cache directory: 1.2 MB
+    ABI snapshot size: 2.1 KB
+  Increase memory usage: 43.4 MB
+  Total memory usage at the end of build: 255.4 MB
+  Total compiler iteration: 2
+    Number of lines analyzed: 162
+    Number of lines for code generation: 81
+    Analysis lines per second: 911
+    Code generation lines per second: 2382
+  Start time of task action: 2078-06-05T17:06:04
+
+
+Total time for Kotlin tasks: 0.79 s (68.3 % of all tasks time)
+Time  |% of Kotlin time|Task                             
+0.40 s|50.4 %          |:app:compileDebugKotlin          
+0.39 s|49.6 %          |:app:kaptGenerateStubsDebugKotlin
+
+Task ':app:compileDebugKotlin' finished in 0.40 s
+Task info:
+  Kotlin language version: 1.9
+Compilation log for task ':app:compileDebugKotlin':
+  Use module detection: true
+  Classpath changes info passed from Gradle task: ClasspathSnapshotDisabled
+  Last Kotlin Build info -- BuildInfo(startTS=1710837119421, dependencyToAbiSnapshot={})
+  Process SignatureChanged(fqName = com.ghn.cocknovel.ui.fragment.RecommendFragment.initViewObservable.2)
+  Process SignatureChanged(fqName = com.ghn.cocknovel.ui.fragment.RecommendFragment.initViewObservable.1)
+  Process SignatureChanged(fqName = .kotlin_module)
+  Process SignatureChanged(fqName = com.ghn.cocknovel.ui.fragment.RecommendFragment.initViewObservable.2.1)
+  Process SignatureChanged(fqName = com.ghn.cocknovel.ui.fragment.RecommendFragment.initViewObservable.2.invoke..inlined.addType.1)
+  Process SignatureChanged(fqName = com.ghn.cocknovel.ui.fragment.RecommendFragment.initViewObservable.2.invoke..inlined.addType.2)
+  Deleting D:\Android\xiangmu\Android\novel-app\app\build\tmp\kotlin-classes\debug\com\ghn\cocknovel\ui\fragment\RecommendFragment$initViewObservable$2.class on clearing cache for D:\Android\xiangmu\Android\novel-app\app\src\main\java\com\ghn\cocknovel\ui\fragment\RecommendFragment.kt
+  Deleting D:\Android\xiangmu\Android\novel-app\app\build\tmp\kotlin-classes\debug\com\ghn\cocknovel\ui\fragment\RecommendFragment$initViewObservable$2$invoke$$inlined$addType$2.class on clearing cache for D:\Android\xiangmu\Android\novel-app\app\src\main\java\com\ghn\cocknovel\ui\fragment\RecommendFragment.kt
+  Deleting D:\Android\xiangmu\Android\novel-app\app\build\tmp\kotlin-classes\debug\com\ghn\cocknovel\ui\fragment\RecommendFragment$initViewObservable$1.class on clearing cache for D:\Android\xiangmu\Android\novel-app\app\src\main\java\com\ghn\cocknovel\ui\fragment\RecommendFragment.kt
+  Deleting D:\Android\xiangmu\Android\novel-app\app\build\tmp\kotlin-classes\debug\com\ghn\cocknovel\ui\fragment\RecommendFragment$initViewObservable$2$invoke$$inlined$addType$1.class on clearing cache for D:\Android\xiangmu\Android\novel-app\app\src\main\java\com\ghn\cocknovel\ui\fragment\RecommendFragment.kt
+  Deleting D:\Android\xiangmu\Android\novel-app\app\build\tmp\kotlin-classes\debug\com\ghn\cocknovel\ui\fragment\RecommendFragment$initViewObservable$2$1.class on clearing cache for D:\Android\xiangmu\Android\novel-app\app\src\main\java\com\ghn\cocknovel\ui\fragment\RecommendFragment.kt
+  Deleting D:\Android\xiangmu\Android\novel-app\app\build\tmp\kotlin-classes\debug\META-INF\app_debug.kotlin_module on clearing cache for D:\Android\xiangmu\Android\novel-app\app\src\main\java\com\ghn\cocknovel\ui\fragment\RecommendFragment.kt
+  Deleting D:\Android\xiangmu\Android\novel-app\app\build\tmp\kotlin-classes\debug\com\ghn\cocknovel\ui\fragment\RecommendFragment.class on clearing cache for D:\Android\xiangmu\Android\novel-app\app\src\main\java\com\ghn\cocknovel\ui\fragment\RecommendFragment.kt
+  Compile iteration:
+    app\src\main\java\com\ghn\cocknovel\ui\fragment\RecommendFragment.kt <- was modified since last time
+  Incremental compilation completed
+Time metrics:
+  Total Gradle task time: 0.40 s
+  Spent time before task action: 0.00 s
+  Task action before worker execution: 0.07 s
+    Backup output: 0.02 s
+  Run compilation in Gradle worker: 0.32 s
+    Connect to Kotlin daemon: 0.00 s
+    Calculate output size: 0.00 s
+    Run compilation: 0.31 s
+      Incremental compilation in daemon: 0.29 s
+        Calculate initial dirty sources set: 0.01 s
+          Analyze dependency changes: 0.00 s
+          Detect removed classes: 0.00 s
+        Update caches: 0.01 s
+        Sources compilation round: 0.25 s
+          Compiler initialization time: 0.04 s
+          Compiler code analysis: 0.16 s
+          Compiler code generation: 0.03 s
+  Start gradle worker: 0.00 s
+Size metrics:
+  Total size of the cache directory: 673.4 KB
+    ABI snapshot size: 1.8 KB
+  Increase memory usage: 34.2 MB
+  Total memory usage at the end of build: 145.1 MB
+  Total compiler iteration: 1
+    Number of lines analyzed: 81
+    Number of lines for code generation: 81
+    Analysis lines per second: 500
+    Code generation lines per second: 2382
+  Start time of task action: 2024-03-19T08:33:02
+GC metrics:
+  G1 Young Generation:
+    GC count: 1
+    GC time: 0.01 s
+  G1 Old Generation:
+    GC count: 0
+    GC time: 0.00 s
+
+Task ':app:kaptGenerateStubsDebugKotlin' finished in 0.39 s
+Task info:
+  Kotlin language version: 1.9
+Compilation log for task ':app:kaptGenerateStubsDebugKotlin':
+  Use module detection: true
+  Classpath changes info passed from Gradle task: ClasspathSnapshotDisabled
+  Last Kotlin Build info -- BuildInfo(startTS=1710837117245, dependencyToAbiSnapshot={})
+  Process SignatureChanged(fqName = .kotlin_module)
+  Deleting D:\Android\xiangmu\Android\novel-app\app\build\tmp\kapt3\stubs\debug\com\ghn\cocknovel\ui\fragment\RecommendFragment.kapt_metadata on clearing cache for D:\Android\xiangmu\Android\novel-app\app\src\main\java\com\ghn\cocknovel\ui\fragment\RecommendFragment.kt
+  Deleting D:\Android\xiangmu\Android\novel-app\app\build\tmp\kapt3\incrementalData\debug\META-INF\app_debug.kotlin_module on clearing cache for D:\Android\xiangmu\Android\novel-app\app\src\main\java\com\ghn\cocknovel\ui\fragment\RecommendFragment.kt
+  Deleting D:\Android\xiangmu\Android\novel-app\app\build\tmp\kapt3\stubs\debug\com\ghn\cocknovel\ui\fragment\RecommendFragment.java on clearing cache for D:\Android\xiangmu\Android\novel-app\app\src\main\java\com\ghn\cocknovel\ui\fragment\RecommendFragment.kt
+  Deleting D:\Android\xiangmu\Android\novel-app\app\build\tmp\kapt3\incrementalData\debug\com\ghn\cocknovel\ui\fragment\RecommendFragment.class on clearing cache for D:\Android\xiangmu\Android\novel-app\app\src\main\java\com\ghn\cocknovel\ui\fragment\RecommendFragment.kt
+  Compile iteration:
+    app\src\main\java\com\ghn\cocknovel\ui\fragment\RecommendFragment.kt <- was modified since last time
+  Incremental compilation completed
+Time metrics:
+  Total Gradle task time: 0.39 s
+  Spent time before task action: 0.01 s
+  Task action before worker execution: 0.06 s
+    Backup output: 0.02 s
+  Run compilation in Gradle worker: 0.32 s
+    Connect to Kotlin daemon: 0.00 s
+    Calculate output size: 0.00 s
+    Run compilation: 0.31 s
+      Incremental compilation in daemon: 0.29 s
+        Calculate initial dirty sources set: 0.01 s
+          Analyze dependency changes: 0.00 s
+          Detect removed classes: 0.00 s
+        Update caches: 0.01 s
+        Sources compilation round: 0.24 s
+          Compiler initialization time: 0.04 s
+          Compiler code analysis: 0.20 s
+  Start gradle worker: 0.00 s
+Size metrics:
+  Total size of the cache directory: 532.0 KB
+    ABI snapshot size: 295 B
+  Increase memory usage: 9.2 MB
+  Total memory usage at the end of build: 110.4 MB
+  Total compiler iteration: 1
+    Number of lines analyzed: 81
+    Analysis lines per second: 411
+  Start time of task action: 2024-03-19T08:33:01
+GC metrics:
+  G1 Young Generation:
+    GC count: 1
+    GC time: 0.01 s
+  G1 Old Generation:
+    GC count: 0
+    GC time: 0.00 s
+
+Task ':app:packageDebug' finished in 0.09 s
+Time metrics:
+  Total Gradle task time: 0.09 s
+
+Task ':NetworkModule:kaptDebugKotlin' finished in 0.03 s
+Time metrics:
+  Total Gradle task time: 0.03 s
+
+Task ':app:dexBuilderDebug' finished in 0.02 s
+Time metrics:
+  Total Gradle task time: 0.02 s
+
+Task ':app:mergeProjectDexDebug' finished in 0.02 s
+Time metrics:
+  Total Gradle task time: 0.02 s
+
+Task ':app:kaptDebugKotlin' finished in 0.02 s
+Time metrics:
+  Total Gradle task time: 0.02 s
+
+Task ':app:processDebugResources' finished in 0.02 s
+Time metrics:
+  Total Gradle task time: 0.02 s
+
+Task ':app:checkDebugDuplicateClasses' finished in 0.01 s
+Time metrics:
+  Total Gradle task time: 0.01 s
+
+Task ':NetworkModule:kaptGenerateStubsDebugKotlin' finished in 0.01 s
+Time metrics:
+  Total Gradle task time: 0.01 s
+
+Task ':app:processDebugMainManifest' finished in 0.01 s
+Time metrics:
+  Total Gradle task time: 0.01 s
+
+Task ':NetworkModule:dataBindingMergeDependencyArtifactsDebug' finished in 0.01 s
+Time metrics:
+  Total Gradle task time: 0.01 s
+
+Task ':app:mergeExtDexDebug' finished in 0.01 s
+Time metrics:
+  Total Gradle task time: 0.01 s
+
+Task ':app:mergeDebugNativeLibs' finished in 0.01 s
+Time metrics:
+  Total Gradle task time: 0.01 s
+
+Task ':app:mapDebugSourceSetPaths' finished in 0.01 s
+Time metrics:
+  Total Gradle task time: 0.01 s
+
+Task ':app:packageDebugResources' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:checkDebugAarMetadata' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:javaPreCompileDebug' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':BaseModule:packageDebugResources' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:parseDebugLocalResources' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:dataBindingGenBaseClassesDebug' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:compileDebugShaders' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:mergeDebugResources' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:mergeDebugAssets' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:dataBindingMergeDependencyArtifactsDebug' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:compileDebugKotlin' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:compileDebugJavaWithJavac' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:transformDebugClassesWithAsm' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:compileDebugJavaWithJavac' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:mergeDebugJavaResource' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:generateDebugResValues' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:dataBindingTriggerDebug' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:processDebugManifest' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':BaseModule:compileDebugShaders' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':BaseModule:extractDeepLinksDebug' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:desugarDebugFileDependencies' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:mergeDebugJniLibFolders' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:generateDebugResValues' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:parseDebugLocalResources' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:generateDebugRFile' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:compressDebugAssets' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:dataBindingGenBaseClassesDebug' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':BaseModule:compileDebugKotlin' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':BaseModule:preBuild' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:preBuild' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:preBuild' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:createDebugVariantModel' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':BaseModule:writeDebugAarMetadata' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:createDebugCompatibleScreenManifests' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:dataBindingTriggerDebug' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:mergeDebugShaders' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':BaseModule:processDebugManifest' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':BaseModule:mergeDebugShaders' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:mergeDebugJniLibFolders' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':BaseModule:javaPreCompileDebug' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':BaseModule:mergeDebugJniLibFolders' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:mergeDebugNativeDebugMetadata' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':BaseModule:generateDebugResValues' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':BaseModule:generateDebugResources' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:writeDebugAarMetadata' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':BaseModule:mergeDebugNativeLibs' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':BaseModule:copyDebugJniLibsProjectOnly' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:generateDebugBuildConfig' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:extractDeepLinksDebug' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:copyDebugJniLibsProjectOnly' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':BaseModule:packageDebugAssets' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:generateDebugResources' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:packageDebugResources' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':BaseModule:parseDebugLocalResources' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':BaseModule:generateDebugRFile' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:compileDebugShaders' was skipped: NO-SOURCE
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:generateDebugAssets' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:processDebugManifest' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:stripDebugDebugSymbols' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:packageDebugAssets' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:processDebugManifestForPackage' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:processDebugJavaRes' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:bundleLibCompileToJarDebug' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':NetworkModule:bundleLibRuntimeToJarDebug' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':BaseModule:processDebugJavaRes' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':BaseModule:bundleLibCompileToJarDebug' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:processDebugJavaRes' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':app:createDebugApkListingFileRedirect' finished in 0.00 s
+Time metrics:
+  Total Gradle task time: 0.00 s
+
+Task ':BaseModule:preDebugBuild' finished in 0.00 s
+
+Task ':NetworkModule:preDebugBuild' finished in 0.00 s
+
+Task ':app:preDebugBuild' finished in 0.00 s
+
+Task ':app:javaPreCompileDebug' finished in 0.00 s
+
+Task ':app:writeDebugSigningConfigVersions' finished in 0.00 s
+
+Task ':app:writeDebugAppMetadata' finished in 0.00 s
+
+Task ':app:generateDebugResources' finished in 0.00 s
+
+Task ':NetworkModule:mergeDebugNativeLibs' was skipped: NO-SOURCE
+
+Task ':app:validateSigningDebug' finished in 0.00 s
+
+Task ':BaseModule:generateDebugAssets' finished in 0.00 s
+
+Task ':NetworkModule:mergeDebugShaders' finished in 0.00 s
+
+Task ':app:generateDebugAssets' finished in 0.00 s
+
+Task ':BaseModule:compileDebugLibraryResources' finished in 0.00 s
+
+Task ':NetworkModule:extractDeepLinksDebug' finished in 0.00 s
+
+Task ':NetworkModule:compileDebugLibraryResources' finished in 0.00 s
+
+Task ':NetworkModule:bundleLibRuntimeToDirDebug' finished in 0.00 s
+
+Task ':BaseModule:compileDebugJavaWithJavac' was skipped: NO-SOURCE
+
+Task ':BaseModule:bundleLibRuntimeToDirDebug' finished in 0.00 s
+
+Task ':BaseModule:bundleLibRuntimeToJarDebug' finished in 0.00 s
+
+Task ':app:mergeLibDexDebug' finished in 0.00 s
+
+Task ':app:assembleDebug' finished in 0.00 s
+

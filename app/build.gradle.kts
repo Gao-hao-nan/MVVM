@@ -1,14 +1,10 @@
 plugins {
     id("com.android.application")
-//    id ("org.jetbrains.kotlin.android")
     id("kotlin-android")
     kotlin("android")
     kotlin("kapt")
-//    kotlin("android-extensions")
 }
-//apply plugin: "kotlin-android-extensions"
-//apply plugin: "kotlin-android"
-//apply plugin: "kotlin-kapt"
+
 
 
 kapt {
@@ -71,30 +67,14 @@ android {
     packagingOptions {
         exclude("AndroidManifest.xml")
     }
-//    dataBinding {
-//        enabled = true
-//    }
-//    viewBinding {
-//        enabled = true
-//    }
-
+    dexOptions {
+        javaMaxHeapSize = "4g"
+    }
 }
 
 dependencies {
     implementation(project(mapOf("path" to ":BaseModule")))
     implementation(project(mapOf("path" to ":NetworkModule")))
-//    implementation("androidx.core:core-ktx:1.8.0")
-//    implementation("androidx.appcompat:appcompat:1.5.1")
-//    implementation("com.google.android.material:material:1.6.1")
-//    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-//    implementation("androidx.navigation:navigation-fragment-ktx:2.4.1")
-//    implementation("androidx.navigation:navigation-ui-ktx:2.4.1")
-//    testImplementation("junit:junit:4.13.2")
-//    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-//    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
-//    // 标题栏框架
-//    implementation("com.github.getActivity:TitleBar:10.0")
-//    implementation("com.github.xiaohaibin:XBanner:androidx_v1.2.6")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -107,10 +87,7 @@ dependencies {
     implementation(libs.androidx.espresso)
     implementation(libs.github.titlebar)
     implementation(libs.github.xbanner)
-    implementation("com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7")
     implementation(libs.github.xxPermissions)
-//    implementation ("androidx.biometric:biometric:1.2.0")
-
 }
 //android.applicationVariants.all {
 //    variant ->

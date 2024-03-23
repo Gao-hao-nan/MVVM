@@ -23,6 +23,7 @@ import com.kt.NetworkModel.utils.ToastUtils
 import com.kt.network.dialog.LoadingDialog
 import com.trello.rxlifecycle4.components.support.RxAppCompatActivity
 import com.trello.rxlifecycle4.components.support.RxFragment
+import dagger.hilt.android.AndroidEntryPoint
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -37,6 +38,7 @@ import java.lang.reflect.ParameterizedType
  *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
  * @Description: TODO 封装一个BaseFragment
  */
+@AndroidEntryPoint
 abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> :RxFragment(), IBaseView{
 
     open var mBinding: V? = null

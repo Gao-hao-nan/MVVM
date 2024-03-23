@@ -10,7 +10,7 @@ import com.ghn.cocknovel.ui.activity.WebviewActivity
 import com.google.gson.Gson
 import com.kt.NetworkModel.bean.ProjectBean
 import com.kt.NetworkModel.bean.TabFrameBean
-import com.kt.network.bean.FontDataNew
+import com.kt.network.bean.datas
 import com.stx.xhb.androidx.entity.BaseBannerInfo
 
 /**
@@ -32,7 +32,7 @@ open class RecommendViewModel(application: Application) : BaseViewModel(applicat
 
     }
 
-    val homeStatus = MutableLiveData<FontDataNew>()
+    val homeStatus = mutableListOf<datas>()
     val mBanner = MutableLiveData<List<BaseBannerInfo>>()
     val mProject = MutableLiveData<MutableList<ProjectBean.Data>>()
     val mProjectcontent = MutableLiveData<TabFrameBean.Data>()
@@ -60,7 +60,7 @@ open class RecommendViewModel(application: Application) : BaseViewModel(applicat
         launchOnlyresult({
             DataService.callback(5)
         }, {
-//            homeStatus.value = it
+            homeStatus.addAll(it!!.datas)
         })
     }
 

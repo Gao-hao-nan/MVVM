@@ -23,16 +23,8 @@ android {
 }
 
 dependencies {
-
-//    implementation ("androidx.core:core-ktx:1.8.0")
-//    implementation ("androidx.appcompat:appcompat:1.4.1")
-//    implementation ("com.google.android.material:material:1.5.0")
-
-//    testImplementation ("junit:junit:4.13.2")
-//    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-//    androidTestImplementation ("androidx.test.espresso:espresso-core:3.4.0")
-//    implementation ("com.github.Doonkey:DkFloatingView:1.1.0")
-    implementation(project(mapOf("path" to ":NetworkModule")))
+    implementation(project(":CapturePacketModule"))
+    implementation(project(":NetworkModule"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.google.material)
@@ -41,4 +33,6 @@ dependencies {
     implementation(libs.androidx.espresso)
     implementation(libs.dialogs.core)
     implementation(libs.dialogs.lifecycle)
+    implementation(libs.github.xpopup)
+    implementation ("com.github.yhaolpz:FloatWindow:1.0.9")
 }

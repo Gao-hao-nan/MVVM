@@ -1,0 +1,17 @@
+Gradle start parameters:
+  tasks = []
+  excluded tasks = []
+  current dir = D:\Android\xiangmu\Android\novel-app
+  project properties args = [android.injected.build.model.only.advanced: true, android.studio.version: 232.10227.8.2321.11479570, android.injected.build.model.disable.src.download: true, org.gradle.kotlin.dsl.provider.cid: 392099447947500, android.injected.invoked.from.ide: true, android.injected.build.model.only.versioned: 3, android.injected.avoid.task.registration: true, kotlin.mpp.enableIntransitiveMetadataConfiguration: true, idea.gradle.do.not.build.tasks: true, android.injected.build.model.only: true]
+  system properties args = [idea.active: true, idea.resolveSourceSetDependencies: true, idea.version: 2023.2, java.awt.headless: true, idea.sync.active: true, org.gradle.internal.GradleProjectBuilderOptions: omit_all_tasks]
+
+Time metrics:
+  Total Gradle task time: 0.01 s
+
+
+
+No Kotlin task was run
+Task ':prepareKotlinBuildScriptModel' finished in 0.01 s
+Time metrics:
+  Total Gradle task time: 0.01 s
+

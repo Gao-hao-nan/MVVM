@@ -1,5 +1,6 @@
 package com.ghn.cocknovel.ui.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -27,7 +28,7 @@ class BoyFragment : BaseFragment<FragmentBoyBinding, RecommendViewModel>(){
 
     }
 
+    @SuppressLint("ObjectAnimatorBinding")
     override fun initViewObservable() {
-
     }
 }

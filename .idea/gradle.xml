@@ -10,6 +10,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/BaseModule" />
+            <option value="$PROJECT_DIR$/CapturePacketModule" />
             <option value="$PROJECT_DIR$/NetworkModule" />
             <option value="$PROJECT_DIR$/app" />
           </set>

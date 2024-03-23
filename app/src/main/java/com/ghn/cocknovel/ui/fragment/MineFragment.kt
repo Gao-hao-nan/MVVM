@@ -62,7 +62,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, BookStoreViewModel>() {
 
     override fun initViewObservable() {
         mBinding?.let {
-            Glide.with(this).load(R.mipmap.ic_my_handes)
+            Glide.with(this).load(com.example.basemodel.R.mipmap.ic_my_handes)
                 .apply(RequestOptions.bitmapTransform(CircleCrop()))
                 .transition(DrawableTransitionOptions.withCrossFade(500))
                 .into(it.rounIcon)
@@ -175,6 +175,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, BookStoreViewModel>() {
         startActivityForResult(CameraUtils.getselectPhotoIntent, SELECT_PHOTO)
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {

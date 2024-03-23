@@ -11,6 +11,7 @@ import com.kt.network.net.interceptor.HTTPDNSInterceptor
 import com.kt.network.net.interceptor.NoNetworkInterceptor
 import okhttp3.Cache
 import okhttp3.ConnectionPool
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.internal.platform.Platform
 import retrofit2.Retrofit
@@ -46,6 +47,16 @@ class RetrofitClient
      */
     private fun createOkHttpClient(optimization: Boolean, update: Boolean): OkHttpClient {
         val builder = OkHttpClient.Builder()
+        var captureInterceptor: Interceptor? = null
+        try {
+            val clazz =
+                Class.forName("cn.coderpig.cp_network_capture.interceptor.CaptureInterceptor")
+            val constructor = clazz.getDeclaredConstructor()
+            captureInterceptor = constructor.newInstance() as Interceptor
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+//        captureInterceptor?.let { builder.addInterceptor(it) }
         builder.connectTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
             .writeTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
             .readTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
@@ -53,6 +64,7 @@ class RetrofitClient
             .sslSocketFactory(TrustAllCerts.createSSLSocketFactory()!!, TrustAllCerts())
             .hostnameVerifier(TrustAllCerts.TrustAllHostnameVerifier())
             //alibaba dns优化
+            .addInterceptor(captureInterceptor!!)
             .dns(OkHttpDNS.get(context))
             .eventListenerFactory(OkHttpEventListener.FACTORY)
         if (optimization) {

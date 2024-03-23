@@ -1,12 +1,16 @@
 package com.example.basemodel.base
 
+import android.content.Context
 import android.content.Intent
+import android.content.pm.ApplicationInfo
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
+import android.view.animation.BounceInterpolator
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentActivity
@@ -22,6 +26,10 @@ import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.CLASS
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.REQUEST
 import com.kt.NetworkModel.utils.ToastUtils
 import com.trello.rxlifecycle4.components.support.RxAppCompatActivity
+import com.yhao.floatwindow.FloatWindow
+import com.yhao.floatwindow.MoveType
+import com.yhao.floatwindow.Screen
+import dagger.hilt.android.AndroidEntryPoint
 import java.lang.reflect.ParameterizedType
 
 
@@ -37,6 +45,7 @@ import java.lang.reflect.ParameterizedType
  *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
  * @Description: TODO 封装一个BaseActivity
  */
+@AndroidEntryPoint
 abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppCompatActivity(),
     IBaseView {
     open var mBinding: V? = null
@@ -44,6 +53,15 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
     open var viewModelId = 0
     private var dialog: MaterialDialog? = null
     private var toast: ToastUtils? = null
+    fun isDebuggable(context: Context): Boolean {
+        return try {
+            val info = context.applicationInfo
+            info.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
+        } catch (e: java.lang.Exception) {
+            // Handle any exceptions here
+            false
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -62,6 +80,32 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
             window.statusBarColor = Color.TRANSPARENT
         } else {
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS) //隐藏状态栏
+        }
+        if (isDebuggable(this)) {
+            val fWview=layoutInflater.inflate(R.layout.flw,null)
+
+//            val textView = TextView(applicationContext)
+//            textView.setText("抓包")
+//            textView.setBackgroundColor(Color.RED)
+            FloatWindow
+                .with(applicationContext)
+                .setView(fWview)
+                .setWidth(Screen.width, 0.2f) //设置悬浮控件宽高
+                .setHeight(Screen.width, 0.2f)
+                .setX(Screen.width, 0.8f)
+                .setY(Screen.height, 0.3f)
+                .setMoveType(MoveType.slide, 100, -100)
+                .setMoveStyle(500, BounceInterpolator())
+                .setDesktopShow(true)
+                .build()
+            fWview.setOnClickListener {
+                val launchIntent="cn.coderpig.cp_network_capture.ui.activity.NetworkCaptureActivity"
+                val intent = Intent()
+                intent.setClassName(packageName,launchIntent)
+                startActivity(intent)
+            }
+        } else {
+            Toast.makeText(this,"apk包类型: ${isDebuggable(this)}", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -84,11 +128,11 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
 
         }
         //包名和类名跳转
-        mViewModel?.getUC()?.getStartModelActivityEvent()?.observe(this){ params->
+        mViewModel?.getUC()?.getStartModelActivityEvent()?.observe(this) { params ->
             params?.let {
-                val clz=params[CLASS]
-                val Packagename=params[CANONICAL_NAME]
-                val intent=Intent()
+                val clz = params[CLASS]
+                val Packagename = params[CANONICAL_NAME]
+                val intent = Intent()
                 intent.setClassName(Packagename.toString(), clz.toString())
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)

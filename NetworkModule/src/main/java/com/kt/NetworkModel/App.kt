@@ -2,8 +2,13 @@ package com.kt.NetworkModel
 
 import android.app.Application
 import android.content.Context
+import com.drake.brv.utils.BRV
 import com.kt.NetworkModel.utils.MVUtils
+import com.scwang.smart.refresh.footer.ClassicsFooter
+import com.scwang.smart.refresh.header.MaterialHeader
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.tencent.mmkv.MMKV
+import dagger.hilt.android.HiltAndroidApp
 import me.jessyan.autosize.AutoSize
 import me.jessyan.autosize.AutoSizeConfig
 import me.jessyan.autosize.unit.Subunits
@@ -20,9 +25,8 @@ import me.jessyan.autosize.unit.Subunits
  *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
  * 描述:
  */
+@HiltAndroidApp
 open class App : Application() {
-
-
     override fun onCreate() {
         super.onCreate()
         instance = this
@@ -34,6 +38,15 @@ open class App : Application() {
             .setSupportSubunits(Subunits.MM)
         MMKV.initialize(this)
         MVUtils.instance
+        BRV.modelId=androidx.databinding.library.baseAdapters.BR._all
+        //指定刷新头和尾部
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
+            MaterialHeader(context)
+        }
+        SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout ->
+            ClassicsFooter(context)
+        }
+
     }
 
     /**

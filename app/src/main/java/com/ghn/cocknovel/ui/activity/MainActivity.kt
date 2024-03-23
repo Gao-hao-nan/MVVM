@@ -70,7 +70,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
                     }
                 }
             })
-        showMsgimage("提示",R.mipmap.ic_my_handes)
+        showMsgimage("提示", com.example.basemodel.R.mipmap.ic_my_handes)
+
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

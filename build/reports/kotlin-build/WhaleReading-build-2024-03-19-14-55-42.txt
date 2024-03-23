@@ -1,0 +1,25 @@
+Gradle start parameters:
+  tasks = [clean]
+  excluded tasks = []
+  current dir = D:\Android\xiangmu\Android\novel-app
+  project properties args = [android.studio.version: 232.10300.40.2321.11567975, android.injected.attribution.file.location: D:\Android\xiangmu\Android\novel-app\.gradle, android.injected.invoked.from.ide: true]
+  system properties args = [idea.active: true, idea.version: 2023.2]
+
+Time metrics:
+  Total Gradle task time: 0.03 s
+
+
+
+No Kotlin task was run
+Task ':app:clean' finished in 0.01 s
+Time metrics:
+  Total Gradle task time: 0.01 s
+
+Task ':NetworkModule:clean' finished in 0.01 s
+Time metrics:
+  Total Gradle task time: 0.01 s
+
+Task ':BaseModule:clean' finished in 0.01 s
+Time metrics:
+  Total Gradle task time: 0.01 s
+

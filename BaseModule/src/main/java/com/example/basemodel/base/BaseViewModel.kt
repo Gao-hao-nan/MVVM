@@ -19,6 +19,9 @@ import com.kt.network.bean.BaseResult
 import com.kt.network.net.ExceptionHandle
 import com.kt.network.net.ResponseThrowable
 import com.trello.rxlifecycle4.LifecycleProvider
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -41,6 +44,8 @@ import kotlin.collections.set
  *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
  * @Description: TODO 封装我们的BaseModel然后，通过观察者模式对数据进行观察并且通知我们的UI进行更新数据
  */
+@Module
+@InstallIn(SingletonComponent ::class)
 open class BaseViewModel(application: Application) : AndroidViewModel(application), IBaseViewModel {
     private var mLifecycle: WeakReference<LifecycleProvider<*>>? = null
     private var uc: UIChangeLiveData? = null

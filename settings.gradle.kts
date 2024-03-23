@@ -30,3 +30,4 @@ rootProject.name = "WhaleReading"
 include(":app")
 include(":NetworkModule")
 include(":BaseModule")
+include(":CapturePacketModule")
