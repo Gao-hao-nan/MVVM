@@ -24,6 +24,7 @@ import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.BUNDLE
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.CANONICAL_NAME
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.CLASS
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.REQUEST
+import com.kt.NetworkModel.App
 import com.kt.NetworkModel.utils.ToastUtils
 import com.trello.rxlifecycle4.components.support.RxAppCompatActivity
 import com.yhao.floatwindow.FloatWindow
@@ -88,7 +89,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
 //            textView.setText("抓包")
 //            textView.setBackgroundColor(Color.RED)
             FloatWindow
-                .with(applicationContext)
+                .with(App.get())
                 .setView(fWview)
                 .setWidth(Screen.width, 0.2f) //设置悬浮控件宽高
                 .setHeight(Screen.width, 0.2f)
@@ -100,9 +101,10 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
                 .build()
             fWview.setOnClickListener {
                 val launchIntent="cn.coderpig.cp_network_capture.ui.activity.NetworkCaptureActivity"
-                val intent = Intent()
-                intent.setClassName(packageName,launchIntent)
-                startActivity(intent)
+                mViewModel?.startModelActivity(packageName,launchIntent)
+//                val intent = Intent()
+//                intent.setClassName(packageName,launchIntent)
+//                startActivity(intent)
             }
         } else {
             Toast.makeText(this,"apk包类型: ${isDebuggable(this)}", Toast.LENGTH_SHORT).show()
