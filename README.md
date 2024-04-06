@@ -1,4 +1,4 @@
-基于 **模块化+Kotlin+协程+Rxjava+Retrofit+Jetpack+MVVM** 架构实现的 WanAndroid 客户端。 能提供大家学习如何从0到1打造一个符合[大型Android项目的架构模式]
+基于 **模块化+Kotlin+协程+Retrofit+Jetpack+MVVM** 架构实现的 WanAndroid 客户端。 能提供大家学习如何从0到1打造一个符合[大型Android项目的架构模式]
 
 |                             项目截图                             |                             项目截图                             |                             项目截图                             |                             项目截图                             |
 | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
@@ -6,9 +6,10 @@
 ### 1. 项目架构
 1. 项目采用 Kotlin 语言编写，结合 Jetpack 相关控件，`Navigation`，`Lifecyle`，`DataBinding`，`LiveData`，`ViewModel`等搭建的 **MVVM** 架构模式；
 2. 通过**组件化**，**模块化**拆分，实现项目更好解耦和复用
-3. 使用 **协程+Rxjava+Retrofit+OkHttp** 优雅地实现网络请求；
+3. 使用 **协程+Retrofit+OkHttp** 优雅地实现网络请求；
 4. 通过 **mmkv**，**Room** 数据库等实现对数据缓存的管理；
 5. 使用 **Glide** 完成图片加载；
+6. 通过RxAppCompatActivity+RxLifecycleAndroid 封装的基类
 
 欢迎在 **Issue** 中提交对本仓库的改进建议~
 有问题请联系QQ:1931672489
@@ -25,5 +26,4 @@
 *   [**Glide**](https://github.com/bumptech/glide)
 *   [**ARouter**](https://github.com/alibaba/ARouter)
 *   [**MMKV**](https://github.com/Tencent/MMKV)
-*   [**RxPermission**](https://github.com/tbruyelle/RxPermissions)
 *   [**SmartRefreshLayout**](https://github.com/scwang90/SmartRefreshLayout)
