@@ -56,6 +56,17 @@ open class RecommendViewModel(application: Application) : BaseViewModel(applicat
         })
     }
 
+    /**
+     * 通过flow进行网络请求
+     */
+    open fun  flowbanner(){
+        launchFlow({
+            DataService.wbanner(5)
+        },{
+            Log.i(TAG, "flowbanner: $it")
+        },true)
+    }
+
     open fun getHomeStatus() {
         launchOnlyresult({
             DataService.callback(5)

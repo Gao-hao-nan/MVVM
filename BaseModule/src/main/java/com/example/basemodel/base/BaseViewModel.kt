@@ -15,6 +15,7 @@ import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.CANONIC
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.CLASS
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.REQEUST_DEFAULT
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.REQUEST
+import com.kt.NetworkModel.net.requestFlow
 import com.kt.network.bean.BaseResult
 import com.kt.network.net.ExceptionHandle
 import com.kt.network.net.ResponseThrowable
@@ -45,7 +46,7 @@ import kotlin.collections.set
  * @Description: TODO 封装我们的BaseModel然后，通过观察者模式对数据进行观察并且通知我们的UI进行更新数据
  */
 @Module
-@InstallIn(SingletonComponent ::class)
+@InstallIn(SingletonComponent::class)
 open class BaseViewModel(application: Application) : AndroidViewModel(application), IBaseViewModel {
     private var mLifecycle: WeakReference<LifecycleProvider<*>>? = null
     private var uc: UIChangeLiveData? = null
@@ -168,6 +169,30 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     /**
+     * flow 运行在主线程中，可直接调用
+     * @param errorCall 错误回调
+     * @param requestCall 请求函数
+     * @param isShowDialog 是否展示加载框
+     * @param successBlock 请求结果
+     */
+    fun <T> launchFlow(
+        requestCall: suspend () -> BaseResult<T>?,
+        successBlock: (T?) -> Unit,
+        isShowDialog: Boolean = true,
+        errorCall: (ResponseThrowable) -> Unit = {
+            it.printStackTrace()
+        }
+    ) {
+        if (isShowDialog) uc?.getShowDialog()?.call()
+        viewModelScope.launch(Dispatchers.Main) {
+            val data = requestFlow(errorBlock = { code, error ->
+                errorCall(error!!)
+            }, requestCall)
+            successBlock(data)
+        }
+    }
+
+    /**
      * 异常统一处理
      */
     private suspend fun handleException(
@@ -185,6 +210,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
             }
         }
     }
+
 
     /**
      * 注入RxLifecycle生命周期
@@ -243,10 +269,10 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
      *
      * @param clz 所跳转的目的Activity类
      */
-    fun startModelActivity(Packagename: String?,clz: String?) {
+    fun startModelActivity(Packagename: String?, clz: String?) {
         val params: MutableMap<String, Any?> = HashMap()
         params[CLASS] = clz
-        params[CANONICAL_NAME]=Packagename
+        params[CANONICAL_NAME] = Packagename
         uc?.getStartModelActivityEvent()?.postValue(params as Map<String, Any>)
     }
 
