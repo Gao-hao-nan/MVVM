@@ -44,12 +44,12 @@ class BookstoreFragment : BaseFragment<FragmentBookstoreBinding, BookStoreViewMo
         titles.add("男生")
         titles.add("女生")
 
-        mBinding?.viewpage?.adapter=
-            activity?.let { TabLayoutAdapter(it.supportFragmentManager,fragmentList,titles) }
-        mBinding?.mainTab?.setupWithViewPager( mBinding?.viewpage)
-        mBinding?.mainTab?.getTabAt(0)?.view?.scaleX=1.5f
-        mBinding?.mainTab?.getTabAt(0)?.view?.scaleY=1.5f
-        mBinding?.mainTab?.addOnTabSelectedListener(object : OnTabSelectedListener {
+        mBinding.viewpage.adapter=
+            activity.let { TabLayoutAdapter(it!!.supportFragmentManager,fragmentList,titles) }
+        mBinding.mainTab.setupWithViewPager( mBinding.viewpage)
+        mBinding.mainTab.getTabAt(0)!!.view.scaleX=1.5f
+        mBinding.mainTab.getTabAt(0)!!.view.scaleY=1.5f
+        mBinding.mainTab.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 (tab.view as View).setScaleX(1.5f)
                 (tab.view as View).setScaleY(1.5f)

@@ -24,6 +24,7 @@ import com.stx.xhb.androidx.transformers.Transformer
 
 
 class RecommendFragment : BaseFragment<FragmentRecommendBinding, RecommendViewModel>() {
+    private var page=1
     override fun initVariableId(): Int {
         return BR.mode
     }
@@ -43,37 +44,87 @@ class RecommendFragment : BaseFragment<FragmentRecommendBinding, RecommendViewMo
     @RequiresApi(Build.VERSION_CODES.M)
     @SuppressLint("CheckResult", "SetTextI18n")
     override fun initViewObservable() {
-        mViewModel?.getBanner()
-        mViewModel?.flowbanner()
-        mViewModel?.mBanner?.observe(this) {
-            mBinding?.homexbanner?.setBannerData(it)
+        mViewModel.getBanner()
+        mViewModel.flowbanner()
+        mViewModel.mBanner.observe(this) {
+            mBinding.homexbanner.setBannerData(it)
             //刷新数据之后，需要重新设置是否支持自动轮播
-            mBinding?.homexbanner?.setAutoPlayAble(it.size > 1)
+            mBinding.homexbanner.setAutoPlayAble(it.size > 1)
             //设置模式是否为一屏多页（可选）
-            mBinding?.homexbanner?.setIsClipChildrenMode(true)
-            mBinding?.homexbanner?.setBannerData(it)
+            mBinding.homexbanner.setIsClipChildrenMode(true)
+            mBinding.homexbanner.setBannerData(it)
             //设置轮播的动画，默认情况下一屏多页左右的图片不会缩放，更改动画可以改变轮播的效果，
             //Transformer还有很多效果，感兴趣的朋友可以自行尝试
-            mBinding?.homexbanner?.setPageTransformer(Transformer.Scale)
-            mBinding?.homexbanner?.loadImage(object : XBanner.XBannerAdapter {
+            mBinding.homexbanner.setPageTransformer(Transformer.Scale)
+            mBinding.homexbanner.loadImage(object : XBanner.XBannerAdapter {
                 override fun loadBanner(banner: XBanner?, model: Any?, view: View?, position: Int) {
                     Glide.with(this@RecommendFragment).load((model as WBanner.Data).imagePath)
                         .into(view as ImageView)
                 }
             })
         }
-        mViewModel?.getHomeStatus()
-        mBinding?.recyclerViewHome?.linear()?.setup {
-            addType<datas>(R.layout.item_home)
-            onBind {
-                val binding=getBinding<ItemHomeBinding>()
-                val mode=getModel<datas>()
-                binding.itemHomeAuthor.text="作者: ${mode.shareUser}"
-                binding.itemHomeTitle.text="标题: ${mode.title}"
-                binding.itemHomeSource.text="目录名称: ${mode.chapterName}"
-                binding.itemHomeTime.text="时间: ${mode.niceDate}"
-            }
-        }?.models=mViewModel?.homeStatus
+//        val customExoPlayer = CustomExoPlayer(requireContext())
+//        customExoPlayer.setPlayerView(mBinding.exoPlay!!)
+//        val mediaUriList = listOf(
+//            Uri.parse("http://vjs.zencdn.net/v/oceans.mp4"),
+//            Uri.parse("http://vjs.zencdn.net/v/oceans.mp4"),
+//            Uri.parse("http://vjs.zencdn.net/v/oceans.mp4")
+//        )
+//        customExoPlayer.setDataSourceList(mediaUriList)
+//        customExoPlayer.start()
+
+//        Log.i("TAG", "initViewObservable: ${customExoPlayer.duration()}")
+        mViewModel.getHomeStatus(page)
+//        mBinding.recyclerViewHome.layoutManager = LinearLayoutManager(activity)
+//        val homelist= mutableListOf<datas>()
+//        mViewModel.homeStatus.observe(this) {
+//            homelist.addAll(it)
+//            val adapter = object : BaseQuickAdapter<datas, DataBindingHolder<ItemHomeBinding>>() {
+//                override fun onBindViewHolder(
+//                    holder: DataBindingHolder<ItemHomeBinding>,
+//                    position: Int,
+//                    item: datas?
+//                ) {
+//
+//                }
+//                override fun onCreateViewHolder(
+//                    context: Context,
+//                    parent: ViewGroup,
+//                    viewType: Int
+//                ): DataBindingHolder<ItemHomeBinding> {
+//                    return DataBindingHolder<ItemHomeBinding>(R.layout.item_home, parent)
+//                }
+//
+//            }
+//            mBinding.recyclerViewHome.adapter=adapter
+//        }
+
+
+        mViewModel.homeStatus.observe(this@RecommendFragment) {
+            mBinding.HomePage.onRefresh {
+                mViewModel.getHomeStatus(page)
+                addData(it.datas) {
+                    page < it.curPage
+                }
+//                 addData(it.datas, mBinding.recyclerViewHome.bindingAdapter, isEmpty = {
+//                     true // 此处判断是否存在下一页
+//                 }, hasMore = {
+//                     false // 此处判断是否显示空布局
+//                 })
+            }.autoRefresh()
+            mBinding.recyclerViewHome.linear().setup {
+                addType<datas>(R.layout.item_home)
+                onBind {
+                    val binding=getBinding<ItemHomeBinding>()
+                    val mode=getModel<datas>()
+                    binding.itemHomeAuthor.text="作者: ${mode.shareUser}"
+                    binding.itemHomeTitle.text="标题: ${mode.title}"
+                    binding.itemHomeSource.text="目录名称: ${mode.chapterName}"
+                    binding.itemHomeTime.text="时间: ${mode.niceDate}"
+                }
+            }.models=it.datas
+        }
+
     }
 }
 

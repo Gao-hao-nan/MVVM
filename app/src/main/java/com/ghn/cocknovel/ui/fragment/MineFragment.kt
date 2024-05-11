@@ -61,27 +61,27 @@ class MineFragment : BaseFragment<FragmentMineBinding, BookStoreViewModel>() {
     }
 
     override fun initViewObservable() {
-        mBinding?.let {
+        mBinding.let {
             Glide.with(this).load(com.example.basemodel.R.mipmap.ic_my_handes)
                 .apply(RequestOptions.bitmapTransform(CircleCrop()))
                 .transition(DrawableTransitionOptions.withCrossFade(500))
                 .into(it.rounIcon)
         }
-        mBinding?.rounIcon?.setOnClickListener {
+        mBinding.rounIcon.setOnClickListener {
             // 打开自定义dialog
 //            openDialog()
-//            context?.let { it1 -> ButtomDialogView(it1,true,true).show() }
+//            context.let { it1 -> ButtomDialogView(it1,true,true).show() }
         }
     }
 
 //    private fun openDialog() {
-//        val headDialog = context?.let { ButtomDialogView(it, false, true) }
-//        headDialog?.show()
-//        headDialog?.setClicklistener(object : ButtomDialogView.ClickListenerInterface {
+//        val headDialog = context.let { ButtomDialogView(it, false, true) }
+//        headDialog.show()
+//        headDialog.setClicklistener(object : ButtomDialogView.ClickListenerInterface {
 //            override fun doGetCamera() {
 //                //相机
 //                headDialog.dismiss()
-//                activity?.let {
+//                activity.let {
 //                    XXPermissions.with(it)
 //                        .permission(Permission.CAMERA).permission(Permission.READ_MEDIA_IMAGES)
 //                        .request(object : OnPermissionCallback {
@@ -116,7 +116,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, BookStoreViewModel>() {
 //            override fun doGetPic() {
 //                //相册
 //                headDialog.dismiss()
-//                activity?.let {
+//                activity.let {
 //                    XXPermissions.with(it)
 //                        .permission(Permission.CAMERA).permission(Permission.READ_MEDIA_IMAGES)
 //                        .request(object : OnPermissionCallback {
@@ -165,7 +165,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, BookStoreViewModel>() {
         val filename = timeStampFormat.format(Date())
         outputImagePath = File(activity?.getExternalCacheDir(), "$filename.jpg")
         val takePhotoIntent =
-            activity?.let { CameraUtils.getTakePhotoIntent(it, outputImagePath!!) }
+            activity.let { CameraUtils.getTakePhotoIntent(it!!, outputImagePath!!) }
         // 开启一个带有返回值的Activity，请求码为TAKE_PHOTO
         // 开启一个带有返回值的Activity，请求码为TAKE_PHOTO
         startActivityForResult(takePhotoIntent, TAKE_PHOTO)
@@ -190,12 +190,12 @@ class MineFragment : BaseFragment<FragmentMineBinding, BookStoreViewModel>() {
                 //判断手机系统版本号
                 imagePath = if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
                     //4.4及以上系统使用这个方法处理图片
-                    activity?.let { CameraUtils.getImageOnKitKatPath(data!!, it) }
+                    activity.let { CameraUtils.getImageOnKitKatPath(data!!, it!!) }
                 } else {
-                    activity?.let { CameraUtils.getImageBeforeKitKatPath(data!!, it) }
+                    activity.let { CameraUtils.getImageBeforeKitKatPath(data!!, it!!) }
                 }
                 //显示图片
-                imagePath?.let { displayImage(it) }
+                imagePath.let { displayImage(it!!) }
             }
 
             else -> {}
@@ -209,7 +209,7 @@ class MineFragment : BaseFragment<FragmentMineBinding, BookStoreViewModel>() {
     private fun displayImage(imagePath: String) {
         if (!TextUtils.isEmpty(imagePath)) {
             //显示图片
-            mBinding?.rounIcon?.let {
+            mBinding.rounIcon.let {
                 Glide.with(this).load(imagePath).apply(requestOptions).into(it)
             }
             //压缩图片

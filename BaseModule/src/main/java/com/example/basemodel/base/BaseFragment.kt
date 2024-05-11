@@ -40,9 +40,8 @@ import java.lang.reflect.ParameterizedType
  */
 @AndroidEntryPoint
 abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> :RxFragment(), IBaseView{
-
-    open var mBinding: V? = null
-    open var mViewModel: VM? = null
+    protected lateinit var mBinding: V
+    protected lateinit var mViewModel: VM
     open var viewModelId = 0
     var dialog: MaterialDialog? = null
     private var toast: ToastUtils? = null
@@ -62,13 +61,9 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> :RxFragment
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mBinding = DataBindingUtil.inflate<ViewDataBinding>(
-            inflater,
-            initContentView(inflater, container, savedInstanceState),
-            container,
-            false
-        ) as V?
-        return mBinding?.root
+        mBinding = (DataBindingUtil.inflate<ViewDataBinding>
+            (inflater, initContentView(inflater, container, savedInstanceState), container, false) as V)
+        return mBinding.root
     }
 
 
@@ -76,9 +71,9 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> :RxFragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onVisible()
-        mViewModel?.let { lifecycle.addObserver(it) }
         //私有的初始化Databinding和ViewModel方法
         initViewDataBinding()
+        lifecycle.addObserver(mViewModel)
         //私有的ViewModel与View的契约事件回调逻辑
         registerUIChangeLiveDataCallBack()
         //页面事件监听的方法，一般用于ViewModel层转到View层的事件注册
@@ -107,7 +102,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> :RxFragment
 
     private fun registerUIChangeLiveDataCallBack() {
         //跳入新页面
-        mViewModel?.getUC()?.getStartActivityEvent()?.observe(viewLifecycleOwner) { params ->
+        mViewModel.getUC()?.getStartActivityEvent()?.observe(viewLifecycleOwner) { params ->
             params?.let {
                 val clz = params[BaseViewModel.Companion.ParameterField.CLASS] as Class<*>?
                 val intent = Intent(activity, clz)
@@ -125,7 +120,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> :RxFragment
 
         }
         //包名和类名跳转
-        mViewModel?.getUC()?.getStartModelActivityEvent()?.observe(viewLifecycleOwner){ params->
+        mViewModel.getUC()?.getStartModelActivityEvent()?.observe(viewLifecycleOwner){ params->
             params?.let {
                 val clz=params[BaseViewModel.Companion.ParameterField.CLASS]
                 val Packagename=params[BaseViewModel.Companion.ParameterField.CANONICAL_NAME]
@@ -136,17 +131,17 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> :RxFragment
             }
         }
 
-        mViewModel?.getUC()?.getFinishResult()?.observe(viewLifecycleOwner) { integer ->
+        mViewModel.getUC()?.getFinishResult()?.observe(viewLifecycleOwner) { integer ->
             integer?.let {
                 activity?.setResult(integer)
                 activity?.finish()
             }
         }
 
-        mViewModel?.getUC()?.getShowDialog()?.observe(viewLifecycleOwner) {
+        mViewModel.getUC()?.getShowDialog()?.observe(viewLifecycleOwner) {
             ShowDialog()
         }
-        mViewModel?.getUC()?.getDismissDialog()?.observe(viewLifecycleOwner) {
+        mViewModel.getUC()?.getDismissDialog()?.observe(viewLifecycleOwner) {
             dismissLoading()
         }
 
@@ -154,9 +149,9 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> :RxFragment
 //        viewModel?.getUC()?.getFinishEvent()?.observe(this) { activity?.finish() }
         //关闭上一层
 
-        mViewModel?.getUC()?.getOnBackPressedEvent()?.observe(viewLifecycleOwner) { activity?.onBackPressed() }
+        mViewModel.getUC()?.getOnBackPressedEvent()?.observe(viewLifecycleOwner) { activity?.onBackPressed() }
 
-        mViewModel?.getUC()?.getSetResultEvent()?.observe(viewLifecycleOwner) { params ->
+        mViewModel.getUC()?.getSetResultEvent()?.observe(viewLifecycleOwner) { params ->
             params?.let {
                 val intent = Intent()
                 if (params.isNotEmpty()) {
@@ -189,14 +184,14 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> :RxFragment
 
         mViewModel = createViewModel(this, modelClass as Class<VM>)
         //关联ViewModel
-        mBinding?.setVariable(viewModelId, mViewModel)
+        mBinding.setVariable(viewModelId, mViewModel)
         //支持LiveData绑定xml，数据改变，UI自动会更新
-        mBinding?.lifecycleOwner = this
-        mBinding?.lifecycleOwner?.lifecycle?.addObserver(mViewModel!!)
+        mBinding.lifecycleOwner = this
+        mBinding.lifecycleOwner?.lifecycle?.addObserver(mViewModel!!)
         //让ViewModel拥有View的生命周期感应
 //        lifecycle.addObserver(viewModel!!)
         //注入RxLifecycle生命周期
-        mViewModel?.injectLifecycleProvider(this)
+        mViewModel.injectLifecycleProvider(this)
     }
 
     open fun <T : ViewModel> createViewModel(fragment: Fragment?, cls: Class<T>?): T {

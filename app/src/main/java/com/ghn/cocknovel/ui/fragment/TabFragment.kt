@@ -46,9 +46,9 @@ class TabFragment : BaseFragment<FragmentTabBinding, RecommendViewModel>() {
 
     override fun initViewObservable() {
 
-        tabcid.let { mViewModel?.project_content(page, it) }
+        tabcid.let { mViewModel.project_content(page, it) }
         val recyclerview_tablist = mutableListOf<TabFrameBean.Data.Data>()
-        mBinding?.fragmentRecyclerview?.layoutManager =
+        mBinding.fragmentRecyclerview.layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
         adapter = object : BaseRecyclerAdapter<TabFrameBean.Data.Data>(recyclerview_tablist) {
@@ -71,9 +71,8 @@ class TabFragment : BaseFragment<FragmentTabBinding, RecommendViewModel>() {
             override val layoutId: Int = R.layout.item_tab
         }
         val controller = LayoutAnimationController(AnimationUtils.loadAnimation(activity, R.anim.animate))
-        mBinding?.fragmentRecyclerview?.layoutAnimation = controller
-        mBinding?.fragmentRecyclerview?.adapter = adapter
-        mViewModel?.mProjectcontent?.observe(this) {
+        mBinding.fragmentRecyclerview.adapter = adapter
+        mViewModel.mProjectcontent.observe(this) {
             adapter?.addData(it.datas)
         }
 

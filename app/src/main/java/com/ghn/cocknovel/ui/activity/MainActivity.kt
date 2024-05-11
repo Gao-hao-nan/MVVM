@@ -22,6 +22,7 @@ import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
 import com.kt.NetworkModel.utils.MVUtils
 
+
 class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
     BottomNavigationView.OnNavigationItemSelectedListener {
     private var preFragment = 0 // 记录上一个被点击的 fragment页面 ，默认值是0
@@ -46,9 +47,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
         //默认显示第一个fragment
         getSupportFragmentManager().beginTransaction()
             .replace(R.id.fl_content, fragmentList!!.get(0)).commit();
-        mBinding?.navView?.setOnNavigationItemSelectedListener(this)
-        mBinding?.mainFlWarn?.setOnClickListener {
-            mBinding?.mainFlWarn?.visibility = View.GONE
+        mBinding.navView.setOnNavigationItemSelectedListener(this)
+        mBinding.mainFlWarn.setOnClickListener {
+            mBinding.mainFlWarn.visibility = View.GONE
         }
         XXPermissions.with(this).permission(Permission.CAMERA)
             .permission(Permission.READ_MEDIA_IMAGES)
@@ -126,7 +127,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_DOWN) {
             if (System.currentTimeMillis() - exitTime > 2000) {
-                mBinding?.container?.let { showMsg("再按一次退出鲸鱼阅读") }
+                mBinding.container?.let { showMsg("再按一次退出鲸鱼阅读") }
                 exitTime = System.currentTimeMillis()
             } else {
                 finish()

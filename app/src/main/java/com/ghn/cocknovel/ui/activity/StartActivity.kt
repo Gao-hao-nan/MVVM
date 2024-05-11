@@ -23,13 +23,13 @@ class StartActivity : BaseActivity<ActivityStartBinding, BookStoreViewModel>() {
     }
 
     override fun initParam() {
-        mBinding?.ivCode?.setImageBitmap(RandomverificationCode.instance?.createBitmap())
-        mBinding?.ivCode?.setOnClickListener {
-            mBinding?.ivCode!!.setImageBitmap(RandomverificationCode.instance?.createBitmap())
+        mBinding.ivCode.setImageBitmap(RandomverificationCode.instance?.createBitmap())
+        mBinding.ivCode.setOnClickListener {
+            mBinding.ivCode.setImageBitmap(RandomverificationCode.instance?.createBitmap())
 
         }
-        mBinding?.btSignIn?.setOnClickListener {
-            mViewModel?.getMain("18507174506")
+        mBinding.btSignIn.setOnClickListener {
+            mViewModel.getMain("18507174506")
 //            if (!TextUtils.isEmpty(mBinding?.startEdtextName?.text.toString()) && !TextUtils.isEmpty(mBinding?.startEdtextPassword?.text.toString())){
 //
 //            }else{

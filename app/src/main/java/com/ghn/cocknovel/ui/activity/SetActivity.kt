@@ -21,7 +21,7 @@ class SetActivity : BaseActivity<ActivitySetBinding, BookStoreViewModel>() {
 
     override fun initParam() {
 
-        mBinding?.titlebar?.setOnTitleBarListener(object : OnTitleBarListener {
+        mBinding.titlebar?.setOnTitleBarListener(object : OnTitleBarListener {
             override fun onLeftClick(titleBar: TitleBar) {
                 finish()
             }

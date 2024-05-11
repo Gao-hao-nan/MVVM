@@ -49,8 +49,8 @@ import java.lang.reflect.ParameterizedType
 @AndroidEntryPoint
 abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppCompatActivity(),
     IBaseView {
-    open var mBinding: V? = null
-    open var mViewModel: VM? = null
+    protected lateinit var mBinding: V
+    protected lateinit var mViewModel: VM
     open var viewModelId = 0
     private var dialog: MaterialDialog? = null
     private var toast: ToastUtils? = null
@@ -101,7 +101,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
                 .build()
             fWview.setOnClickListener {
                 val launchIntent="cn.coderpig.cp_network_capture.ui.activity.NetworkCaptureActivity"
-                mViewModel?.startModelActivity(packageName,launchIntent)
+                mViewModel.startModelActivity(packageName,launchIntent)
 //                val intent = Intent()
 //                intent.setClassName(packageName,launchIntent)
 //                startActivity(intent)
@@ -115,7 +115,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
     private fun registerUIChangeLiveDataCallBack() {
 
         //跳入新页面
-        mViewModel?.getUC()?.getStartActivityEvent()?.observe(this) { params ->
+        mViewModel.getUC()?.getStartActivityEvent()?.observe(this) { params ->
 
             params?.let {
                 val clz = params[CLASS] as Class<*>?
@@ -130,7 +130,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
 
         }
         //包名和类名跳转
-        mViewModel?.getUC()?.getStartModelActivityEvent()?.observe(this) { params ->
+        mViewModel.getUC()?.getStartModelActivityEvent()?.observe(this) { params ->
             params?.let {
                 val clz = params[CLASS]
                 val Packagename = params[CANONICAL_NAME]
@@ -141,31 +141,31 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
             }
         }
 
-        mViewModel?.getUC()?.getFinishResult()?.observe(this) { integer ->
+        mViewModel.getUC()?.getFinishResult()?.observe(this) { integer ->
             integer?.let {
                 setResult(integer)
                 finish()
             }
         }
 
-        mViewModel?.getUC()?.getShowDialog()?.observe(this) {
+        mViewModel.getUC()?.getShowDialog()?.observe(this) {
             showLoading()
         }
 
-        mViewModel?.getUC()?.getDismissDialog()?.observe(this) {
+        mViewModel.getUC()?.getDismissDialog()?.observe(this) {
             dismissLoading()
         }
-        mViewModel?.getUC()?.toastEvent()?.observe(this) {
+        mViewModel.getUC()?.toastEvent()?.observe(this) {
 //            ToastUtils.showShort(it)
             showMsg(it.toString())
         }
         //关闭界面
-        mViewModel?.getUC()?.getFinishEvent()?.observe(this) { finish() }
+        mViewModel.getUC()?.getFinishEvent()?.observe(this) { finish() }
         //关闭上一层
 
-        mViewModel?.getUC()?.getOnBackPressedEvent()?.observe(this) { onBackPressed() }
+        mViewModel.getUC()?.getOnBackPressedEvent()?.observe(this) { onBackPressed() }
 
-        mViewModel?.getUC()?.getSetResultEvent()?.observe(this) { params ->
+        mViewModel.getUC()?.getSetResultEvent()?.observe(this) { params ->
             params?.let {
                 val intent = Intent()
                 if (params.isNotEmpty()) {
@@ -201,13 +201,13 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
         }
         mViewModel = createViewModel(this, modelClass as Class<VM>)
         //关联ViewModel
-        mBinding?.setVariable(viewModelId, mViewModel)
+        mBinding.setVariable(viewModelId, mViewModel)
         //支持LiveData绑定xml，数据改变，UI自动会更新
-        mBinding?.lifecycleOwner = this
+        mBinding.lifecycleOwner = this
         //让ViewModel拥有View的生命周期感应
-        lifecycle.addObserver(mViewModel!!)
+        lifecycle.addObserver(mViewModel)
         //注入RxLifecycle生命周期
-        mViewModel?.injectLifecycleProvider(this)
+        mViewModel.injectLifecycleProvider(this)
 
     }
 
@@ -243,7 +243,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
 
     override fun onDestroy() {
         super.onDestroy()
-        mBinding?.unbind()
+        mBinding.unbind()
     }
 
 
@@ -260,7 +260,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        mViewModel?.onActivityResult(requestCode, resultCode, data)
+        mViewModel.onActivityResult(requestCode, resultCode, data)
     }
 
 
