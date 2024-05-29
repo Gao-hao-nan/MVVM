@@ -127,7 +127,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_DOWN) {
             if (System.currentTimeMillis() - exitTime > 2000) {
-                mBinding.container?.let { showMsg("再按一次退出鲸鱼阅读") }
+                mBinding.container.let { showMsg("再按一次退出鲸鱼阅读") }
                 exitTime = System.currentTimeMillis()
             } else {
                 finish()

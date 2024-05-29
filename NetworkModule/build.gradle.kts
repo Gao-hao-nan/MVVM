@@ -1,7 +1,7 @@
 plugins {
     id("com.android.library")
     id("kotlin-android")
-    id ("dagger.hilt.android.plugin")
+    id("dagger.hilt.android.plugin")
     kotlin("android")
     kotlin("kapt")
 }
@@ -15,11 +15,26 @@ kapt {
 }
 
 android {
-    compileSdk=libs.versions.compileSdk.get().toInt()
+    compileSdk = 34
     defaultConfig {
-        minSdk=libs.versions.minSdk.get().toInt()
-        targetSdk=libs.versions.compileSdk.get().toInt()
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.compileSdk.get().toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            )
+        }
+        getByName("debug") {
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+
+            )
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -70,6 +85,8 @@ dependencies {
     api(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.android.compiler)
 
+}
+
 //    api("com.github.bumptech.glide:glide:4.13.2")
 //    //room数据库
 //    api("androidx.room:room-runtime:2.4.2")
@@ -93,4 +110,4 @@ dependencies {
 //
 //    api("com.afollestad.material-dialogs:core:3.1.1")
 //    api("com.afollestad.material-dialogs:lifecycle:3.1.1")
-}
+//}

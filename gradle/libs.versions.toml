@@ -1,30 +1,30 @@
 [versions]
 compileSdk="33"
 minSdk="21"
-versionCode="1"
+versionCode ="1"
 versionName="1.0.0"
 
 
-agp = "8.1.2"
+agp = "8.1.4"
 kotlin = "1.9.0"
-ktx="2.6.1"
-core-ktx="1.8.0"
+ktx="2.8.0"
+core-ktx="1.13.1"
 
 
-appcompat="1.7.0-alpha02"
-kotlinx-core="1.6.4"
-kotlinx-android="1.7.2"
+appcompat="1.7.0-rc01"
+kotlinx-core="1.7.3"
+kotlinx-android="1.7.3"
 coordinatorlayout="1.2.0"
 constraintlayout="2.1.4"
-material="1.6.1"
+material="1.12.0"
 okhttp3-logging="3.6.0"
 okhttp4="4.10.0"
 retrofit="2.9.0"
-rxjava="2.6.0"
+rxjava="2.9.0"
 rxlifecycle="4.0.2"
 glide="4.13.2"
 room="2.4.2"
-annotations="15.0"
+annotations="24.0.1"
 httpdns="2.2.2"
 dialog-avi="2.1.3"
 dialog-blankj="1.31.0"
@@ -33,7 +33,7 @@ xxpermissions="16.6"
 github-XPopup="2.9.19"
 mmkv="1.3.0"
 dialogs="3.1.1"
-navigation="2.4.1"
+navigation="2.7.7"
 junit="4.13.2"
 ext-junit="1.1.3"
 espresso="3.4.0"
@@ -41,6 +41,10 @@ titlebar="10.0"
 xbanner="androidx_v1.2.6"
 hilt = "2.37"
 liangjingkanji-brv="1.5.8"
+
+
+[metadata]
+
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -86,10 +90,12 @@ dagger-hilt-android={ group = "com.google.dagger", name = "hilt-android", versio
 dagger-hilt-android-compiler={ group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 github-BRV={group = "com.github.liangjingkanji",name="BRV",version.ref="liangjingkanji-brv"}
 
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
+
 
 kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 
