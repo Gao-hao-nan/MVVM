@@ -1,5 +1,6 @@
 [versions]
 compileSdk="33"
+
 minSdk="21"
 versionCode ="1"
 versionName="1.0.0"
@@ -41,12 +42,12 @@ titlebar="10.0"
 xbanner="androidx_v1.2.6"
 hilt = "2.37"
 liangjingkanji-brv="1.5.8"
+easywindow="10.6"
 
-
-[metadata]
 
 
 [libraries]
+
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "ktx" }
 lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "ktx" }
@@ -89,7 +90,7 @@ github-xbanner={ group = "com.github.xiaohaibin", name = "XBanner", version.ref 
 dagger-hilt-android={ group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 dagger-hilt-android-compiler={ group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 github-BRV={group = "com.github.liangjingkanji",name="BRV",version.ref="liangjingkanji-brv"}
-
+github-easywindow = { module = "com.github.getActivity:EasyWindow", version.ref = "easywindow" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

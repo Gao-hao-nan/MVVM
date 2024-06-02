@@ -5,6 +5,7 @@
     android:background="@drawable/flw_back"
     >
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/TvFlw"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="抓包"

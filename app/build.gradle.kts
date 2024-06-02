@@ -16,12 +16,12 @@ kapt {
 android {
 
     namespace = "com.ghn.cocknovel"
-    compileSdk = libs.versions.compileSdk.get().toInt()
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.ghn.cocknovel"
         minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = libs.versions.compileSdk.get().toInt()
+        targetSdk = 34
         versionCode = libs.versions.versionCode.get().toInt()
         versionName = libs.versions.versionName.toString()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -33,8 +33,8 @@ android {
             storePassword = "Cocknovel" // 对应-srcstorepass
             keyAlias = "Cocknovel" //对应-name
             keyPassword = "Cocknovel" // 对应-pass
-            isV1SigningEnabled = true
-            isV2SigningEnabled = true
+//            isV1SigningEnabled = true
+//            isV2SigningEnabled = true
         }
     }
     buildTypes {
@@ -66,12 +66,12 @@ android {
         viewBinding = true
         dataBinding = true
     }
-    packagingOptions {
-        exclude("AndroidManifest.xml")
-    }
-    dexOptions {
-        javaMaxHeapSize = "4g"
-    }
+//    packagingOptions {
+//        exclude("AndroidManifest.xml")
+//    }
+//    dexOptions {
+//        javaMaxHeapSize = "4g"
+//    }
 }
 
 dependencies {

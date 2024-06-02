@@ -5,10 +5,8 @@ plugins {
 
 android {
     namespace="com.example.basemodel"
-    compileSdk=libs.versions.compileSdk.get().toInt()
+    compileSdk = 34
     defaultConfig {
-        minSdk=libs.versions.minSdk.get().toInt()
-        targetSdk=libs.versions.compileSdk.get().toInt()
         testInstrumentationRunner="androidx.test.runner.AndroidJUnitRunner"
 //        consumerProguardFiles="consumer-rules.pro"
     }
@@ -34,5 +32,5 @@ dependencies {
     implementation(libs.dialogs.core)
     implementation(libs.dialogs.lifecycle)
     implementation(libs.github.xpopup)
-    implementation ("com.github.yhaolpz:FloatWindow:1.0.9")
+    implementation (libs.github.easywindow)
 }

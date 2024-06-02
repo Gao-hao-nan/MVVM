@@ -9,8 +9,9 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
-import android.view.animation.BounceInterpolator
+import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentActivity
@@ -24,12 +25,9 @@ import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.BUNDLE
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.CANONICAL_NAME
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.CLASS
 import com.example.basemodel.base.BaseViewModel.Companion.ParameterField.REQUEST
-import com.kt.NetworkModel.App
+import com.hjq.window.EasyWindow
 import com.kt.NetworkModel.utils.ToastUtils
 import com.trello.rxlifecycle4.components.support.RxAppCompatActivity
-import com.yhao.floatwindow.FloatWindow
-import com.yhao.floatwindow.MoveType
-import com.yhao.floatwindow.Screen
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.reflect.ParameterizedType
 
@@ -54,6 +52,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
     open var viewModelId = 0
     private var dialog: MaterialDialog? = null
     private var toast: ToastUtils? = null
+    @RequiresApi(Build.VERSION_CODES.DONUT)
     fun isDebuggable(context: Context): Boolean {
         return try {
             val info = context.applicationInfo
@@ -63,6 +62,8 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
             false
         }
     }
+
+    @RequiresApi(Build.VERSION_CODES.DONUT)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -83,31 +84,26 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : RxAppComp
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS) //隐藏状态栏
         }
         if (isDebuggable(this)) {
-            val fWview=layoutInflater.inflate(R.layout.flw,null)
-
-//            val textView = TextView(applicationContext)
-//            textView.setText("抓包")
-//            textView.setBackgroundColor(Color.RED)
-            FloatWindow
-                .with(App.get())
-                .setView(fWview)
-                .setWidth(Screen.width, 0.2f) //设置悬浮控件宽高
-                .setHeight(Screen.width, 0.2f)
-                .setX(Screen.width, 0.8f)
-                .setY(Screen.height, 0.3f)
-                .setMoveType(MoveType.slide, 100, -100)
-                .setMoveStyle(500, BounceInterpolator())
-                .setDesktopShow(true)
-                .build()
-            fWview.setOnClickListener {
-                val launchIntent="cn.coderpig.cp_network_capture.ui.activity.NetworkCaptureActivity"
-                mViewModel.startModelActivity(packageName,launchIntent)
-//                val intent = Intent()
-//                intent.setClassName(packageName,launchIntent)
-//                startActivity(intent)
-            }
+            EasyWindow.with(this).apply {
+                setContentView(R.layout.flw)
+                // 设置成可拖拽的
+                setDraggable()
+                //向x轴偏移
+                setXOffset(500)
+                // 设置外层是否能被触摸
+                setOutsideTouchable(true)
+                setOnClickListener(
+                    R.id.TvFlw,
+                    EasyWindow.OnClickListener<TextView?> { easyWindow: EasyWindow<*>, view: TextView? ->
+                        val launchIntent =
+                            "cn.coderpig.cp_network_capture.ui.activity.NetworkCaptureActivity"
+                        mViewModel.startModelActivity(packageName, launchIntent)
+                        // 点击这个 View 后消失
+//                        easyWindow.cancel()
+                    })
+            }.show()
         } else {
-            Toast.makeText(this,"apk包类型: ${isDebuggable(this)}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "apk包类型: ${isDebuggable(this)}", Toast.LENGTH_SHORT).show()
         }
     }
 
