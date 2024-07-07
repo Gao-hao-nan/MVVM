@@ -69,7 +69,7 @@ open class RecommendViewModel(application: Application) : BaseViewModel(applicat
 
     open fun getHomeStatus(page:Int) {
         launchOnlyresult({
-            DataService.callback(5, page)
+            DataService.callback(5)
         }, {
 //            homeStatus.addAll(it!!.datas)
             homeStatus.value=it

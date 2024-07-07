@@ -79,11 +79,11 @@ dependencies {
     implementation(libs.jessyan.autosize)
     implementation(libs.dialog.avi.library)
     implementation(libs.dialog.blankj)
-    api(libs.github.brv)
+    api(libs.github.lqdbrv)
     implementation(libs.gencent.mmkv)
     api(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.android.compiler)
-
+    implementation("io.github.scwang90:refresh-header-classics:2.0.5")
 }
 
 //    api("com.github.bumptech.glide:glide:4.13.2")

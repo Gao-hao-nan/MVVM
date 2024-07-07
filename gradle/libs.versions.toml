@@ -89,7 +89,7 @@ github-titlebar={ group = "com.github.getActivity", name = "TitleBar", version.r
 github-xbanner={ group = "com.github.xiaohaibin", name = "XBanner", version.ref = "xbanner" }
 dagger-hilt-android={ group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 dagger-hilt-android-compiler={ group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
-github-BRV={group = "com.github.liangjingkanji",name="BRV",version.ref="liangjingkanji-brv"}
+github-lqdbrv={group = "com.github.liangjingkanji",name="BRV",version.ref="liangjingkanji-brv"}
 github-easywindow = { module = "com.github.getActivity:EasyWindow", version.ref = "easywindow" }
 
 [plugins]

@@ -2,9 +2,12 @@ package com.kt.NetworkModel
 
 import android.app.Application
 import android.content.Context
+import androidx.databinding.library.baseAdapters.BR
 import com.drake.brv.utils.BRV
 import com.kt.NetworkModel.utils.MVUtils
+import com.scwang.smart.refresh.classics.ClassicsAbstract
 import com.scwang.smart.refresh.footer.ClassicsFooter
+import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.header.MaterialHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.tencent.mmkv.MMKV
@@ -38,10 +41,10 @@ open class App : Application() {
             .setSupportSubunits(Subunits.MM)
         MMKV.initialize(this)
         MVUtils.instance
-        BRV.modelId=androidx.databinding.library.baseAdapters.BR._all
+        BRV.modelId=BR._all
         //指定刷新头和尾部
         SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
-            MaterialHeader(context)
+            ClassicsHeader(context)
         }
         SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout ->
             ClassicsFooter(context)

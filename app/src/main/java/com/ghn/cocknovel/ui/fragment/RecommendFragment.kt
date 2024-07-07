@@ -19,6 +19,7 @@ import com.ghn.cocknovel.databinding.ItemHomeBinding
 import com.ghn.cocknovel.viewmodel.RecommendViewModel
 import com.kt.NetworkModel.bean.WBanner
 import com.kt.network.bean.datas
+import com.scwang.smart.refresh.layout.api.RefreshHeader
 import com.stx.xhb.androidx.XBanner
 import com.stx.xhb.androidx.transformers.Transformer
 
@@ -56,12 +57,10 @@ class RecommendFragment : BaseFragment<FragmentRecommendBinding, RecommendViewMo
             //设置轮播的动画，默认情况下一屏多页左右的图片不会缩放，更改动画可以改变轮播的效果，
             //Transformer还有很多效果，感兴趣的朋友可以自行尝试
             mBinding.homexbanner.setPageTransformer(Transformer.Scale)
-            mBinding.homexbanner.loadImage(object : XBanner.XBannerAdapter {
-                override fun loadBanner(banner: XBanner?, model: Any?, view: View?, position: Int) {
-                    Glide.with(this@RecommendFragment).load((model as WBanner.Data).imagePath)
-                        .into(view as ImageView)
-                }
-            })
+            mBinding.homexbanner.loadImage { banner, model, view, position ->
+                Glide.with(this@RecommendFragment).load((model as WBanner.Data).imagePath)
+                    .into(view as ImageView)
+            }
         }
 //        val customExoPlayer = CustomExoPlayer(requireContext())
 //        customExoPlayer.setPlayerView(mBinding.exoPlay!!)
@@ -98,8 +97,6 @@ class RecommendFragment : BaseFragment<FragmentRecommendBinding, RecommendViewMo
 //            }
 //            mBinding.recyclerViewHome.adapter=adapter
 //        }
-
-
         mViewModel.homeStatus.observe(this@RecommendFragment) {
             mBinding.HomePage.onRefresh {
                 mViewModel.getHomeStatus(page)
@@ -111,7 +108,7 @@ class RecommendFragment : BaseFragment<FragmentRecommendBinding, RecommendViewMo
 //                 }, hasMore = {
 //                     false // 此处判断是否显示空布局
 //                 })
-            }.autoRefresh()
+            }
             mBinding.recyclerViewHome.linear().setup {
                 addType<datas>(R.layout.item_home)
                 onBind {
