@@ -23,8 +23,8 @@ interface ApiService {
     /**
      * 首页文章
      */
-    @GET(ApiAddress.CALLBACK)
-    suspend fun callback(): BaseResult<FontDataNew>
+    @GET("article/list/{page}/json")
+    suspend fun callback(@Query("page")page: Int): BaseResult<FontDataNew>
 
     /**
      * 轮播图

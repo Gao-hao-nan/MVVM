@@ -39,7 +39,7 @@ open class BaseResult<T> {
 }
 
 data class FontDataNew(
-    val curPage: Double,
+    val curPage: Int,
     val datas: ArrayList<datas>,
     val offset: Double,
     val over: Boolean,

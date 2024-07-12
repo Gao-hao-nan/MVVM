@@ -101,14 +101,13 @@ class RecommendFragment : BaseFragment<FragmentRecommendBinding, RecommendViewMo
             mBinding.HomePage.onRefresh {
                 mViewModel.getHomeStatus(page)
                 addData(it.datas) {
-                    page < it.curPage
+                    itemCount < it.curPage
                 }
-//                 addData(it.datas, mBinding.recyclerViewHome.bindingAdapter, isEmpty = {
-//                     true // 此处判断是否存在下一页
-//                 }, hasMore = {
-//                     false // 此处判断是否显示空布局
-//                 })
             }
+//            mBinding.HomePage.onLoadMore {
+//                page++
+//                mViewModel.getHomeStatus(page)
+//            }
             mBinding.recyclerViewHome.linear().setup {
                 addType<datas>(R.layout.item_home)
                 onBind {

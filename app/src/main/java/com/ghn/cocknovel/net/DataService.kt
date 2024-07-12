@@ -38,9 +38,9 @@ class DataService {
         /**
          * 首页接口
          */
-        suspend fun callback(host: Int): BaseResult<FontDataNew> {
+        suspend fun callback(host: Int,page: Int): BaseResult<FontDataNew> {
             return RetrofitClient.getInstance(App.get()).getDefault(ApiService::class.java, host)
-                .callback()
+                .callback(page)
         }
 
         /**
