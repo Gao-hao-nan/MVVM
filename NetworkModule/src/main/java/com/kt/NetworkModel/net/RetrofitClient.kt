@@ -56,7 +56,6 @@ class RetrofitClient
         } catch (e: Exception) {
             e.printStackTrace()
         }
-//        captureInterceptor?.let { builder.addInterceptor(it) }
         builder.connectTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
             .writeTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
             .readTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
@@ -82,50 +81,6 @@ class RetrofitClient
             })
         }
         return builder.build()
-        //根据需求添加不同的拦截器
-//        if (optimization) {
-//            //DNS 优化以及 开启缓存、无网拦截
-//            return OkHttpClient.Builder()
-//                .connectTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
-//                .writeTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
-//                .readTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
-//                .connectionPool(ConnectionPool(8, 10, TimeUnit.SECONDS)) //添加这两行代码
-//                .sslSocketFactory(TrustAllCerts.createSSLSocketFactory()!!, TrustAllCerts())
-//                .hostnameVerifier(TrustAllCerts.TrustAllHostnameVerifier())
-//                //alibaba dns优化
-//                .dns(OkHttpDNS.get(context))
-//                .addInterceptor(HTTPDNSInterceptor(context)) //不建议用这种方式，因为大型APP 域名会比较多，假设HTTPS 的话，证书会认证失败
-//                .cache(context?.cacheDir?.let { Cache(it, 50 * 1024 * 1024L) })//缓存目录
-//                .addInterceptor(NoNetworkInterceptor(context))//无网拦截器
-//                .addNetworkInterceptor(LoggingInterceptor().apply {
-//                    isDebug = BuildConfig.DEBUG
-//                    level = Level.BASIC
-//                    type = Platform.INFO
-//                    requestTag = "Request"
-//                    requestTag = "Response"
-//                })
-//                .eventListenerFactory(OkHttpEventListener.FACTORY)
-//                .build()
-//        } else {
-//            //无优化版本
-//            return OkHttpClient.Builder()
-//                .connectTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
-//                .writeTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
-//                .readTimeout(DEFAULT_TIME_OUT.toLong(), TimeUnit.SECONDS)
-//                .connectionPool(ConnectionPool(8, 10, TimeUnit.SECONDS)) //添加这两行代码
-//                .sslSocketFactory(TrustAllCerts.createSSLSocketFactory()!!, TrustAllCerts())
-//                .hostnameVerifier(TrustAllCerts.TrustAllHostnameVerifier())
-//                .dns(OkHttpDNS.get(context))
-//                .addNetworkInterceptor(LoggingInterceptor().apply {
-//                    isDebug = BuildConfig.DEBUG
-//                    level = Level.BASIC
-//                    type = Platform.INFO
-//                    requestTag = "Request"
-//                    requestTag = "Response"
-//                })
-//                .build()
-//        }
-
     }
 
 

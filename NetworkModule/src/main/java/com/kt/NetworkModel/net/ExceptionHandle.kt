@@ -26,57 +26,55 @@ import java.net.ConnectException
 @SuppressLint("StaticFieldLeak")
 object ExceptionHandle {
     private var toast: ToastUtils? = null
+    private fun showToast(message: String) {
+        if (toast == null) {
+            toast = ToastUtils(App.get())
+            toast?.InitToast()
+        }
+        toast?.setText(message)
+        toast?.setGravity(Gravity.CENTER)
+        toast?.show()
+    }
     fun handleException(e: Throwable): ResponseThrowable {
-        var ex: ResponseThrowable
-        if (e is ResponseThrowable) {
-            ex = e
-        } else if (e is HttpException) {
-            ex = ResponseThrowable(ERROR.HTTP_ERROR, e)
-            when (e.code()) {
-                404 -> {
-                    toast=ToastUtils(App.get())
-                    toast?.InitToast()
-                    toast?.setText("网络地址错误。请稍后再试")
-                    toast?.setGravity(Gravity.CENTER)
-                    toast?.show()
-                    ex = ResponseThrowable(ERROR.NOT_FOUND, e)
-                }
-                400 -> {
-                    ex = ResponseThrowable(ERROR.TOKEN_EMPTY, e)
-                }
+        val ex: ResponseThrowable = when (e) {
+            is ResponseThrowable -> e
+            is HttpException -> handleHttpException(e)
+            is JsonParseException, is JSONException, is ParseException, is MalformedJsonException -> {
+                ResponseThrowable(ERROR.PARSE_ERROR, e)
             }
-        } else if (e is JsonParseException
-            || e is JSONException
-            || e is ParseException || e is MalformedJsonException
-        ) {
-            ex = ResponseThrowable(ERROR.PARSE_ERROR, e)
-        } else if (e is ConnectException) {
-            toast=ToastUtils(App.get())
-            toast?.InitToast()
-            toast?.setText("网络连接失败。请稍后再试")
-            toast?.setGravity(Gravity.CENTER)
-            toast?.show()
-            ex = ResponseThrowable(ERROR.NETWORD_ERROR, e)
-        } else if (e is javax.net.ssl.SSLException) {
-            ex = ResponseThrowable(ERROR.SSL_ERROR, e)
-        } else if (e is java.net.SocketTimeoutException) {
-            toast=ToastUtils(App.get())
-            toast?.InitToast()
-            toast?.setText("网络连接失败。请稍后再试")
-            toast?.setGravity(Gravity.CENTER)
-            toast?.show()
-            ex = ResponseThrowable(ERROR.TIMEOUT_ERROR, e)
-
-        } else if (e is java.net.UnknownHostException) {
-            toast=ToastUtils(App.get())
-            toast?.InitToast()
-            toast?.setText("网络连接失败。请稍后再试")
-            toast?.setGravity(Gravity.CENTER)
-            toast?.show()
-            ex = ResponseThrowable(ERROR.TIMEOUT_ERROR, e)
-        } else {
-            ex = if (!e.message.isNullOrEmpty()) ResponseThrowable(1000, e.message!!, e)
-            else ResponseThrowable(ERROR.UNKNOWN, e)
+            is ConnectException -> {
+                showToast("网络连接失败。请稍后再试")
+                ResponseThrowable(ERROR.NETWORD_ERROR, e)
+            }
+            is javax.net.ssl.SSLException -> ResponseThrowable(ERROR.SSL_ERROR, e)
+            is java.net.SocketTimeoutException -> {
+                showToast("网络连接失败。请稍后再试")
+                ResponseThrowable(ERROR.TIMEOUT_ERROR, e)
+            }
+            is java.net.UnknownHostException -> {
+                showToast("网络连接失败。请稍后再试")
+                ResponseThrowable(ERROR.TIMEOUT_ERROR, e)
+            }
+            else -> {
+                if (!e.message.isNullOrEmpty()) ResponseThrowable(1000, e.message!!, e)
+                else ResponseThrowable(ERROR.UNKNOWN, e)
+            }
+        }
+        return ex
+    }
+    private fun handleHttpException(e: HttpException): ResponseThrowable {
+        val ex: ResponseThrowable
+        when (e.code()) {
+            404 -> {
+                showToast("网络地址错误。请稍后再试")
+                ex = ResponseThrowable(ERROR.NOT_FOUND, e)
+            }
+            400 -> {
+                ex = ResponseThrowable(ERROR.TOKEN_EMPTY, e)
+            }
+            else -> {
+                ex = ResponseThrowable(ERROR.HTTP_ERROR, e)
+            }
         }
         return ex
     }
