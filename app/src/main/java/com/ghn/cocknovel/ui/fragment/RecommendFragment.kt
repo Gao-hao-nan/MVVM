@@ -4,14 +4,13 @@ import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import com.bumptech.glide.Glide
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
-import com.example.basemodel.base.BaseFragment
+import com.example.basemodel.base.basefra.BaseFragment
 import com.ghn.cocknovel.BR
 import com.ghn.cocknovel.R
 import com.ghn.cocknovel.databinding.FragmentRecommendBinding
@@ -19,24 +18,18 @@ import com.ghn.cocknovel.databinding.ItemHomeBinding
 import com.ghn.cocknovel.viewmodel.RecommendViewModel
 import com.kt.NetworkModel.bean.WBanner
 import com.kt.network.bean.datas
-import com.scwang.smart.refresh.layout.api.RefreshHeader
-import com.stx.xhb.androidx.XBanner
 import com.stx.xhb.androidx.transformers.Transformer
 
 
 class RecommendFragment : BaseFragment<FragmentRecommendBinding, RecommendViewModel>() {
-    private var page=1
+    private var page = 1
     override fun initVariableId(): Int {
         return BR.mode
     }
 
-    override fun initContentView(
-        inflater: LayoutInflater?,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): Int {
-        return R.layout.fragment_recommend
-    }
+    override fun initContentView(inflater: LayoutInflater, container: ViewGroup?): Int =
+        R.layout.fragment_recommend
+
 
     override fun initParam() {
 
@@ -111,14 +104,14 @@ class RecommendFragment : BaseFragment<FragmentRecommendBinding, RecommendViewMo
             mBinding.recyclerViewHome.linear().setup {
                 addType<datas>(R.layout.item_home)
                 onBind {
-                    val binding=getBinding<ItemHomeBinding>()
-                    val mode=getModel<datas>()
-                    binding.itemHomeAuthor.text="作者: ${mode.shareUser}"
-                    binding.itemHomeTitle.text="标题: ${mode.title}"
-                    binding.itemHomeSource.text="目录名称: ${mode.chapterName}"
-                    binding.itemHomeTime.text="时间: ${mode.niceDate}"
+                    val binding = getBinding<ItemHomeBinding>()
+                    val mode = getModel<datas>()
+                    binding.itemHomeAuthor.text = "作者: ${mode.shareUser}"
+                    binding.itemHomeTitle.text = "标题: ${mode.title}"
+                    binding.itemHomeSource.text = "目录名称: ${mode.chapterName}"
+                    binding.itemHomeTime.text = "时间: ${mode.niceDate}"
                 }
-            }.models=it.datas
+            }.models = it.datas
         }
 
     }

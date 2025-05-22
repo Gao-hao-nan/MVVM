@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.basemodel.base.BaseFragment
+import com.example.basemodel.base.basefra.BaseFragment
 import com.ghn.cocknovel.BR
 import com.ghn.cocknovel.R
 import com.ghn.cocknovel.databinding.FragmentBookstoreBinding
@@ -22,13 +22,7 @@ class BookstoreFragment : BaseFragment<FragmentBookstoreBinding, BookStoreViewMo
         return BR.model
     }
 
-    override fun initContentView(
-        inflater: LayoutInflater?,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): Int {
-        return R.layout.fragment_bookstore
-    }
+    override fun initContentView(inflater: LayoutInflater, container: ViewGroup?): Int =R.layout.fragment_bookstore
 
     override fun initParam() {
 

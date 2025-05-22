@@ -8,7 +8,7 @@ import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
 import android.widget.TextView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.basemodel.base.BaseFragment
+import com.example.basemodel.base.basefra.BaseFragment
 import com.example.basemodel.base.BaseRecyclerAdapter
 import com.ghn.cocknovel.BR
 import com.ghn.cocknovel.R
@@ -32,13 +32,8 @@ class TabFragment : BaseFragment<FragmentTabBinding, RecommendViewModel>() {
         return BR.mode
     }
 
-    override fun initContentView(
-        inflater: LayoutInflater?,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): Int {
-        return R.layout.fragment_tab
-    }
+    override fun initContentView(inflater: LayoutInflater, container: ViewGroup?): Int =R.layout.fragment_tab
+
 
     override fun initParam() {
 

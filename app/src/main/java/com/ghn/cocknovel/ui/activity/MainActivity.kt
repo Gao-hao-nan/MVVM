@@ -7,7 +7,7 @@ import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.example.basemodel.base.BaseActivity
+import com.example.basemodel.base.baseact.BaseActivity
 import com.example.basemodel.base.BaseViewModel
 import com.ghn.cocknovel.BR
 import com.ghn.cocknovel.R
@@ -37,7 +37,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
 
     @SuppressLint("CommitTransaction")
     override fun initParam() {
-
         Log.i("TAG", "initParam: ${MVUtils.getInt("token")}")
         fragmentList = ArrayList()
         fragmentList?.add(BookstoreFragment())
@@ -71,9 +70,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
                     }
                 }
             })
-        showMsgimage("提示", com.example.basemodel.R.mipmap.ic_my_handes)
+        showMsgWithImage("提示", com.example.basemodel.R.mipmap.ic_my_handes)
 
     }
+
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {

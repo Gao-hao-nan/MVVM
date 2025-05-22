@@ -16,7 +16,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
-import com.example.basemodel.base.BaseFragment
+import com.example.basemodel.base.basefra.BaseFragment
 import com.ghn.cocknovel.BR
 import com.ghn.cocknovel.R
 import com.ghn.cocknovel.databinding.FragmentMineBinding
@@ -50,11 +50,8 @@ class MineFragment : BaseFragment<FragmentMineBinding, BookStoreViewModel>() {
         return BR.mode
     }
 
-    override fun initContentView(
-        inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?
-    ): Int {
-        return R.layout.fragment_mine
-    }
+    override fun initContentView(inflater: LayoutInflater, container: ViewGroup?): Int =R.layout.fragment_mine
+
 
     override fun initParam() {
 

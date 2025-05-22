@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.example.basemodel.base.BaseFragment
+import com.example.basemodel.base.basefra.BaseFragment
 import com.ghn.cocknovel.BR
 import com.ghn.cocknovel.R
 import com.ghn.cocknovel.databinding.FragmentClassificationBinding
@@ -20,14 +20,8 @@ class ClassificationFragment : BaseFragment<FragmentClassificationBinding, Recom
         return BR.mode
     }
 
-    override fun initContentView(
-        inflater: LayoutInflater?,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+    override fun initContentView(inflater: LayoutInflater, container: ViewGroup?): Int =R.layout.fragment_classification
 
-    ): Int {
-        return R.layout.fragment_classification
-    }
 
     override fun initParam() {
 

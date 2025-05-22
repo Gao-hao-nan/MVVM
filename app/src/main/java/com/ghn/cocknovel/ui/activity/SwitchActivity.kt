@@ -1,7 +1,7 @@
 package com.ghn.cocknovel.ui.activity
 
 import android.os.Bundle
-import com.example.basemodel.base.BaseActivity
+import com.example.basemodel.base.baseact.BaseActivity
 import com.ghn.cocknovel.BR
 import com.ghn.cocknovel.R
 import com.ghn.cocknovel.databinding.ActivitySwitchBinding
