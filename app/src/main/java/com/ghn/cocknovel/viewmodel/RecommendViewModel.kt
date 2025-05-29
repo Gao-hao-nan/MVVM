@@ -4,7 +4,7 @@ import android.app.Application
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.example.basemodel.base.BaseViewModel
+import com.example.basemodel.base.basevm.BaseViewModel
 import com.ghn.cocknovel.net.DataService
 import com.ghn.cocknovel.ui.activity.WebviewActivity
 import com.google.gson.Gson

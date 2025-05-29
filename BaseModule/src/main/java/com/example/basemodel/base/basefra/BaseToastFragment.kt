@@ -2,7 +2,7 @@ package com.example.basemodel.base.basefra
 
 import android.view.Gravity
 import androidx.databinding.ViewDataBinding
-import com.example.basemodel.base.BaseViewModel
+import com.example.basemodel.base.basevm.BaseViewModel
 import com.kt.NetworkModel.utils.ToastUtils
 
 
@@ -24,7 +24,7 @@ abstract class BaseToastFragment<V : ViewDataBinding, VM : BaseViewModel> :
     override fun initViewObservable() {
         super.initViewObservable()
 
-        mViewModel.getUC()?.toastEvent()?.observe(this) { message ->
+        mViewModel.uc.toastEvent().observe(this) { message ->
             showMsg(message.toString())
         }
     }

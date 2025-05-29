@@ -21,6 +21,11 @@ class SwitchActivity : BaseActivity<ActivitySwitchBinding, BookStoreViewModel>()
     }
 
     override fun initParam() {
+
+
+    }
+
+    override fun initView() {
         mBinding.titleBarSwtich?.setOnTitleBarListener(object : OnTitleBarListener{
             override fun onLeftClick(titleBar: TitleBar) {
                 finish()
@@ -35,6 +40,13 @@ class SwitchActivity : BaseActivity<ActivitySwitchBinding, BookStoreViewModel>()
 
             }
         })
+    }
+
+    override fun initViewObservable() {
+
+    }
+
+    override fun initData() {
 
     }
 }

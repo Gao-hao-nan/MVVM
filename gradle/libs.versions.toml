@@ -1,13 +1,16 @@
 [versions]
 compileSdk="33"
 
+hiltAndroidGradlePlugin="2.38.1"
+kotlinGradlePlugin="2.0.0"
 minSdk="21"
+refreshHeaderClassics="2.0.5"
 versionCode ="1"
 versionName="1.0.0"
 
 
 agp = "8.1.4"
-kotlin = "1.9.0"
+kotlin = "2.0.21"
 ktx="2.8.0"
 core-ktx="1.13.1"
 
@@ -41,13 +44,15 @@ espresso="3.4.0"
 titlebar="10.0"
 xbanner="androidx_v1.2.6"
 hilt = "2.37"
-liangjingkanji-brv="1.5.8"
+liangjingkanji-brv="1.6.1"
 easywindow="10.6"
 
 
 
 [libraries]
 
+hilt-android-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hiltAndroidGradlePlugin" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinGradlePlugin" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "ktx" }
 lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "ktx" }
@@ -60,6 +65,7 @@ androidx-constraintlayout={ group = "androidx.constraintlayout", name = "constra
 google-material={ group = "com.google.android.material", name = "material", version.ref = "material" }
 okhttp-okhttp4-logging={ group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp3-logging" }
 okhttp-okhttp4={ group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp4" }
+refresh-header-classics = { module = "io.github.scwang90:refresh-header-classics", version.ref = "refreshHeaderClassics" }
 retrofit-retrofit2={ group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-retrofit2-gson={ group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 retrofit-retrofit2-scalars={ group = "com.squareup.retrofit2", name = "converter-scalars", version.ref = "retrofit" }

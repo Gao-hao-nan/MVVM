@@ -5,7 +5,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.example.basemodel.R
-import com.example.basemodel.base.BaseViewModel
+import com.example.basemodel.base.basevm.BaseViewModel
 
 
 /**
@@ -26,8 +26,8 @@ abstract class BaseLoadingActivity<V : ViewDataBinding, VM : BaseViewModel> :
     override fun registerUIObservers() {
         super.registerUIObservers()
 
-        mViewModel.getUC()?.getShowDialog()?.observe(this) { showLoading() }
-        mViewModel.getUC()?.getDismissDialog()?.observe(this) { dismissLoading() }
+        mViewModel.uc.getShowDialog().observe(this) { showLoading() }
+        mViewModel.uc.getDismissDialog().observe(this) { dismissLoading() }
     }
 
     protected fun showLoading() {

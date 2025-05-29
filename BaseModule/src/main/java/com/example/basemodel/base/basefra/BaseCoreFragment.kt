@@ -6,13 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.basemodel.base.BaseViewModel
+import com.example.basemodel.base.basevm.BaseViewModel
+import com.example.basemodel.base.baseint.IBaseView
 import com.trello.rxlifecycle4.LifecycleProvider
 import com.trello.rxlifecycle4.components.support.RxFragment
-import java.lang.ref.WeakReference
 import java.lang.reflect.ParameterizedType
 /**
  * @author 浩楠
@@ -25,7 +23,7 @@ import java.lang.reflect.ParameterizedType
  *  描述: TODO TODO 最底层基类 绑定 ViewModel + DataBinding
  */
 abstract class BaseCoreFragment<V : ViewDataBinding, VM : BaseViewModel> :
-    RxFragment(), LifecycleObserver {
+    RxFragment(), IBaseView {
 
     protected lateinit var mBinding: V
     protected lateinit var mViewModel: VM
@@ -48,14 +46,11 @@ abstract class BaseCoreFragment<V : ViewDataBinding, VM : BaseViewModel> :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewModel()
-        initParam()
-        initView()
-        initViewObservable()
-        initData()
+        lifecycle.addObserver(this)
     }
 
     override fun onResume() {
-        super.onResume()
+        super<RxFragment>.onResume()
         if (isFirst) {
             lazyLoadData()
             isFirst = false
@@ -83,19 +78,6 @@ abstract class BaseCoreFragment<V : ViewDataBinding, VM : BaseViewModel> :
         super.onDestroyView()
         mBinding.unbind()
     }
-
-    /** 页面传参 */
-    open fun initParam() {}
-
-    /** 初始化视图逻辑 */
-    open fun initView() {}
-
-    /** ViewModel 观察者绑定 */
-    open fun initViewObservable() {}
-
-    /** 数据加载（如请求接口） */
-    open fun initData() {}
-
-    /** 懒加载：首次可见时触发 */
+//    /** 懒加载：首次可见时触发 */
     open fun lazyLoadData() {}
 }

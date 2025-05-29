@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
-import com.example.basemodel.base.BaseViewModel
+import com.example.basemodel.base.basevm.BaseViewModel
 
 /**
  * @author 浩楠
@@ -19,12 +19,12 @@ import com.example.basemodel.base.BaseViewModel
 abstract class BaseMVVMFragment<V : ViewDataBinding, VM : BaseViewModel> :
     BaseCoreFragment<V, VM>() {
 
+
     override fun initViewObservable() {
-        super.initViewObservable()
         registerUIObservers()
     }
     open fun registerUIObservers() {
-        mViewModel.getUC()?.getStartActivityEvent()?.observe(this) { params ->
+        mViewModel.uc.getStartActivityEvent()?.observe(this) { params ->
             params?.let {
                 val clz = params[BaseViewModel.Companion.ParameterField.CLASS] as Class<*>?
                 val intent = Intent(activity, clz)
@@ -39,7 +39,7 @@ abstract class BaseMVVMFragment<V : ViewDataBinding, VM : BaseViewModel> :
             }
         }
 
-        mViewModel.getUC()?.getStartModelActivityEvent()?.observe(this) {params ->
+        mViewModel.uc.getStartModelActivityEvent()?.observe(this) {params ->
 
             val clz = params?.get(BaseViewModel.Companion.ParameterField.CLASS) as Class<*>?
             val pkg = params?.get(BaseViewModel.Companion.ParameterField.CANONICAL_NAME)
@@ -49,21 +49,21 @@ abstract class BaseMVVMFragment<V : ViewDataBinding, VM : BaseViewModel> :
             this@BaseMVVMFragment.startActivity(intent)
         }
 
-        mViewModel.getUC()?.getFinishEvent()?.observe(this) {
+        mViewModel.uc.getFinishEvent()?.observe(this) {
             activity?.finish()
         }
 
-        mViewModel.getUC()?.getOnBackPressedEvent()?.observe(this) {
+        mViewModel.uc.getOnBackPressedEvent()?.observe(this) {
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
 
-        mViewModel.getUC()?.getSetResultEvent()?.observe(this) { result ->
+        mViewModel.uc.getSetResultEvent()?.observe(this) { result ->
             val intent = Intent()
             result?.forEach { intent.putExtra(it.key, it.value.toString()) }
             activity?.setResult(AppCompatActivity.RESULT_OK, intent)
         }
 
-        mViewModel.getUC()?.getFinishResult()?.observe(this) {
+        mViewModel.uc.getFinishResult()?.observe(this) {
             activity?.setResult(it!!)
             activity?.finish()
         }

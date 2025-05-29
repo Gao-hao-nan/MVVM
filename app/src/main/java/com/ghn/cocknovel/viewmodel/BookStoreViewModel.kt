@@ -6,7 +6,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.basemodel.base.BaseViewModel
+import com.example.basemodel.base.basevm.BaseViewModel
 import com.example.basemodel.base.SingleLiveEvent
 import com.ghn.cocknovel.net.DataService
 import com.ghn.cocknovel.ui.activity.MainActivity

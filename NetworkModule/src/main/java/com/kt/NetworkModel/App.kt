@@ -5,10 +5,8 @@ import android.content.Context
 import androidx.databinding.library.baseAdapters.BR
 import com.drake.brv.utils.BRV
 import com.kt.NetworkModel.utils.MVUtils
-import com.scwang.smart.refresh.classics.ClassicsAbstract
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
-import com.scwang.smart.refresh.header.MaterialHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.tencent.mmkv.MMKV
 import dagger.hilt.android.HiltAndroidApp

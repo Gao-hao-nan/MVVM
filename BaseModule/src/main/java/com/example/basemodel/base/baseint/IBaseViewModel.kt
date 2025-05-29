@@ -1,4 +1,4 @@
-package com.example.basemodel.base
+package com.example.basemodel.base.baseint
 
 import android.content.Intent
 import androidx.lifecycle.Lifecycle

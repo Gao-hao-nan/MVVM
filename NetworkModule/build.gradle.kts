@@ -6,35 +6,12 @@ plugins {
     kotlin("kapt")
 }
 
-//apply plugin: 'kotlin-android'
-//apply plugin: 'kotlin-android-extensions'
-//apply plugin: 'kotlin-kapt'
-
 kapt {
     generateStubs = true
 }
 
 android {
-    compileSdk = 34
-    defaultConfig {
-        minSdk = libs.versions.minSdk.get().toInt()
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
-            )
-        }
-        getByName("debug") {
-            isMinifyEnabled = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
-
-            )
-        }
-    }
+    compileSdk = 35
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -44,7 +21,6 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
         dataBinding = true
         buildConfig = true
     }
@@ -83,30 +59,5 @@ dependencies {
     implementation(libs.gencent.mmkv)
     api(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.android.compiler)
-    implementation("io.github.scwang90:refresh-header-classics:2.0.5")
+    implementation(libs.refresh.header.classics)
 }
-
-//    api("com.github.bumptech.glide:glide:4.13.2")
-//    //room数据库
-//    api("androidx.room:room-runtime:2.4.2")
-//    kapt("androidx.room:room-compiler:2.4.2") // Kotlin 使用 kapt
-//    api("androidx.room:room-ktx:2.4.2")//Coroutines support for Room 协程操作库
-//    implementation("org.jetbrains:annotations:15.0")
-//    //httpDns 优化
-//    implementation("com.aliyun.ams:alicloud-android-httpdns:2.2.2")
-//    //加载中的dialog
-//    implementation("com.wang.avi:library:2.1.3")
-//    implementation("com.blankj:utilcodex:1.31.0")
-    //屏幕适配
-//    implementation("me.jessyan:autosize:1.2.1")
-    // 权限请求框架
-//    api("com.github.getActivity:XXPermissions:16.6")
-//    //弹窗
-//    api("com.github.li-xiaojun:XPopup:2.9.19")
-//    //MMKV
-//    api("com.tencent:mmkv:1.3.0")
-//    api("com.github.coder-pig:CpNetworkCapture:0.0.11")
-//
-//    api("com.afollestad.material-dialogs:core:3.1.1")
-//    api("com.afollestad.material-dialogs:lifecycle:3.1.1")
-//}

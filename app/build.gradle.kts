@@ -10,18 +10,15 @@ kapt {
     useBuildCache = false
 }
 
-
-
-
 android {
 
     namespace = "com.ghn.cocknovel"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.ghn.cocknovel"
         minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = 34
+        targetSdk = 35
         versionCode = libs.versions.versionCode.get().toInt()
         versionName = libs.versions.versionName.toString()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

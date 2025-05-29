@@ -23,6 +23,11 @@ class StartActivity : BaseActivity<ActivityStartBinding, BookStoreViewModel>() {
     }
 
     override fun initParam() {
+
+
+    }
+
+    override fun initView() {
         mBinding.ivCode.setImageBitmap(RandomverificationCode.instance?.createBitmap())
         mBinding.ivCode.setOnClickListener {
             mBinding.ivCode.setImageBitmap(RandomverificationCode.instance?.createBitmap())
@@ -36,8 +41,16 @@ class StartActivity : BaseActivity<ActivityStartBinding, BookStoreViewModel>() {
 //                showMsg("账号密码不能为空")
 //            }
         }
+    }
+
+    override fun initViewObservable() {
+
+    }
+
+    override fun initData() {
         isDeviceFolded(this)
     }
+
     fun isDeviceFolded(context: Context): Boolean {
         val metrics = DisplayMetrics()
         val wm = context.getSystemService(WINDOW_SERVICE) as WindowManager

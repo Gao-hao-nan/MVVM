@@ -10,6 +10,8 @@ import com.ghn.cocknovel.ui.view.MyWebView
 import com.ghn.cocknovel.viewmodel.RecommendViewModel
 
 class WebviewActivity : BaseActivity<ActivityWebviewBinding, RecommendViewModel>() {
+    private var bundle: Bundle? = null
+
     override fun initVariableId(): Int {
         return BR.mode
     }
@@ -19,9 +21,13 @@ class WebviewActivity : BaseActivity<ActivityWebviewBinding, RecommendViewModel>
     }
 
     override fun initParam() {
-        val bundle = this.intent.extras
+       bundle = this.intent.extras
+
+    }
+
+    override fun initView() {
         //webview加载成功和失败的回调
-        mBinding.homeWebview.setOnLoadStatueListener(object :MyWebView.OnWebLoadStatusListener{
+        mBinding.homeWebview.setOnLoadStatueListener(object : MyWebView.OnWebLoadStatusListener {
             override fun error() {
                 Log.i("TAG", "error: 失败")
             }
@@ -37,5 +43,13 @@ class WebviewActivity : BaseActivity<ActivityWebviewBinding, RecommendViewModel>
         })
         bundle?.getString("url")?.let { mBinding.homeWebview.loadUrl(it) }
         mBinding.homeWebview.canGoBack()
+    }
+
+    override fun initViewObservable() {
+
+    }
+
+    override fun initData() {
+
     }
 }

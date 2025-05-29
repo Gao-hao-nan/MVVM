@@ -6,7 +6,8 @@ import android.content.pm.ApplicationInfo
 import android.os.Bundle
 import androidx.databinding.ViewDataBinding
 import com.example.basemodel.R
-import com.example.basemodel.base.BaseViewModel
+import com.example.basemodel.base.basevm.BaseViewModel
+import com.example.basemodel.base.baseint.IBaseView
 import com.hjq.window.EasyWindow
 
 /**
@@ -22,40 +23,16 @@ import com.hjq.window.EasyWindow
  * @Description: TODO 最终对外暴露的基类
  */
 abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> :
-    BaseToastActivity<V, VM>() {
+    BaseToastActivity<V, VM>(), IBaseView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        initParam()             // 参数、Fragment等初始化
-        initView()              // UI视图、adapter等初始化
-        initViewObservable()    // LiveData、Flow 绑定
-        initData()              // 加载数据（网络、本地）
-
+        super<BaseToastActivity>.onCreate(savedInstanceState)
+        lifecycle.addObserver(this)
         if (isDebuggable(this)) {
             enableDebugWindowIfNeeded(mViewModel)
         }
     }
 
-    /**
-     * 初始化传参、Fragment列表等
-     */
-    open fun initParam() {}
-
-    /**
-     * 初始化视图，如 RecyclerView、按钮监听等
-     */
-    open fun initView() {}
-
-    /**
-     * 初始化数据，如请求网络、加载缓存等
-     */
-    open fun initData() {}
-
-    /**
-     * 初始化 ViewModel → View 的观察者（LiveData/Flow）
-     */
-    open fun initViewObservable() {}
 
     @SuppressLint("NewApi")
     private fun isDebuggable(context: Context): Boolean {

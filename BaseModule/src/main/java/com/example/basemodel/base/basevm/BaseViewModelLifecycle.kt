@@ -1,26 +1,16 @@
-package com.example.basemodel.base
+package com.example.basemodel.base.basevm
+
+import com.example.basemodel.base.baseint.IBaseViewModel
+
+
 /**
  * @author 浩楠
- *
- * @date 2023/6/4-16:10
- *
+ * @date 2025/5/29 14:33
  *      _              _           _     _   ____  _             _ _
  *     / \   _ __   __| |_ __ ___ (_) __| | / ___|| |_ _   _  __| (_) ___
  *    / _ \ | '_ \ / _` | '__/ _ \| |/ _` | \___ \| __| | | |/ _` | |/ _ \
  *   / ___ \| | | | (_| | | | (_) | | (_| |  ___) | |_| |_| | (_| | | (_) |
  *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
- * @Description: TODO 通过接口类来实现我们需要的方法，并且便于后期我们对base的新增和修改
+ *  描述: TODO
  */
-interface IBaseView {
-
-    /**
-     * 初始化界面传递参数
-     */
-    fun initParam()
-
-
-    /**
-     * 初始化界面观察者的监听
-     */
-    fun initViewObservable()
-}
+interface BaseViewModelLifecycle : IBaseViewModel

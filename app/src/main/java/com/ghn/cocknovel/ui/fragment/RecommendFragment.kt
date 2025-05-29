@@ -35,11 +35,17 @@ class RecommendFragment : BaseFragment<FragmentRecommendBinding, RecommendViewMo
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    @SuppressLint("CheckResult", "SetTextI18n")
-    override fun initViewObservable() {
+    override fun initView() {
+
+    }
+
+    override fun initData() {
         mViewModel.getBanner()
         mViewModel.flowbanner()
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun initViewObservable() {
         mViewModel.mBanner.observe(this) {
             mBinding.homexbanner.setBannerData(it)
             //刷新数据之后，需要重新设置是否支持自动轮播

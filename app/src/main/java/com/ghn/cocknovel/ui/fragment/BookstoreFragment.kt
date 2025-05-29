@@ -28,7 +28,11 @@ class BookstoreFragment : BaseFragment<FragmentBookstoreBinding, BookStoreViewMo
 
     }
 
-    override fun initViewObservable() {
+    override fun initView() {
+
+    }
+
+    override fun initData() {
         fragmentList.clear()
         titles.clear()
         fragmentList.add(RecommendFragment())
@@ -37,7 +41,6 @@ class BookstoreFragment : BaseFragment<FragmentBookstoreBinding, BookStoreViewMo
         titles.add("推荐")
         titles.add("男生")
         titles.add("女生")
-
         mBinding.viewpage.adapter=
             activity.let { TabLayoutAdapter(it!!.supportFragmentManager,fragmentList,titles) }
         mBinding.mainTab.setupWithViewPager( mBinding.viewpage)
@@ -57,5 +60,9 @@ class BookstoreFragment : BaseFragment<FragmentBookstoreBinding, BookStoreViewMo
                 (tab.view as View).scaleY = 1.5f
             }
         })
+    }
+
+    override fun initViewObservable() {
+
     }
 }

@@ -23,7 +23,13 @@ class BoyFragment : BaseFragment<FragmentBoyBinding, RecommendViewModel>(){
 
     }
 
-    @SuppressLint("ObjectAnimatorBinding")
+    override fun initView() {
+
+    }
+
+    override fun initData() {
+    }
+
     override fun initViewObservable() {
     }
 }

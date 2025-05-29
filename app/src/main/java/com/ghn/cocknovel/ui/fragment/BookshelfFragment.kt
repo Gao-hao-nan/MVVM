@@ -22,6 +22,14 @@ class BookshelfFragment() : BaseFragment<FragmentBookshelfBinding, RecommendView
     override fun initParam() {
     }
 
+    override fun initView() {
+
+    }
+
+    override fun initData() {
+
+    }
+
     override fun initViewObservable() {
 
 //        val RecommList = mutableListOf<datas>()

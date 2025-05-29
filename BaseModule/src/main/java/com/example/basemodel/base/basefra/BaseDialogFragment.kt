@@ -5,7 +5,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.example.basemodel.R
-import com.example.basemodel.base.BaseViewModel
+import com.example.basemodel.base.basevm.BaseViewModel
 
 
 /**
@@ -26,11 +26,11 @@ abstract class BaseDialogFragment<V : ViewDataBinding, VM : BaseViewModel> :
     override fun initViewObservable() {
         super.initViewObservable()
 
-        mViewModel.getUC()?.getShowDialog()?.observe(this) {
+        mViewModel.uc.getShowDialog().observe(this) {
             showLoading()
         }
 
-        mViewModel.getUC()?.getDismissDialog()?.observe(this) {
+        mViewModel.uc.getDismissDialog().observe(this) {
             dismissLoading()
         }
     }

@@ -5,12 +5,7 @@ plugins {
 
 android {
     namespace="com.example.basemodel"
-    compileSdk = 34
-    defaultConfig {
-        testInstrumentationRunner="androidx.test.runner.AndroidJUnitRunner"
-//        consumerProguardFiles="consumer-rules.pro"
-    }
-
+    compileSdk = 35
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8

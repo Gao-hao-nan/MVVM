@@ -21,7 +21,10 @@ class SetActivity : BaseActivity<ActivitySetBinding, BookStoreViewModel>() {
 
     override fun initParam() {
 
-        mBinding.titlebar?.setOnTitleBarListener(object : OnTitleBarListener {
+    }
+
+    override fun initView() {
+        mBinding.titlebar.setOnTitleBarListener(object : OnTitleBarListener {
             override fun onLeftClick(titleBar: TitleBar) {
                 finish()
             }
@@ -34,5 +37,13 @@ class SetActivity : BaseActivity<ActivitySetBinding, BookStoreViewModel>() {
 
             }
         })
+    }
+
+    override fun initViewObservable() {
+
+    }
+
+    override fun initData() {
+
     }
 }

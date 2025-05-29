@@ -57,18 +57,26 @@ class MineFragment : BaseFragment<FragmentMineBinding, BookStoreViewModel>() {
 
     }
 
-    override fun initViewObservable() {
+    override fun initView() {
+
+        mBinding.rounIcon.setOnClickListener {
+            // 打开自定义dialog
+//            openDialog()
+//            context.let { it1 -> ButtomDialogView(it1,true,true).show() }
+        }
+    }
+
+    override fun initData() {
         mBinding.let {
             Glide.with(this).load(com.example.basemodel.R.mipmap.ic_my_handes)
                 .apply(RequestOptions.bitmapTransform(CircleCrop()))
                 .transition(DrawableTransitionOptions.withCrossFade(500))
                 .into(it.rounIcon)
         }
-        mBinding.rounIcon.setOnClickListener {
-            // 打开自定义dialog
-//            openDialog()
-//            context.let { it1 -> ButtomDialogView(it1,true,true).show() }
-        }
+    }
+
+    override fun initViewObservable() {
+
     }
 
 //    private fun openDialog() {

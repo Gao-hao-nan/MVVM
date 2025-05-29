@@ -26,7 +26,7 @@ dependencyResolutionManagement {
         maven { setUrl("https://jitpack.io") }
     }
 }
-rootProject.name = "WhaleReading"
+rootProject.name = "KotlinMvvm"
 include(":app")
 include(":NetworkModule")
 include(":BaseModule")

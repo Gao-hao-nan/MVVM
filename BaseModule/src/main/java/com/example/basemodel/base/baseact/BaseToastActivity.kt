@@ -2,7 +2,7 @@ package com.example.basemodel.base.baseact
 
 import android.view.Gravity
 import androidx.databinding.ViewDataBinding
-import com.example.basemodel.base.BaseViewModel
+import com.example.basemodel.base.basevm.BaseViewModel
 import com.kt.NetworkModel.utils.ToastUtils
 
 
@@ -23,7 +23,7 @@ abstract class BaseToastActivity<V : ViewDataBinding, VM : BaseViewModel> :
 
     override fun registerUIObservers() {
         super.registerUIObservers()
-        mViewModel.getUC()?.toastEvent()?.observe(this) { showMsg(it.toString()) }
+        mViewModel.uc.toastEvent().observe(this) { showMsg(it.toString()) }
     }
 
     protected fun showMsg(msg: String) {

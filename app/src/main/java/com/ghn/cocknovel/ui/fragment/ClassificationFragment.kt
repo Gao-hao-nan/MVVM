@@ -27,13 +27,21 @@ class ClassificationFragment : BaseFragment<FragmentClassificationBinding, Recom
 
     }
 
-    override fun initViewObservable() {
+    override fun initView() {
         //初始化fragmentlist
         fragmentList=ArrayList()
         //viewpage2禁止预加载
         mBinding.ficationPage.offscreenPageLimit = ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
+    }
 
+    override fun initData() {
         mViewModel.getProject()
+
+    }
+
+    override fun initViewObservable() {
+
+
         mViewModel.mProject.observe(this) {
             for (i in 0 until it.size) {
                 mBinding.ficationTab.addTab(mBinding.ficationTab.newTab().setText(it[i].name))

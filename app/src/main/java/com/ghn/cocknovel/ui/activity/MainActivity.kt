@@ -1,14 +1,12 @@
 package com.ghn.cocknovel.ui.activity
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.basemodel.base.baseact.BaseActivity
-import com.example.basemodel.base.BaseViewModel
+import com.example.basemodel.base.basevm.BaseViewModel
 import com.ghn.cocknovel.BR
 import com.ghn.cocknovel.R
 import com.ghn.cocknovel.databinding.ActivityMainBinding
@@ -20,7 +18,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
-import com.kt.NetworkModel.utils.MVUtils
 
 
 class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
@@ -35,21 +32,25 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
         return R.layout.activity_main
     }
 
-    @SuppressLint("CommitTransaction")
     override fun initParam() {
-        Log.i("TAG", "initParam: ${MVUtils.getInt("token")}")
+
+    }
+
+    override fun initView() {
+
+    }
+
+    override fun initViewObservable() {
+
+    }
+
+    override fun initData() {
         fragmentList = ArrayList()
         fragmentList?.add(BookstoreFragment())
         fragmentList?.add(ClassificationFragment())
         fragmentList?.add(BookshelfFragment())
         fragmentList?.add(MineFragment())
-        //默认显示第一个fragment
-        getSupportFragmentManager().beginTransaction()
-            .replace(R.id.fl_content, fragmentList!!.get(0)).commit();
-        mBinding.navView.setOnNavigationItemSelectedListener(this)
-        mBinding.mainFlWarn.setOnClickListener {
-            mBinding.mainFlWarn.visibility = View.GONE
-        }
+
         XXPermissions.with(this).permission(Permission.CAMERA)
             .permission(Permission.READ_MEDIA_IMAGES)
             .request(object : OnPermissionCallback {
@@ -71,7 +72,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
                 }
             })
         showMsgWithImage("提示", com.example.basemodel.R.mipmap.ic_my_handes)
-
+        getSupportFragmentManager().beginTransaction()
+            .replace(R.id.fl_content, fragmentList!!.get(0)).commit();
+        mBinding.navView.setOnNavigationItemSelectedListener(this)
+        mBinding.mainFlWarn.setOnClickListener {
+            mBinding.mainFlWarn.visibility = View.GONE
+        }
     }
 
 
