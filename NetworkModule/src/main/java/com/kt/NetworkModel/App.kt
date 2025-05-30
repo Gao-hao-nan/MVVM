@@ -3,12 +3,16 @@ package com.kt.NetworkModel
 import android.app.Application
 import android.content.Context
 import androidx.databinding.library.baseAdapters.BR
+import androidx.multidex.MultiDex
+import androidx.multidex.MultiDexApplication
 import com.drake.brv.utils.BRV
 import com.kt.NetworkModel.utils.MVUtils
+import com.kt.ktmvvm.lib.BuildConfig
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.tencent.mmkv.MMKV
+import com.therouter.TheRouter
 import dagger.hilt.android.HiltAndroidApp
 import me.jessyan.autosize.AutoSize
 import me.jessyan.autosize.AutoSizeConfig
@@ -26,20 +30,31 @@ import me.jessyan.autosize.unit.Subunits
  *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
  * 描述:
  */
-@HiltAndroidApp
-open class App : Application() {
+open class App : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+        this.initAuto()
+        this.initMMkv()
+        this.initAdp()
+    }
+
+    private fun initAuto() {
         AutoSize.initCompatMultiProcess(this);
         AutoSize.checkAndInit(this);
         AutoSizeConfig.getInstance().setCustomFragment(true).setExcludeFontScale(true)
             .setPrivateFontScale(0.8f).setLog(false).setBaseOnWidth(true).setUseDeviceSize(true)
             .getUnitsManager().setSupportDP(true).setDesignSize(2160F, 3840F).setSupportSP(true)
             .setSupportSubunits(Subunits.MM)
+    }
+
+    private fun initMMkv() {
         MMKV.initialize(this)
         MVUtils.instance
-        BRV.modelId=BR._all
+    }
+
+    private fun initAdp() {
+        BRV.modelId = BR._all
         //指定刷新头和尾部
         SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
             ClassicsHeader(context)
@@ -47,20 +62,14 @@ open class App : Application() {
         SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout ->
             ClassicsFooter(context)
         }
-
     }
-
-    /**
-     * 更换王漢宗勘亭流繁
-     */
-    open fun changeTTF() {
-//        ChangeDefaultFontUtils.setDefaultFont(this, "SERIF", "fonts/wangmozongkantingliufan.ttf");
-    }
-
 
     override fun attachBaseContext(base: Context?) {
+        TheRouter.isDebug = BuildConfig.DEBUG
         super.attachBaseContext(base)
+        MultiDex.install(this)
         instance = this
+        TheRouter.init(this)
     }
 
 

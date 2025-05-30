@@ -49,7 +49,6 @@ dependencies {
     api(libs.github.glide)
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.runtime)
-//    kapt(libs.androidx.room.comliler)
     implementation(libs.jetbrains.annotations)
     implementation(libs.aliyun.httpdns)
     implementation(libs.jessyan.autosize)
@@ -60,4 +59,8 @@ dependencies {
     api(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.android.compiler)
     implementation(libs.refresh.header.classics)
+
+    kapt (libs.apt)
+    api(libs.router)
+    implementation(libs.multidex)
 }

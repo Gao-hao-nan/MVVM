@@ -87,6 +87,7 @@ dependencies {
     implementation(libs.github.titlebar)
     implementation(libs.github.xbanner)
     implementation(libs.github.xxPermissions)
+
     // ExoPlayer 核心库
     implementation("com.google.android.exoplayer:exoplayer-core:2.15.0")
     // ExoPlayer UI 控件库
@@ -96,14 +97,4 @@ dependencies {
     implementation("com.google.android.exoplayer:exoplayer-hls:2.15.0")
     implementation("io.github.cymchad:BaseRecyclerViewAdapterHelper4:4.1.4")
 }
-//android.applicationVariants.all {
-//    variant ->
-//        variant.outputs.all { output ->
-////            def date = new Date().format("yyMMdd", TimeZone.getTimeZone("GMT+08"))
-//            if (variant.buildType.name == 'debug'){
-//                output.outputFileName = "鲸鱼阅读_debug.apk"
-//            }else if (variant.buildType.name == 'release'){
-//                output.outputFileName = "鲸鱼阅读_release.apk"
-//            }
-//        }
-//}
+

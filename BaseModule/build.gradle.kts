@@ -2,7 +2,6 @@ plugins {
     id ("com.android.library")
     id ("org.jetbrains.kotlin.android")
 }
-
 android {
     namespace="com.example.basemodel"
     compileSdk = 35
@@ -28,4 +27,6 @@ dependencies {
     implementation(libs.dialogs.lifecycle)
     implementation(libs.github.xpopup)
     implementation (libs.github.easywindow)
+
+
 }

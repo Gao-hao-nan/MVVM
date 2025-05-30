@@ -38,9 +38,9 @@ class BookstoreFragment : BaseFragment<FragmentBookstoreBinding, BookStoreViewMo
         fragmentList.add(RecommendFragment())
         fragmentList.add(BoyFragment())
         fragmentList.add(GirlFragment())
-        titles.add("推荐")
-        titles.add("男生")
-        titles.add("女生")
+        titles.add("数据页面")
+        titles.add("路由页面")
+        titles.add("空")
         mBinding.viewpage.adapter=
             activity.let { TabLayoutAdapter(it!!.supportFragmentManager,fragmentList,titles) }
         mBinding.mainTab.setupWithViewPager( mBinding.viewpage)

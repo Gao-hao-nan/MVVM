@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.basemodel.base.basefra.BaseFragment
+import com.example.basemodel.base.router.AppRouter
+import com.example.basemodel.base.router.RouterPath
 import com.ghn.cocknovel.BR
 import com.ghn.cocknovel.R
 import com.ghn.cocknovel.databinding.FragmentBoyBinding
@@ -24,7 +26,12 @@ class BoyFragment : BaseFragment<FragmentBoyBinding, RecommendViewModel>(){
     }
 
     override fun initView() {
-
+        mBinding.TvNav.setOnClickListener {
+            AppRouter.goTo(RouterPath.Main.HOME)
+        }
+        mBinding.TvNav.setOnClickListener {
+           AppRouter.geToKey()
+        }
     }
 
     override fun initData() {
