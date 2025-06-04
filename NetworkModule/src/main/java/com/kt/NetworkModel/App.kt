@@ -1,6 +1,7 @@
 package com.kt.NetworkModel
 
-import android.app.Application
+import android.annotation.SuppressLint
+import android.app.ActivityManager
 import android.content.Context
 import androidx.databinding.library.baseAdapters.BR
 import androidx.multidex.MultiDex
@@ -13,10 +14,11 @@ import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.tencent.mmkv.MMKV
 import com.therouter.TheRouter
-import dagger.hilt.android.HiltAndroidApp
 import me.jessyan.autosize.AutoSize
 import me.jessyan.autosize.AutoSizeConfig
 import me.jessyan.autosize.unit.Subunits
+import android.os.Process
+
 
 /**
  * @author 浩楠
@@ -33,18 +35,30 @@ import me.jessyan.autosize.unit.Subunits
 open class App : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
-        instance = this
-        this.initAuto()
-        this.initMMkv()
-        this.initAdp()
+        if (isMainProcess()) {
+            instance = this
+            this.initAuto()
+            this.initMMkv()
+            this.initAdp()
+            TheRouter.init(this)
+        }
     }
+
+    @SuppressLint("WrongConstant", "NewApi")
+    fun isMainProcess(): Boolean {
+        val pid = Process.myPid()
+        val activityManager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val processName = activityManager.runningAppProcesses?.firstOrNull { it.pid == pid }?.processName
+        return processName == packageName
+    }
+
 
     private fun initAuto() {
         AutoSize.initCompatMultiProcess(this);
-        AutoSize.checkAndInit(this);
+        AutoSize.checkAndInit(this)
         AutoSizeConfig.getInstance().setCustomFragment(true).setExcludeFontScale(true)
             .setPrivateFontScale(0.8f).setLog(false).setBaseOnWidth(true).setUseDeviceSize(true)
-            .getUnitsManager().setSupportDP(true).setDesignSize(2160F, 3840F).setSupportSP(true)
+            .unitsManager.setSupportDP(true).setDesignSize(2160F, 3840F).setSupportSP(true)
             .setSupportSubunits(Subunits.MM)
     }
 
@@ -69,15 +83,15 @@ open class App : MultiDexApplication() {
         super.attachBaseContext(base)
         MultiDex.install(this)
         instance = this
-        TheRouter.init(this)
+
     }
 
 
     companion object {
-        private var instance: Application? = null
-        fun get(): App {
-            return instance as App
-        }
+        private lateinit var instance: App
+
+        fun get(): App = instance
+        fun context(): Context = instance.applicationContext
 
     }
 }

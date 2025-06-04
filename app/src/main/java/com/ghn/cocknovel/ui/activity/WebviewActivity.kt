@@ -3,14 +3,21 @@ package com.ghn.cocknovel.ui.activity
 import android.os.Bundle
 import android.util.Log
 import com.example.basemodel.base.baseact.BaseActivity
+import com.example.basemodel.base.router.RouterParams
+import com.example.basemodel.base.router.RouterPath
 import com.ghn.cocknovel.BR
 import com.ghn.cocknovel.R
 import com.ghn.cocknovel.databinding.ActivityWebviewBinding
 import com.ghn.cocknovel.ui.view.MyWebView
 import com.ghn.cocknovel.viewmodel.RecommendViewModel
+import com.therouter.router.Autowired
+import com.therouter.router.Route
 
+@Route(path = RouterPath.Web.WEBVIEW)
 class WebviewActivity : BaseActivity<ActivityWebviewBinding, RecommendViewModel>() {
-    private var bundle: Bundle? = null
+
+    @Autowired(name = RouterParams.KEY_WBE_URL)
+    lateinit var webUrl: String
 
     override fun initVariableId(): Int {
         return BR.mode
@@ -21,7 +28,6 @@ class WebviewActivity : BaseActivity<ActivityWebviewBinding, RecommendViewModel>
     }
 
     override fun initParam() {
-       bundle = this.intent.extras
 
     }
 
@@ -41,7 +47,7 @@ class WebviewActivity : BaseActivity<ActivityWebviewBinding, RecommendViewModel>
             }
 
         })
-        bundle?.getString("url")?.let { mBinding.homeWebview.loadUrl(it) }
+        mBinding.homeWebview.loadUrl(webUrl)
         mBinding.homeWebview.canGoBack()
     }
 

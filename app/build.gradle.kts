@@ -87,6 +87,7 @@ dependencies {
     implementation(libs.github.titlebar)
     implementation(libs.github.xbanner)
     implementation(libs.github.xxPermissions)
+    kapt (libs.apt)
 
     // ExoPlayer 核心库
     implementation("com.google.android.exoplayer:exoplayer-core:2.15.0")

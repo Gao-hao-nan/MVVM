@@ -60,7 +60,7 @@ dependencies {
     kapt(libs.dagger.hilt.android.compiler)
     implementation(libs.refresh.header.classics)
 
-    kapt (libs.apt)
+
     api(libs.router)
     implementation(libs.multidex)
 }

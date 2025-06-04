@@ -2,6 +2,7 @@ package com.ghn.cocknovel.ui.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.basemodel.base.basefra.BaseFragment
@@ -11,6 +12,7 @@ import com.ghn.cocknovel.BR
 import com.ghn.cocknovel.R
 import com.ghn.cocknovel.databinding.FragmentBoyBinding
 import com.ghn.cocknovel.viewmodel.RecommendViewModel
+import com.therouter.TheRouter
 
 
 class BoyFragment : BaseFragment<FragmentBoyBinding, RecommendViewModel>(){
@@ -29,8 +31,11 @@ class BoyFragment : BaseFragment<FragmentBoyBinding, RecommendViewModel>(){
         mBinding.TvNav.setOnClickListener {
             AppRouter.goTo(RouterPath.Main.HOME)
         }
-        mBinding.TvNav.setOnClickListener {
+        mBinding.TvNavElse.setOnClickListener {
            AppRouter.geToKey()
+        }
+        mBinding.TvNavKey.setOnClickListener {
+            AppRouter.goToProfile("https://www.baidu.com/")
         }
     }
 

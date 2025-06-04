@@ -12,7 +12,7 @@ package com.example.basemodel.base.router
  *  描述: TODO 统一管理参数 key（可以不这么写）
  */
 object RouterParams {
-    const val KEY_USER_ID = "user_id"
+    const val KEY_WBE_URL = "web_url"
     const val KEY_USERNAME = "username"
     const val KEY_TOKEN = "token"
 }

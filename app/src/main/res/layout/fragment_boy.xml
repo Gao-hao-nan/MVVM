@@ -17,6 +17,12 @@
             android:text="路由跳转" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/TvNavElse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="路由的其他函数跳转" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/TvNavKey"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

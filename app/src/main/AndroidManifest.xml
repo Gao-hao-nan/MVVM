@@ -24,6 +24,8 @@
         android:theme="@style/Theme.Cocknovel"
         android:enableOnBackInvokedCallback="true"
         tools:targetApi="31">
+        <activity android:name=".ui.activity.UserKeyActivity" android:exported="false"/>
+        <activity android:name=".ui.activity.HomeActivity" android:exported="false"/>
         <activity
             android:name=".ui.activity.WebviewActivity"
             android:exported="false" />

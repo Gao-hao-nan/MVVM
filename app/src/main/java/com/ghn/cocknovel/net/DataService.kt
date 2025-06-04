@@ -31,7 +31,7 @@ class DataService {
             host: Int,
             phoneNumber: String
         ): BaseResult<Any> {
-            return RetrofitClient.getInstance(App.get()).getDefault(ApiService::class.java, host)
+            return RetrofitClient.getInstance(App.context()).getDefault(ApiService::class.java, host)
                 .Login(phoneNumber)
         }
 
@@ -39,7 +39,7 @@ class DataService {
          * 首页接口
          */
         suspend fun callback(host: Int,page: Int): BaseResult<FontDataNew> {
-            return RetrofitClient.getInstance(App.get()).getDefault(ApiService::class.java, host)
+            return RetrofitClient.getInstance(App.context()).getDefault(ApiService::class.java, host)
                 .callback(page)
         }
 
@@ -47,7 +47,7 @@ class DataService {
          * banner
          */
         suspend fun wbanner(host: Int): BaseResult<MutableList<WBanner.Data>> {
-            return RetrofitClient.getInstance(App.get()).getDefault(ApiService::class.java, host)
+            return RetrofitClient.getInstance(App.context()).getDefault(ApiService::class.java, host)
                 .banner()
         }
 
@@ -55,7 +55,7 @@ class DataService {
          * 项目分类
          */
         suspend fun project(host: Int): BaseResult<MutableList<ProjectBean.Data>> {
-            return RetrofitClient.getInstance(App.get()).getDefault(ApiService::class.java, host)
+            return RetrofitClient.getInstance(App.context()).getDefault(ApiService::class.java, host)
                 .project()
         }
 
@@ -63,7 +63,7 @@ class DataService {
          * 项目分类的详情
          */
         suspend fun project_content(host: Int, page: Int, cid: Int): BaseResult<TabFrameBean.Data> {
-            return RetrofitClient.getInstance(App.get()).getDefault(ApiService::class.java, host)
+            return RetrofitClient.getInstance(App.context()).getDefault(ApiService::class.java, host)
                 .project_content(page, cid)
         }
 
@@ -71,7 +71,7 @@ class DataService {
          * 下载
          */
         suspend fun download(host: Int, url: String): Any? {
-            return RetrofitClient.getInstance(App.get()).getDefault(ApiService::class.java, host)
+            return RetrofitClient.getInstance(App.context()).getDefault(ApiService::class.java, host)
                 .downloadFile(url)
         }
     }

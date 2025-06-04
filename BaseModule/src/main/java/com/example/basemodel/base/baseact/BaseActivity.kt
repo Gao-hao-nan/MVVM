@@ -9,6 +9,7 @@ import com.example.basemodel.R
 import com.example.basemodel.base.basevm.BaseViewModel
 import com.example.basemodel.base.baseint.IBaseView
 import com.hjq.window.EasyWindow
+import com.therouter.TheRouter
 
 /**
  * @author 浩楠
@@ -26,7 +27,11 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> :
     BaseToastActivity<V, VM>(), IBaseView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super<BaseToastActivity>.onCreate(savedInstanceState)
+
+
+
         lifecycle.addObserver(this)
         if (isDebuggable(this)) {
             enableDebugWindowIfNeeded(mViewModel)

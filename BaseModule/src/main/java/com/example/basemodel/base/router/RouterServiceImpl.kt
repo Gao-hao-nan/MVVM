@@ -23,9 +23,9 @@ class RouterServiceImpl : RouterService {
         TheRouter.build(RouterPath.User.UserKey).navigation()
     }
 
-    override fun goToProfile(userId: String) {
-        TheRouter.build(RouterPath.Main.HOME)
-            .withString(RouterParams.KEY_USER_ID, userId)
+    override fun goToProfile(weburl: String) {
+        TheRouter.build(RouterPath.Web.WEBVIEW)
+            .withString(RouterParams.KEY_WBE_URL, weburl)
             .navigation()
     }
 

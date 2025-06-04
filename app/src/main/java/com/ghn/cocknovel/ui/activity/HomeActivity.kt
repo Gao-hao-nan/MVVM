@@ -1,6 +1,7 @@
 package com.ghn.cocknovel.ui.activity
 
 import android.os.Bundle
+import android.util.Log
 import com.example.basemodel.base.baseact.BaseActivity
 import com.example.basemodel.base.basevm.BaseViewModel
 import com.example.basemodel.base.router.RouterPath
@@ -8,7 +9,6 @@ import com.ghn.cocknovel.BR
 import com.ghn.cocknovel.R
 import com.ghn.cocknovel.databinding.HomeActivityBinding
 import com.therouter.router.Route
-import retrofit2.http.Path
 
 
 /**
@@ -22,10 +22,15 @@ import retrofit2.http.Path
  *  描述: TODO
  */
 @Route(path = RouterPath.Main.HOME)
-class HomeActivity:BaseActivity<HomeActivityBinding,BaseViewModel> (){
-    override fun initVariableId(): Int  = BR.mode
+class HomeActivity : BaseActivity<HomeActivityBinding, BaseViewModel>() {
+    override fun initVariableId(): Int = BR.mode
 
     override fun initContentView(savedInstanceState: Bundle?): Int = R.layout.home_activity
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.i("Route", "跳转过来了")
+    }
 
     override fun initParam() {
     }

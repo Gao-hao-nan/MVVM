@@ -13,7 +13,7 @@ package com.example.basemodel.base.router
  */
 object RouterPath {
     object Main {
-        const val HOME = "/main/home"
+        const val HOME = "/home/home"
     }
 
     object User {
