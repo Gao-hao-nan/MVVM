@@ -72,8 +72,8 @@ android {
 }
 
 dependencies {
-    implementation(project(mapOf("path" to ":BaseModule")))
-    implementation(project(mapOf("path" to ":NetworkModule")))
+
+    implementation(project(mapOf("path" to ":CommonModule")))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
