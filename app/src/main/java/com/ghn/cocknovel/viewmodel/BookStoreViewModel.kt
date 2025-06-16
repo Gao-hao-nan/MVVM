@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.basemodel.base.basevm.BaseViewModel
@@ -12,6 +13,8 @@ import com.ghn.cocknovel.net.DataService
 import com.ghn.cocknovel.ui.activity.MainActivity
 import com.ghn.cocknovel.ui.activity.SetActivity
 import com.ghn.cocknovel.ui.activity.SwitchActivity
+import com.ghn.eventmodule.EventChannel
+import com.ghn.eventmodule.collectIn
 import com.kt.NetworkModel.bean.LoginBean
 
 /**
@@ -26,10 +29,31 @@ import com.kt.NetworkModel.bean.LoginBean
  *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
  * 描述:
  */
+
+sealed class GlobalEvent {
+    data class TokenExpired(val reason: String) : GlobalEvent()
+    object ForceLogout : GlobalEvent()
+    data class AppLanguageChanged(val language: String) : GlobalEvent()
+}
+
 open class BookStoreViewModel(application: Application) : BaseViewModel(application) {
     companion object {
         val TAG: String? = BookStoreViewModel::class.simpleName
         val mLogin = MutableLiveData<LoginBean>()
+    }
+
+    init {
+        EventChannel.observe<GlobalEvent>(sticky = true)
+            .collectIn(viewModelScope) {
+                handleGlobalEvent(it)
+            }
+    }
+    private fun handleGlobalEvent(event: GlobalEvent) {
+        when (event) {
+            is GlobalEvent.TokenExpired -> { /* 处理过期 */ }
+            is GlobalEvent.ForceLogout -> { /* 强制退出 */ }
+            is GlobalEvent.AppLanguageChanged -> { /* 语言切换 */ }
+        }
     }
 
 

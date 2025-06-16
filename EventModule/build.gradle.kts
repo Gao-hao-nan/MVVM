@@ -4,18 +4,15 @@ plugins {
 }
 
 android {
-    namespace = "com.ghn.commonmodule"
+    namespace = "com.ghn.eventmodule"
     compileSdk = 35
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
 }
 
 dependencies {
-
-    api(project(":BaseModule"))
-    api(project(":NetworkModule"))
-    api(project(":EventModule"))
 
     implementation(libs.androidx.appcompat)
     implementation(libs.google.material)
