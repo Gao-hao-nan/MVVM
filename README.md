@@ -11,6 +11,18 @@
 5. 使用 **Glide** 完成图片加载；
 6. 通过RxAppCompatActivity+RxLifecycleAndroid 封装的基类
 
+### 2. 新增了event模块（通过flow实现的轻量级）
+| 功能点               | 方法                                            | 说明                            |
+| ----------------- | --------------------------------------------- | ----------------------------- |
+| 🔹 发送事件           | `EventChannel.post(event)`                    | 发送任意类型的事件                     |
+| 🔹 订阅事件（支持粘性）     | `EventChannel.observe<T>(sticky = true)`      | 可指定是否接收历史事件                   |
+| 🔹 只接收历史事件        | `EventChannel.observeOnlySticky<T>()`         | 不再继续监听新事件（可选）                 |
+| 🔹 设置某类型粘性事件最大缓存数 | `EventChannel.setMaxStickyCacheSize<T>(size)` | 默认最多缓存 10 条                   |
+| 🔹 获取粘性历史事件       | `EventChannel.getStickyEvents<T>()`           | 返回 List\<Pair\<T, timestamp>> |
+| 🔹 清除某类粘性事件       | `EventChannel.clearStickyEvents<T>()`         | 清除某个事件的历史                     |
+| 🔹 清除全部粘性事件       | `EventChannel.clearAllStickyEvents()`         | 全局清除所有缓存事件                    |
+| 🔹 生命周期感知收集事件     | `flow.collectIn(owner)`                       | 自动在 LifecycleOwner 生命周期内取消    |
+
 欢迎在 **Issue** 中提交对本仓库的改进建议~
 有问题请联系QQ:1931672489
 感谢您的阅读~
