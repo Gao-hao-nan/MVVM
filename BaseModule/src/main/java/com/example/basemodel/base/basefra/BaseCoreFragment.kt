@@ -21,7 +21,7 @@ import java.lang.reflect.ParameterizedType
  *    / _ \ | '_ \ / _` | '__/ _ \| |/ _` | \___ \| __| | | |/ _` | |/ _ \
  *   / ___ \| | | | (_| | | | (_) | | (_| |  ___) | |_| |_| | (_| | | (_) |
  *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
- *  描述: TODO TODO 最底层基类 绑定 ViewModel + DataBinding
+ *  描述: TODO TODO 最底层基类 绑定 ViewModel + ViewBinding
  */
 abstract class BaseCoreFragment<V : ViewBinding, VM : BaseViewModel> :
     RxFragment(), IBaseView {
