@@ -16,7 +16,10 @@ class BookshelfFragment() : BaseFragment<FragmentBookshelfBinding, RecommendView
         return BR.mode
     }
 
-    override fun initContentView(inflater: LayoutInflater, container: ViewGroup?): Int =R.layout.fragment_bookshelf
+    override fun initContentView(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentBookshelfBinding = FragmentBookshelfBinding.inflate(inflater,container,false)
 
 
     override fun initParam() {

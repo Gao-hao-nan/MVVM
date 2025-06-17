@@ -28,9 +28,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
         return BR.mode
     }
 
-    override fun initContentView(savedInstanceState: Bundle?): Int {
-        return R.layout.activity_main
-    }
+    override fun initContentView(savedInstanceState: Bundle?): ActivityMainBinding =
+        ActivityMainBinding.inflate(layoutInflater)
+
 
     override fun initParam() {
 
@@ -73,7 +73,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
             })
         showMsgWithImage("提示", com.example.basemodel.R.mipmap.ic_my_handes)
         getSupportFragmentManager().beginTransaction()
-            .replace(R.id.fl_content, fragmentList!!.get(0)).commit();
+            .replace(R.id.fl_content, fragmentList!!.get(0)).commit()
         mBinding.navView.setOnNavigationItemSelectedListener(this)
         mBinding.mainFlWarn.setOnClickListener {
             mBinding.mainFlWarn.visibility = View.GONE

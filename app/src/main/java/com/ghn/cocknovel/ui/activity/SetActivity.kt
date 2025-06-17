@@ -15,9 +15,9 @@ class SetActivity : BaseActivity<ActivitySetBinding, BookStoreViewModel>() {
         return BR.mode
     }
 
-    override fun initContentView(savedInstanceState: Bundle?): Int {
-        return R.layout.activity_set
-    }
+    override fun initContentView(savedInstanceState: Bundle?): ActivitySetBinding =
+        ActivitySetBinding.inflate(layoutInflater)
+
 
     override fun initParam() {
 

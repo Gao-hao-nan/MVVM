@@ -33,7 +33,10 @@ class TabFragment : BaseFragment<FragmentTabBinding, RecommendViewModel>() {
         return BR.mode
     }
 
-    override fun initContentView(inflater: LayoutInflater, container: ViewGroup?): Int =R.layout.fragment_tab
+    override fun initContentView(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentTabBinding =FragmentTabBinding.inflate(inflater,container,false)
 
 
     override fun initParam() {

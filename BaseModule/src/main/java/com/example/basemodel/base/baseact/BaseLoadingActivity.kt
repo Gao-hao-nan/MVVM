@@ -1,6 +1,7 @@
 package com.example.basemodel.base.baseact
 
 import androidx.databinding.ViewDataBinding
+import androidx.viewbinding.ViewBinding
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
@@ -18,7 +19,7 @@ import com.example.basemodel.base.basevm.BaseViewModel
  *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
  *  描述: TODO 添加 Loading Dialog 支持
  */
-abstract class BaseLoadingActivity<V : ViewDataBinding, VM : BaseViewModel> :
+abstract class BaseLoadingActivity<V : ViewBinding, VM : BaseViewModel> :
     BaseMVVMActivity<V, VM>() {
 
     private var dialog: MaterialDialog? = null

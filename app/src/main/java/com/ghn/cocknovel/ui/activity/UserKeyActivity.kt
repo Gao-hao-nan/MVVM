@@ -21,10 +21,11 @@ import com.therouter.router.Route
  *  描述: TODO
  */
 @Route(path = RouterPath.User.UserKey)
-class UserKeyActivity:BaseActivity<UserLeyActivityBinding,BaseViewModel>() {
+class UserKeyActivity : BaseActivity<UserLeyActivityBinding, BaseViewModel>() {
     override fun initVariableId(): Int = BR.mode
+    override fun initContentView(savedInstanceState: Bundle?): UserLeyActivityBinding =
+        UserLeyActivityBinding.inflate(layoutInflater)
 
-    override fun initContentView(savedInstanceState: Bundle?): Int = R.layout.user_ley_activity
 
     override fun initParam() {
     }

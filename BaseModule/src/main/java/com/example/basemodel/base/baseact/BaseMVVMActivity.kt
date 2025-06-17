@@ -3,6 +3,7 @@ package com.example.basemodel.base.baseact
 import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.ViewDataBinding
+import androidx.viewbinding.ViewBinding
 import com.example.basemodel.base.basevm.BaseViewModel
 import com.example.basemodel.base.basevm.BaseViewModel.Companion.ParameterField.BUNDLE
 import com.example.basemodel.base.basevm.BaseViewModel.Companion.ParameterField.CANONICAL_NAME
@@ -20,7 +21,7 @@ import com.example.basemodel.base.basevm.BaseViewModel.Companion.ParameterField.
  *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
  *  描述: TODO 添加通用 LiveData 页面跳转、关闭、setResult 事件等
  */
-abstract class BaseMVVMActivity<V : ViewDataBinding, VM : BaseViewModel> :
+abstract class BaseMVVMActivity<V : ViewBinding, VM : BaseViewModel> :
     BaseCoreActivity<V, VM>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

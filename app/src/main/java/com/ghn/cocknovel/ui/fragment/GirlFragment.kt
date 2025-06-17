@@ -25,7 +25,7 @@ class GirlFragment : BaseFragment<FragmentGirlBinding, BookStoreViewModel>(), Vi
     override fun initContentView(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ): Int = R.layout.fragment_girl
+    ): FragmentGirlBinding  = FragmentGirlBinding.inflate(inflater,container,false)
 
 
     override fun initParam() {

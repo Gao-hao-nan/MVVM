@@ -27,8 +27,10 @@ class RecommendFragment : BaseFragment<FragmentRecommendBinding, RecommendViewMo
         return BR.mode
     }
 
-    override fun initContentView(inflater: LayoutInflater, container: ViewGroup?): Int =
-        R.layout.fragment_recommend
+    override fun initContentView(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentRecommendBinding = FragmentRecommendBinding.inflate(inflater, container, false)
 
 
     override fun initParam() {

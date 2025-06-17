@@ -2,6 +2,7 @@ package com.example.basemodel.base.baseact
 
 import android.view.Gravity
 import androidx.databinding.ViewDataBinding
+import androidx.viewbinding.ViewBinding
 import com.example.basemodel.base.basevm.BaseViewModel
 import com.kt.NetworkModel.utils.ToastUtils
 
@@ -16,7 +17,7 @@ import com.kt.NetworkModel.utils.ToastUtils
  *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
  *  描述: TODO 添加 Toast 支持（自定义样式）
  */
-abstract class BaseToastActivity<V : ViewDataBinding, VM : BaseViewModel> :
+abstract class BaseToastActivity<V : ViewBinding, VM : BaseViewModel> :
     BaseLoadingActivity<V, VM>() {
 
     private var toast: ToastUtils? = null

@@ -1,6 +1,7 @@
 package com.example.basemodel.base.basefra
 
 import androidx.databinding.ViewDataBinding
+import androidx.viewbinding.ViewBinding
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
@@ -18,7 +19,7 @@ import com.example.basemodel.base.basevm.BaseViewModel
  *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
  *  描述: TODO 通用 Dialog loading 显示/隐藏逻辑
  */
-abstract class BaseDialogFragment<V : ViewDataBinding, VM : BaseViewModel> :
+abstract class BaseDialogFragment<V : ViewBinding, VM : BaseViewModel> :
     BaseMVVMFragment<V, VM>() {
 
     private var dialog: MaterialDialog? = null

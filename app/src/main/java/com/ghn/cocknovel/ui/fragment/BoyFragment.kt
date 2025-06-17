@@ -16,7 +16,10 @@ class BoyFragment : BaseFragment<FragmentBoyBinding, RecommendViewModel>(){
         return BR.mode
     }
 
-    override fun initContentView(inflater: LayoutInflater, container: ViewGroup?): Int =R.layout.fragment_boy
+    override fun initContentView(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentBoyBinding = FragmentBoyBinding.inflate(inflater,container,false)
 
 
     override fun initParam() {

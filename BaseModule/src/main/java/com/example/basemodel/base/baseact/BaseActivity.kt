@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.os.Bundle
 import androidx.databinding.ViewDataBinding
+import androidx.viewbinding.ViewBinding
 import com.example.basemodel.R
 import com.example.basemodel.base.basevm.BaseViewModel
 import com.example.basemodel.base.baseint.IBaseView
@@ -23,7 +24,7 @@ import com.therouter.TheRouter
  *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
  * @Description: TODO 最终对外暴露的基类
  */
-abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> :
+abstract class BaseActivity<V : ViewBinding, VM : BaseViewModel> :
     BaseToastActivity<V, VM>(), IBaseView {
 
     override fun onCreate(savedInstanceState: Bundle?) {

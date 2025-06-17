@@ -18,9 +18,9 @@ class StartActivity : BaseActivity<ActivityStartBinding, BookStoreViewModel>() {
         return BR.mode
     }
 
-    override fun initContentView(savedInstanceState: Bundle?): Int {
-       return R.layout.activity_start
-    }
+    override fun initContentView(savedInstanceState: Bundle?): ActivityStartBinding =
+        ActivityStartBinding.inflate(layoutInflater)
+
 
     override fun initParam() {
 
@@ -63,7 +63,7 @@ class StartActivity : BaseActivity<ActivityStartBinding, BookStoreViewModel>() {
         if (ratio < 1.2) {
             Log.i("TAG", "isDeviceFolded=展开 ")
             return true
-        }else{
+        } else {
             Log.i("TAG", "isDeviceFolded=折叠 ")
         }
         return false

@@ -16,9 +16,9 @@ class SwitchActivity : BaseActivity<ActivitySwitchBinding, BookStoreViewModel>()
         return BR.mode
     }
 
-    override fun initContentView(savedInstanceState: Bundle?): Int {
-        return R.layout.activity_switch
-    }
+    override fun initContentView(savedInstanceState: Bundle?): ActivitySwitchBinding =
+        ActivitySwitchBinding.inflate(layoutInflater)
+
 
     override fun initParam() {
 
@@ -26,7 +26,7 @@ class SwitchActivity : BaseActivity<ActivitySwitchBinding, BookStoreViewModel>()
     }
 
     override fun initView() {
-        mBinding.titleBarSwtich?.setOnTitleBarListener(object : OnTitleBarListener{
+        mBinding.titleBarSwtich?.setOnTitleBarListener(object : OnTitleBarListener {
             override fun onLeftClick(titleBar: TitleBar) {
                 finish()
 

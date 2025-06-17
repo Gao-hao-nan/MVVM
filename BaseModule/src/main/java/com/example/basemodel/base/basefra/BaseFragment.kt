@@ -1,6 +1,7 @@
 package com.example.basemodel.base.basefra
 
 import androidx.databinding.ViewDataBinding
+import androidx.viewbinding.ViewBinding
 import com.example.basemodel.base.basevm.BaseViewModel
 
 /**
@@ -15,7 +16,7 @@ import com.example.basemodel.base.basevm.BaseViewModel
  *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
  * @Description: TODO 最终对外暴露的基类
  */
-abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> :
+abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel> :
     BaseToastFragment<V, VM>() {
 
     private var isFirstLoad = true

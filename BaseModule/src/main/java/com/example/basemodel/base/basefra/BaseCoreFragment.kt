@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewbinding.ViewBinding
 import com.example.basemodel.base.basevm.BaseViewModel
 import com.example.basemodel.base.baseint.IBaseView
 import com.trello.rxlifecycle4.LifecycleProvider
@@ -22,7 +23,7 @@ import java.lang.reflect.ParameterizedType
  *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
  *  描述: TODO TODO 最底层基类 绑定 ViewModel + DataBinding
  */
-abstract class BaseCoreFragment<V : ViewDataBinding, VM : BaseViewModel> :
+abstract class BaseCoreFragment<V : ViewBinding, VM : BaseViewModel> :
     RxFragment(), IBaseView {
 
     protected lateinit var mBinding: V
@@ -32,14 +33,14 @@ abstract class BaseCoreFragment<V : ViewDataBinding, VM : BaseViewModel> :
     private var isFirst: Boolean = true
 
     abstract fun initVariableId(): Int
-    abstract fun initContentView(inflater: LayoutInflater, container: ViewGroup?): Int
+    abstract fun initContentView(inflater: LayoutInflater, container: ViewGroup?): V
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        initBinding(inflater, container)
+        mBinding = initContentView(inflater,container)
         return mBinding.root
     }
 
@@ -57,26 +58,18 @@ abstract class BaseCoreFragment<V : ViewDataBinding, VM : BaseViewModel> :
         }
     }
 
-    private fun initBinding(inflater: LayoutInflater, container: ViewGroup?) {
-        mBinding = DataBindingUtil.inflate(inflater, initContentView(inflater, container), container, false)
-        mBinding.lifecycleOwner = this
-    }
-
     @Suppress("UNCHECKED_CAST")
     private fun initViewModel() {
         viewModelId = initVariableId()
 
         val modelClass = (javaClass.genericSuperclass as? ParameterizedType)
             ?.actualTypeArguments?.get(1) as? Class<VM> ?: BaseViewModel::class.java as Class<VM>
-
         mViewModel = ViewModelProvider(this)[modelClass]
-        mBinding.setVariable(viewModelId, mViewModel)
         mViewModel.injectLifecycleProvider(this as LifecycleProvider<*>)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        mBinding.unbind()
     }
 //    /** 懒加载：首次可见时触发 */
     open fun lazyLoadData() {}

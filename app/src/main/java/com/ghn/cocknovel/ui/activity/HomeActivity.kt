@@ -24,8 +24,9 @@ import com.therouter.router.Route
 @Route(path = RouterPath.Main.HOME)
 class HomeActivity : BaseActivity<HomeActivityBinding, BaseViewModel>() {
     override fun initVariableId(): Int = BR.mode
+    override fun initContentView(savedInstanceState: Bundle?): HomeActivityBinding =
+        HomeActivityBinding.inflate(layoutInflater)
 
-    override fun initContentView(savedInstanceState: Bundle?): Int = R.layout.home_activity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

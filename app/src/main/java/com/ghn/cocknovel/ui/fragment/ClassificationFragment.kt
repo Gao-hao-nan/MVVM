@@ -20,7 +20,10 @@ class ClassificationFragment : BaseFragment<FragmentClassificationBinding, Recom
         return BR.mode
     }
 
-    override fun initContentView(inflater: LayoutInflater, container: ViewGroup?): Int =R.layout.fragment_classification
+    override fun initContentView(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentClassificationBinding = FragmentClassificationBinding.inflate(inflater,container,false)
 
 
     override fun initParam() {

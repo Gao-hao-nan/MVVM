@@ -23,9 +23,9 @@ class WebviewActivity : BaseActivity<ActivityWebviewBinding, RecommendViewModel>
         return BR.mode
     }
 
-    override fun initContentView(savedInstanceState: Bundle?): Int {
-        return R.layout.activity_webview
-    }
+    override fun initContentView(savedInstanceState: Bundle?): ActivityWebviewBinding =
+        ActivityWebviewBinding.inflate(layoutInflater)
+
 
     override fun initParam() {
 

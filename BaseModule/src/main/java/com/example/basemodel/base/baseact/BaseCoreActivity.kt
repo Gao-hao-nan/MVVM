@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewbinding.ViewBinding
 import com.example.basemodel.base.basevm.BaseViewModel
 import com.therouter.TheRouter
 import com.trello.rxlifecycle4.components.support.RxAppCompatActivity
@@ -20,38 +21,33 @@ import java.lang.reflect.ParameterizedType
  *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
  *  描述: TODO 最底层基类 绑定 ViewModel + DataBinding
  */
-abstract class BaseCoreActivity<V : ViewDataBinding, VM : BaseViewModel> :
+abstract class BaseCoreActivity<V : ViewBinding, VM : BaseViewModel> :
     RxAppCompatActivity(), LifecycleObserver {
 
     protected lateinit var mBinding: V
     protected lateinit var mViewModel: VM
 
     abstract fun initVariableId(): Int
-    abstract fun initContentView(savedInstanceState: Bundle?): Int
+    abstract fun initContentView(savedInstanceState: Bundle?): V
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mBinding = initContentView(savedInstanceState)
+        setContentView(mBinding.root)
+
         TheRouter.inject(this)
-        initBinding(savedInstanceState)
         initViewModel()
         lifecycle.addObserver(mViewModel)
-    }
-
-    private fun initBinding(savedInstanceState: Bundle?) {
-        mBinding = DataBindingUtil.setContentView(this, initContentView(savedInstanceState))
-        mBinding.lifecycleOwner = this
     }
 
     private fun initViewModel() {
         val modelClass = (javaClass.genericSuperclass as ParameterizedType)
             .actualTypeArguments[1] as Class<VM>
         mViewModel = ViewModelProvider(this)[modelClass]
-        mBinding.setVariable(initVariableId(), mViewModel)
         mViewModel.injectLifecycleProvider(this)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        mBinding.unbind()
     }
 }

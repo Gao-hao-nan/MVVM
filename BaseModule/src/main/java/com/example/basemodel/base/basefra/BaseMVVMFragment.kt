@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
+import androidx.viewbinding.ViewBinding
 import com.example.basemodel.base.basevm.BaseViewModel
 
 /**
@@ -16,7 +17,7 @@ import com.example.basemodel.base.basevm.BaseViewModel
  *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
  *  描述: TODO 添加通用 LiveData 页面跳转、关闭、setResult 事件等
  */
-abstract class BaseMVVMFragment<V : ViewDataBinding, VM : BaseViewModel> :
+abstract class BaseMVVMFragment<V : ViewBinding, VM : BaseViewModel> :
     BaseCoreFragment<V, VM>() {
 
 

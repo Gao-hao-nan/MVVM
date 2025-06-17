@@ -50,7 +50,10 @@ class MineFragment : BaseFragment<FragmentMineBinding, BookStoreViewModel>() {
         return BR.mode
     }
 
-    override fun initContentView(inflater: LayoutInflater, container: ViewGroup?): Int =R.layout.fragment_mine
+    override fun initContentView(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentMineBinding = FragmentMineBinding.inflate(inflater,container,false)
 
 
     override fun initParam() {

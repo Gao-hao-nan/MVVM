@@ -22,7 +22,11 @@ class BookstoreFragment : BaseFragment<FragmentBookstoreBinding, BookStoreViewMo
         return BR.model
     }
 
-    override fun initContentView(inflater: LayoutInflater, container: ViewGroup?): Int =R.layout.fragment_bookstore
+    override fun initContentView(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentBookstoreBinding = FragmentBookstoreBinding.inflate(inflater,container,false)
+
 
     override fun initParam() {
 
