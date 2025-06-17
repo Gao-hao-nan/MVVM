@@ -5,6 +5,7 @@ import android.util.Log
 import com.example.basemodel.base.baseact.BaseActivity
 import com.example.basemodel.base.basevm.BaseViewModel
 import com.example.basemodel.base.router.RouterPath
+import com.example.basemodel.base.state.StatusController
 import com.ghn.cocknovel.BR
 import com.ghn.cocknovel.R
 import com.ghn.cocknovel.databinding.HomeActivityBinding
@@ -23,13 +24,29 @@ import com.therouter.router.Route
  */
 @Route(path = RouterPath.Main.HOME)
 class HomeActivity : BaseActivity<HomeActivityBinding, BaseViewModel>() {
+
+    private lateinit var statusController: StatusController
+
     override fun initVariableId(): Int = BR.mode
+
     override fun initContentView(savedInstanceState: Bundle?): HomeActivityBinding =
         HomeActivityBinding.inflate(layoutInflater)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        val container = mBinding.statusContainer // ID 来自 xml 中的 FrameLayout
+//        val contentView = mBinding.root.getChildAt(0) // 你的 layout_home_content 是第一个子 View
+//
+//        // 初始化 StatusController
+//        statusController = StatusController.bind(container, contentView) {
+//            val inflater = layoutInflater
+//            setLoadingView(inflater.inflate(R.layout.layout_custom_loading, container, false))
+//            setEmptyView(inflater.inflate(R.layout.layout_custom_empty, container, false))
+//            setErrorView(inflater.inflate(R.layout.layout_custom_error, container, false))
+//            setRetryAction { }
+//        }
+
         Log.i("Route", "跳转过来了")
     }
 
@@ -37,6 +54,7 @@ class HomeActivity : BaseActivity<HomeActivityBinding, BaseViewModel>() {
     }
 
     override fun initView() {
+
     }
 
     override fun initViewObservable() {
