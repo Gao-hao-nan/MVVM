@@ -1,11 +1,16 @@
 plugins {
-    id ("com.android.library")
-    id ("org.jetbrains.kotlin.android")
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.kotlinAndroid)
 }
 
 android {
-    namespace = "com.ghn.commonmodule"
+    namespace = "com.ghn.routermodule"
     compileSdk = 35
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -13,14 +18,11 @@ android {
 
 dependencies {
 
-    api(project(":BaseModule"))
-    api(project(":NetworkModule"))
-    api(project(":EventModule"))
-    api(project(":RouterModule"))
-    api(project(":CapturePacketModule"))
     implementation(libs.androidx.appcompat)
     implementation(libs.google.material)
     testImplementation(libs.test.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso)
+
+    implementation(libs.router)
 }

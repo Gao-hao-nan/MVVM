@@ -14,6 +14,7 @@ import com.ghn.cocknovel.ui.fragment.BookshelfFragment
 import com.ghn.cocknovel.ui.fragment.BookstoreFragment
 import com.ghn.cocknovel.ui.fragment.ClassificationFragment
 import com.ghn.cocknovel.ui.fragment.MineFragment
+import com.ghn.cocknovel.utils.DebugEntryHelper
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
@@ -37,7 +38,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
     }
 
     override fun initView() {
-
+        DebugEntryHelper.attachToActivity(this)
     }
 
     override fun initViewObservable() {

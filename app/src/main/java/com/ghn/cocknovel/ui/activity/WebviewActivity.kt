@@ -3,13 +3,12 @@ package com.ghn.cocknovel.ui.activity
 import android.os.Bundle
 import android.util.Log
 import com.example.basemodel.base.baseact.BaseActivity
-import com.example.basemodel.base.router.RouterParams
-import com.example.basemodel.base.router.RouterPath
 import com.ghn.cocknovel.BR
-import com.ghn.cocknovel.R
 import com.ghn.cocknovel.databinding.ActivityWebviewBinding
 import com.ghn.cocknovel.ui.view.MyWebView
 import com.ghn.cocknovel.viewmodel.RecommendViewModel
+import com.ghn.routermodule.RouterParams
+import com.ghn.routermodule.RouterPath
 import com.therouter.router.Autowired
 import com.therouter.router.Route
 

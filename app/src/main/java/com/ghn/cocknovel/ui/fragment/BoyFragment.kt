@@ -3,12 +3,11 @@ package com.ghn.cocknovel.ui.fragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.basemodel.base.basefra.BaseFragment
-import com.example.basemodel.base.router.AppRouter
-import com.example.basemodel.base.router.RouterPath
 import com.ghn.cocknovel.BR
-import com.ghn.cocknovel.R
 import com.ghn.cocknovel.databinding.FragmentBoyBinding
 import com.ghn.cocknovel.viewmodel.RecommendViewModel
+import com.ghn.routermodule.AppRouter
+import com.ghn.routermodule.RouterPath
 
 
 class BoyFragment : BaseFragment<FragmentBoyBinding, RecommendViewModel>(){

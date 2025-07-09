@@ -4,11 +4,10 @@ import android.os.Bundle
 import android.util.Log
 import com.example.basemodel.base.baseact.BaseActivity
 import com.example.basemodel.base.basevm.BaseViewModel
-import com.example.basemodel.base.router.RouterPath
 import com.example.basemodel.base.state.StatusController
 import com.ghn.cocknovel.BR
-import com.ghn.cocknovel.R
 import com.ghn.cocknovel.databinding.HomeActivityBinding
+import com.ghn.routermodule.RouterPath
 import com.therouter.router.Route
 
 

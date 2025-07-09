@@ -3,7 +3,14 @@ package com.example.basemodel.base.baseact
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.ApplicationInfo
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.util.TypedValue
+import android.view.Gravity
+import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.databinding.ViewDataBinding
 import androidx.viewbinding.ViewBinding
 import com.example.basemodel.R
@@ -28,15 +35,9 @@ abstract class BaseActivity<V : ViewBinding, VM : BaseViewModel> :
     BaseToastActivity<V, VM>(), IBaseView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super<BaseToastActivity>.onCreate(savedInstanceState)
 
-
-
         lifecycle.addObserver(this)
-        if (isDebuggable(this)) {
-            enableDebugWindowIfNeeded(mViewModel)
-        }
     }
 
 
@@ -48,20 +49,6 @@ abstract class BaseActivity<V : ViewBinding, VM : BaseViewModel> :
         } catch (e: Exception) {
             false
         }
-    }
-
-    protected fun enableDebugWindowIfNeeded(viewModel: BaseViewModel) {
-        EasyWindow.with(this).apply {
-            setContentView(R.layout.flw)
-            setDraggable()
-            setXOffset(500)
-            setOutsideTouchable(true)
-            setOnClickListener(R.id.TvFlw) { _, _ ->
-                val launchIntent =
-                    "cn.coderpig.cp_network_capture.ui.activity.NetworkCaptureActivity"
-                viewModel.startModelActivity(packageName, launchIntent)
-            }
-        }.show()
     }
 }
 

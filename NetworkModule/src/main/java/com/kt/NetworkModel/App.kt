@@ -3,12 +3,10 @@ package com.kt.NetworkModel
 import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.content.Context
-import androidx.databinding.library.baseAdapters.BR
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import com.drake.brv.utils.BRV
 import com.kt.NetworkModel.utils.MVUtils
-import com.kt.ktmvvm.lib.BuildConfig
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -18,6 +16,8 @@ import me.jessyan.autosize.AutoSize
 import me.jessyan.autosize.AutoSizeConfig
 import me.jessyan.autosize.unit.Subunits
 import android.os.Process
+import androidx.databinding.library.baseAdapters.BR
+import com.kt.ktmvvm.lib.BuildConfig
 
 
 /**

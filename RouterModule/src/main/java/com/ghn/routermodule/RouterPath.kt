@@ -1,4 +1,4 @@
-package com.example.basemodel.base.router
+package com.ghn.routermodule
 
 
 /**
@@ -9,11 +9,22 @@ package com.example.basemodel.base.router
  *    / _ \ | '_ \ / _` | '__/ _ \| |/ _` | \___ \| __| | | |/ _` | |/ _ \
  *   / ___ \| | | | (_| | | | (_) | | (_| |  ___) | |_| |_| | (_| | | (_) |
  *  /_/   \_\_| |_|\__,_|_|  \___/|_|\__,_| |____/ \__|\__,_|\__,_|_|\___/
- *  描述: TODO 接口定义，便于做服务解耦
+ *  描述: TODO 统一管理所有路径常量
  */
-interface RouterService {
-    fun goToHome()
-    fun geToKey()
-    fun goToProfile(userId: String)
-    fun goTo(path: String, extras: Map<String, Any?> = emptyMap())
+object RouterPath {
+    object Main {
+        const val HOME = "/home/home"
+    }
+
+    object User {
+        const val UserKEY = "/user/key"
+    }
+
+    object Web {
+        const val WEBVIEW = "/web/browser"
+    }
+
+    object Net{
+        const val NETWORKCAPTURE = "/net/NetworkCapture"
+    }
 }

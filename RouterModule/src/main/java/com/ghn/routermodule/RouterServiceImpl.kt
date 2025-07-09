@@ -1,4 +1,4 @@
-package com.example.basemodel.base.router
+package com.ghn.routermodule
 
 import com.therouter.TheRouter
 
@@ -20,13 +20,19 @@ class RouterServiceImpl : RouterService {
     }
 
     override fun geToKey() {
-        TheRouter.build(RouterPath.User.UserKey).navigation()
+        TheRouter.build(RouterPath.User.UserKEY).navigation()
     }
+
+
 
     override fun goToProfile(weburl: String) {
         TheRouter.build(RouterPath.Web.WEBVIEW)
             .withString(RouterParams.KEY_WBE_URL, weburl)
             .navigation()
+    }
+
+    override fun goToNet() {
+        TheRouter.build(RouterPath.Net.NETWORKCAPTURE).navigation()
     }
 
     override fun goTo(path: String, extras: Map<String, Any?>) {

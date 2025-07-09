@@ -73,8 +73,7 @@ android {
 
 dependencies {
 
-    implementation(project(mapOf("path" to ":CommonModule")))
-
+    implementation(project("path" to ":CommonModule"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.google.material)
@@ -88,14 +87,5 @@ dependencies {
     implementation(libs.github.xbanner)
     implementation(libs.github.xxPermissions)
     kapt (libs.apt)
-
-    // ExoPlayer 核心库
-    implementation("com.google.android.exoplayer:exoplayer-core:2.15.0")
-    // ExoPlayer UI 控件库
-    implementation("com.google.android.exoplayer:exoplayer-ui:2.15.0")
-    // ExoPlayer 广告插入扩展库
-    implementation("com.google.android.exoplayer:extension-ima:2.15.0")
-    implementation("com.google.android.exoplayer:exoplayer-hls:2.15.0")
-    implementation("io.github.cymchad:BaseRecyclerViewAdapterHelper4:4.1.4")
 }
 

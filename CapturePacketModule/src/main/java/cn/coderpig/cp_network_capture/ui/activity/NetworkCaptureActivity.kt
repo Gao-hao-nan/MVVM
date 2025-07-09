@@ -17,12 +17,15 @@ import cn.coderpig.cp_network_capture.ui.adapter.NetworkLogAdapter
 import cn.coderpig.cp_network_capture.utils.binding
 import cn.coderpig.cp_network_capture.utils.fly
 import cn.coderpig.cp_network_capture.utils.nullOrThis
+import com.ghn.routermodule.RouterPath
+import com.therouter.router.Route
 
 /**
  * Author: zpj
  * Date: 2023-09-05 15:39
  * Desc: 网络抓包页
  */
+@Route(path = RouterPath.Net.NETWORKCAPTURE)
 class NetworkCaptureActivity : AppCompatActivity() {
     private val mBinding by binding(ActivityNetworkCaptureBinding::inflate)
     private lateinit var mAdapter: NetworkLogAdapter
