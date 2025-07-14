@@ -19,4 +19,5 @@ dependencies {
     testImplementation(libs.test.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso)
+    implementation(libs.lifecycle.runtime)
 }

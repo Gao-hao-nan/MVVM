@@ -50,4 +50,16 @@ tools:context=".ui.fragment.GirlFragment">
     android:layout_height="wrap_content"
     android:text="其他配套写法（扩展函数）"
     />
+    <androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/btn8"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="fragment 自动绑定生命周期"
+    />
+    <androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/btn9"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="activity 自动绑定生命周期"
+    />
 </LinearLayout>

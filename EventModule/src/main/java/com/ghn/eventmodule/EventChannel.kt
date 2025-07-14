@@ -1,6 +1,12 @@
 package com.ghn.eventmodule
 
+import androidx.activity.ComponentActivity
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 
 
 /**
@@ -39,7 +45,34 @@ object EventChannel {
         SharedFlowEventBus.clearStickyEvents<T>()
     }
 
+    inline fun <reified T : Any> Fragment.observeEvent(
+        sticky: Boolean = false,
+        crossinline block: suspend (T) -> Unit
+    ) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                observe<T>(sticky).collect {
+                    block(it)
+                }
+            }
+        }
+    }
+
+    inline fun <reified T : Any> ComponentActivity.observeEvent(
+        sticky: Boolean = false,
+        crossinline block: suspend (T) -> Unit
+    ) {
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                observe<T>(sticky).collect {
+                    block(it)
+                }
+            }
+        }
+    }
+
     fun clearAllStickyEvents() {
         SharedFlowEventBus.clearAllStickyEvents()
     }
+
 }

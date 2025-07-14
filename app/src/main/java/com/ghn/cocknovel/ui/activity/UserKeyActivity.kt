@@ -5,6 +5,8 @@ import com.example.basemodel.base.baseact.BaseActivity
 import com.example.basemodel.base.basevm.BaseViewModel
 import com.ghn.cocknovel.BR
 import com.ghn.cocknovel.databinding.UserLeyActivityBinding
+import com.ghn.cocknovel.ui.fragment.DemoLoginEvent
+import com.ghn.eventmodule.EventChannel.observeEvent
 import com.ghn.routermodule.RouterPath
 import com.therouter.router.Route
 
@@ -33,6 +35,9 @@ class UserKeyActivity : BaseActivity<UserLeyActivityBinding, BaseViewModel>() {
     }
 
     override fun initViewObservable() {
+        observeEvent<DemoLoginEvent>(sticky = true) { event ->
+            showMsg("收到事件：${event.toString()}")
+        }
     }
 
     override fun initData() {

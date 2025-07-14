@@ -14,7 +14,9 @@ import com.ghn.cocknovel.databinding.FragmentGirlBinding
 import com.ghn.cocknovel.viewmodel.BookStoreViewModel
 import com.ghn.cocknovel.viewmodel.GlobalEvent
 import com.ghn.eventmodule.EventChannel
+import com.ghn.eventmodule.EventChannel.observeEvent
 import com.ghn.eventmodule.collectIn
+import com.ghn.routermodule.AppRouter
 import kotlinx.coroutines.flow.merge
 import java.util.Date
 
@@ -92,6 +94,15 @@ class GirlFragment : BaseFragment<FragmentGirlBinding, BookStoreViewModel>(), Vi
 //                        is DemoLoginEvent -> Log.i("扩展", "扩展：${event.log}")
 //                    }
 //                }
+            }
+            R.id.btn8 ->{
+                observeEvent<DemoLoginEvent> { event ->
+                    Log.d("fragment 自动绑定生命周期扩展函数", "事件: ${event}")
+                }
+            }
+            R.id.btn9 ->{
+                EventChannel.post(DemoLoginEvent("activity扩展event函数"))
+                AppRouter.geToKey()
             }
         }
     }
