@@ -3,6 +3,7 @@ package com.ghn.cocknovel.ui.fragment
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -42,6 +43,11 @@ class RecommendFragment : BaseFragment<FragmentRecommendBinding, RecommendViewMo
     }
 
     override fun initData() {
+
+    }
+
+    override fun lazyLoadData() {
+        Log.d("lazyLoadData", "22222")
         mViewModel.getBanner()
         mViewModel.flowbanner()
     }
@@ -63,41 +69,7 @@ class RecommendFragment : BaseFragment<FragmentRecommendBinding, RecommendViewMo
                     .into(view as ImageView)
             }
         }
-//        val customExoPlayer = CustomExoPlayer(requireContext())
-//        customExoPlayer.setPlayerView(mBinding.exoPlay!!)
-//        val mediaUriList = listOf(
-//            Uri.parse("http://vjs.zencdn.net/v/oceans.mp4"),
-//            Uri.parse("http://vjs.zencdn.net/v/oceans.mp4"),
-//            Uri.parse("http://vjs.zencdn.net/v/oceans.mp4")
-//        )
-//        customExoPlayer.setDataSourceList(mediaUriList)
-//        customExoPlayer.start()
-
-//        Log.i("TAG", "initViewObservable: ${customExoPlayer.duration()}")
         mViewModel.getHomeStatus(page)
-//        mBinding.recyclerViewHome.layoutManager = LinearLayoutManager(activity)
-//        val homelist= mutableListOf<datas>()
-//        mViewModel.homeStatus.observe(this) {
-//            homelist.addAll(it)
-//            val adapter = object : BaseQuickAdapter<datas, DataBindingHolder<ItemHomeBinding>>() {
-//                override fun onBindViewHolder(
-//                    holder: DataBindingHolder<ItemHomeBinding>,
-//                    position: Int,
-//                    item: datas?
-//                ) {
-//
-//                }
-//                override fun onCreateViewHolder(
-//                    context: Context,
-//                    parent: ViewGroup,
-//                    viewType: Int
-//                ): DataBindingHolder<ItemHomeBinding> {
-//                    return DataBindingHolder<ItemHomeBinding>(R.layout.item_home, parent)
-//                }
-//
-//            }
-//            mBinding.recyclerViewHome.adapter=adapter
-//        }
         mViewModel.homeStatus.observe(this@RecommendFragment) {
             mBinding.HomePage.onRefresh {
                 mViewModel.getHomeStatus(page)

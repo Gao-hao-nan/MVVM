@@ -36,7 +36,6 @@ abstract class BaseActivity<V : ViewBinding, VM : BaseViewModel> :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super<BaseToastActivity>.onCreate(savedInstanceState)
-
         lifecycle.addObserver(this)
     }
 

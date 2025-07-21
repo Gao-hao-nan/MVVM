@@ -9,11 +9,14 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:ignore="all">
-    <FrameLayout
-        android:id="@+id/fl_content"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        app:navGraph="@navigation/nav_graph"
+        app:defaultNavHost="true"
         />
     <FrameLayout
         android:id="@+id/main_fl_warn"

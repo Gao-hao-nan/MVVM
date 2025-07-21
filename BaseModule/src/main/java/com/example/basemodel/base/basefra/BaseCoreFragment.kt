@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.example.basemodel.base.basevm.BaseViewModel
@@ -47,16 +49,27 @@ abstract class BaseCoreFragment<V : ViewBinding, VM : BaseViewModel> :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewModel()
+        initViewObservable()
         lifecycle.addObserver(this)
+
+        viewLifecycleOwner.lifecycle.addObserver(object : DefaultLifecycleObserver {
+            override fun onStart(owner: LifecycleOwner) {
+                // Fragment 可见并开始交互
+                if (isFirst) {
+                    isFirst = false
+                    lazyLoadData()
+                }
+            }
+        })
     }
 
-    override fun onResume() {
-        super<RxFragment>.onResume()
-        if (isFirst) {
-            lazyLoadData()
-            isFirst = false
-        }
-    }
+//    override fun onResume() {
+//        super<RxFragment>.onResume()
+//        if (isFirst) {
+//            lazyLoadData()
+//            isFirst = false
+//        }
+//    }
 
     @Suppress("UNCHECKED_CAST")
     private fun initViewModel() {

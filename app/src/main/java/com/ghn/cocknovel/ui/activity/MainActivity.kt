@@ -1,10 +1,14 @@
 package com.ghn.cocknovel.ui.activity
 
 import android.os.Bundle
+import android.os.PersistableBundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.basemodel.base.baseact.BaseActivity
 import com.example.basemodel.base.basevm.BaseViewModel
 import com.ghn.cocknovel.BR
@@ -21,10 +25,7 @@ import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
 
 
-class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
-    BottomNavigationView.OnNavigationItemSelectedListener {
-    private var preFragment = 0 // 记录上一个被点击的 fragment页面 ，默认值是0
-    private var fragmentList: ArrayList<Fragment>? = null
+class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>() {
     override fun initVariableId(): Int {
         return BR.mode
     }
@@ -38,7 +39,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
     }
 
     override fun initView() {
+        Log.i("initView", "1111111")
         DebugEntryHelper.attachToActivity(this)
+        mBinding.navView.post {
+            val navController = findNavController(R.id.nav_host_fragment)
+            NavigationUI.setupWithNavController(mBinding.navView, navController)
+        }
     }
 
     override fun initViewObservable() {
@@ -46,12 +52,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
     }
 
     override fun initData() {
-        fragmentList = ArrayList()
-        fragmentList?.add(BookstoreFragment())
-        fragmentList?.add(ClassificationFragment())
-        fragmentList?.add(BookshelfFragment())
-        fragmentList?.add(MineFragment())
-
         XXPermissions.with(this).permission(Permission.CAMERA)
             .permission(Permission.READ_MEDIA_IMAGES)
             .request(object : OnPermissionCallback {
@@ -73,63 +73,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, BaseViewModel>(),
                 }
             })
         showMsgWithImage("提示", com.example.basemodel.R.mipmap.ic_my_handes)
-        getSupportFragmentManager().beginTransaction()
-            .replace(R.id.fl_content, fragmentList!!.get(0)).commit()
-        mBinding.navView.setOnNavigationItemSelectedListener(this)
-        mBinding.mainFlWarn.setOnClickListener {
-            mBinding.mainFlWarn.visibility = View.GONE
-        }
     }
 
-
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.bookstore -> {
-                if (preFragment != 0) {
-                    switchFragemnt(preFragment, 0)
-                    preFragment = 0
-                }
-                return true
-            }
-
-            R.id.classification -> {
-                if (preFragment != 1) {
-                    switchFragemnt(preFragment, 1)
-                    preFragment = 1
-                }
-                return true
-            }
-
-            R.id.bookshelf -> {
-                if (preFragment != 2) {
-                    switchFragemnt(preFragment, 2)
-                    preFragment = 2
-                }
-                return true
-            }
-
-            R.id.mine -> {
-                if (preFragment != 3) {
-                    switchFragemnt(preFragment, 3)
-                    preFragment = 3
-                }
-                return true
-            }
-        }
-        return false
-    }
-
-    private fun switchFragemnt(preFragment: Int, i: Int) {
-        val ft = supportFragmentManager.beginTransaction()
-        ft.hide(fragmentList!![preFragment])
-        //如果当前被点击的fragment页面还没有被加入到   FragmentManager 里面，则需要添加进来
-        if (fragmentList!![i].isAdded == false) {
-            ft.add(R.id.fl_content, fragmentList!![i])
-        }
-        ft.show(fragmentList!![i]).commitAllowingStateLoss()
-    }
-
-    //重写onKeyDown()方法,继承自退出的方法
     private var exitTime: Long = 0
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_DOWN) {

@@ -19,18 +19,23 @@ import com.example.basemodel.base.basevm.BaseViewModel
 abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel> :
     BaseToastFragment<V, VM>() {
 
-    private var isFirstLoad = true
+//    private var isFirstLoad = true
 
-    override fun onResume() {
-        super.onResume()
-        if (isFirstLoad) {
-            lazyLoadData()
-            isFirstLoad = false
-        }
+//    override fun onResume() {
+//        super.onResume()
+//        if (isFirstLoad) {
+//            lazyLoadData()
+//            isFirstLoad = false
+//        }
+//    }
+//
+//    /**
+//     * 首次可见时懒加载，子类可重写
+//     */
+//    override fun lazyLoadData() {}
+
+    override fun initViewObservable() {
+        super.initViewObservable()
+
     }
-
-    /**
-     * 首次可见时懒加载，子类可重写
-     */
-    override fun lazyLoadData() {}
 }

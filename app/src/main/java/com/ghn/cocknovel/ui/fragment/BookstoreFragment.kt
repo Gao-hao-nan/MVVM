@@ -37,6 +37,10 @@ class BookstoreFragment : BaseFragment<FragmentBookstoreBinding, BookStoreViewMo
     }
 
     override fun initData() {
+
+    }
+
+    override fun initViewObservable() {
         fragmentList.clear()
         titles.clear()
         fragmentList.add(RecommendFragment())
@@ -64,9 +68,5 @@ class BookstoreFragment : BaseFragment<FragmentBookstoreBinding, BookStoreViewMo
                 (tab.view as View).scaleY = 1.5f
             }
         })
-    }
-
-    override fun initViewObservable() {
-
     }
 }
