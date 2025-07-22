@@ -17,6 +17,7 @@ import me.jessyan.autosize.AutoSizeConfig
 import me.jessyan.autosize.unit.Subunits
 import android.os.Process
 import androidx.databinding.library.baseAdapters.BR
+import com.kt.NetworkModel.utils.ToastHelper
 import com.kt.ktmvvm.lib.BuildConfig
 
 
@@ -41,6 +42,7 @@ open class App : MultiDexApplication() {
             this.initMMkv()
             this.initAdp()
             TheRouter.init(this)
+            ToastHelper.init(this)
         }
     }
 

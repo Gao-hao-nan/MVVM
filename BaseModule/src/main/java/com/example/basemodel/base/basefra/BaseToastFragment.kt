@@ -1,10 +1,8 @@
 package com.example.basemodel.base.basefra
 
-import android.view.Gravity
-import androidx.databinding.ViewDataBinding
 import androidx.viewbinding.ViewBinding
 import com.example.basemodel.base.basevm.BaseViewModel
-import com.kt.NetworkModel.utils.ToastUtils
+import com.kt.NetworkModel.ext.showToast
 
 
 /**
@@ -20,8 +18,6 @@ import com.kt.NetworkModel.utils.ToastUtils
 abstract class BaseToastFragment<V : ViewBinding, VM : BaseViewModel> :
     BaseDialogFragment<V, VM>() {
 
-    private var toast: ToastUtils? = null
-
     override fun initViewObservable() {
         super.initViewObservable()
 
@@ -31,21 +27,10 @@ abstract class BaseToastFragment<V : ViewBinding, VM : BaseViewModel> :
     }
 
     protected fun showMsg(msg: String) {
-        toast = ToastUtils(context).apply {
-            InitToast()
-            setText(msg)
-            setGravity(Gravity.CENTER)
-            show()
-        }
+        showToast(msg)
     }
 
     protected fun showMsgWithImage(msg: String, iconRes: Int) {
-        toast = ToastUtils(context).apply {
-            InitToast()
-            setText(msg)
-            setImage(iconRes)
-            setGravity(Gravity.CENTER)
-            show()
-        }
+        showToast(msg,iconRes=iconRes)
     }
 }

@@ -1,10 +1,8 @@
 package com.example.basemodel.base.baseact
 
-import android.view.Gravity
-import androidx.databinding.ViewDataBinding
 import androidx.viewbinding.ViewBinding
 import com.example.basemodel.base.basevm.BaseViewModel
-import com.kt.NetworkModel.utils.ToastUtils
+import com.kt.NetworkModel.ext.showToast
 
 
 /**
@@ -20,31 +18,16 @@ import com.kt.NetworkModel.utils.ToastUtils
 abstract class BaseToastActivity<V : ViewBinding, VM : BaseViewModel> :
     BaseLoadingActivity<V, VM>() {
 
-    private var toast: ToastUtils? = null
-
     override fun registerUIObservers() {
         super.registerUIObservers()
         mViewModel.uc.toastEvent().observe(this) { showMsg(it.toString()) }
     }
 
     protected fun showMsg(msg: String) {
-        toast = ToastUtils(this)
-        toast?.apply {
-            InitToast()
-            setText(msg)
-            setGravity(Gravity.CENTER)
-            show()
-        }
+        showToast(msg)
     }
 
     protected fun showMsgWithImage(msg: String, iconRes: Int) {
-        toast = ToastUtils(this)
-        toast?.apply {
-            InitToast()
-            setText(msg)
-            setImage(iconRes)
-            setGravity(Gravity.CENTER)
-            show()
-        }
+        showToast(msg, iconRes = iconRes)
     }
 }

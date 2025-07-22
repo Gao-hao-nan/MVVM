@@ -2,11 +2,9 @@ package com.kt.network.net
 
 import android.annotation.SuppressLint
 import android.net.ParseException
-import android.view.Gravity
 import com.google.gson.JsonParseException
 import com.google.gson.stream.MalformedJsonException
-import com.kt.NetworkModel.App
-import com.kt.NetworkModel.utils.ToastUtils
+import com.kt.NetworkModel.ext.showToast
 import org.json.JSONException
 import retrofit2.HttpException
 import java.net.ConnectException
@@ -25,16 +23,6 @@ import java.net.ConnectException
  */
 @SuppressLint("StaticFieldLeak")
 object ExceptionHandle {
-    private var toast: ToastUtils? = null
-    private fun showToast(message: String) {
-        if (toast == null) {
-            toast = ToastUtils(App.get())
-            toast?.InitToast()
-        }
-        toast?.setText(message)
-        toast?.setGravity(Gravity.CENTER)
-        toast?.show()
-    }
     fun handleException(e: Throwable): ResponseThrowable {
         val ex: ResponseThrowable = when (e) {
             is ResponseThrowable -> e
